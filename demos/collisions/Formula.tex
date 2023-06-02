@@ -1,0 +1,37 @@
+\documentclass{article}
+\input lastart.tex
+\begin{document}
+Suppose I have two masses with masses $m_i$ and initial velocities $u_i$. They collide with a coefficient of restitution $e$.  What are the final velocities?
+
+First we have to switch to the center of mass frame, where
+$$v_{com}={m_1u_1+m_2u_2\over m_1+m_2}$$
+In the COM frame, we have
+$$u'_1=u_1-\[{m_1\over m_1+m_2}u_1+{m_2\over m_1+m_2}u_2\]={m_2\over m_1+m_2}u_1-{m_2\over m_1+m_2}u_2={\mu\over m_1}(u_1-u_2)$$
+and
+$$u'_2={\mu\over m_2}(u_2-u_1)$$
+The kinetic energy is
+$$KE_i=\frc2 m_1{\mu^2\over m_1^2}(u_1-u_2)^2+\frc2 m_2{\mu^2\over m_2^2}(u_1-u_2)^2
+=\frc2 \mu^2(u_1-u_2)^2\[\frc{m_1}+\frc{m_2}\]=\frc2\mu(u_1-u_2)^2$$
+
+The final velocities in this frame are $v'_1={\mu\over m_1}(v_1-v_2)$ and $v'_2={\mu\over m_2}(v_2-v_1)$, and the kinetic energy is $KE_f=\frc2\mu(v_1-v_2)^2$.  Given the coefficient of restitution $e$,
+$$\frc2\mu(v_1-v_2)^2=e^2\frc2\mu(u_1-u_2)^2 \implies (v_1-v_2)^2=e^2(u_1-u_2)^2
+\implies v_1-v_2=\pm e(u_1-u_2)$$
+We must also have
+$$m_1v_1+m_2v_2=m_1u_1+m_2u_2$$
+Solving the first equation for $v_1$ and substituting:
+\eqns{
+\eq m_1(v_2\pm e(u_1-u_2))+m_2v_2=m_1u_1+m_2u_2\\
+\eq (m_1+m_2)v_2=u_1(m_1\mp em_1)+u_2(m_2\pm em_1)\\
+\ieq v_2=u_1{m_1\over m_1+m_2}(1\mp e)+u_2{m_2\pm em_1\over m_1+m_2}\\
+\eq ={m_1u_1+m_2u_2\pm em_1(u_2-u_1)\over m_1+m_2}\\
+\eq =v_{com}\pm e{m_1\over m_1+m_2}(u_2-u_1)\\
+}
+and similarly
+$$v_1=v_{com}\pm e{m_2\over m_1+m_2}(u_1-u_2)$$
+although I'm not sure if the $\pm$ in the two equations are connected; I'd need to investigate.
+
+If $e=1$, then
+$$v_2=u_2{m_2+m_1\over m_1+m_2}=u_2 \OR v_2=u_1{2m_1\over m_1+m_2}+u_2{m_2-m_1\over m_2+m_1}$$
+If $e=0$, then
+
+\end{document}

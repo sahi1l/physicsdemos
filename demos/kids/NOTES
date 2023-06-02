@@ -1,0 +1,4 @@
+This simulation shows charges in a conductor or insulator as kids in a neighborhood.
+We'll start with a single charge which has two modes.  In the first mode it wanders aimlessly.  In the second mode it accelerates in a particular direction.  In both cases it is restricted to certain boundaries.  (These will be different for conductors and insulators and should be defined as a method.)
+
+Each charge is a little image; eventually an animated figure perhaps. :)

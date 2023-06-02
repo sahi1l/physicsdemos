@@ -1,0 +1,30 @@
+* Background for the different panels
+** Mathematics
+*** a honeycomb lattice of +–x÷, √, and angle symbol
+*** a series of vectors running all over like pipes
+** Mechanics
+*** a honeycomb lattice of pendulum with angle, projectile motion, and car on inclined track
+
+* Main page icons should be real images so they can have tooltips or useful alt text
+
+* General libraries for consistency in look
+** DONE Buttons
+** DONE Scoring and Victory
+** DONE Font choices
+** DONE Color palette
+** TODO favicon
+
+
+* General Ideas
+** Make sure all demos have <TITLE>'s and titles
+** Make a web template in emacs
+** Get js2-mode in Aquamacs (which might require installing MELPA?)
+
+* Numbers
+** The tips might work better as a slideshow on the right or a popup help window
+
+* Coins
+** The whole body should allow overflow scroll in both directions
+** Adjust the font size based on the number of coins
+** Some explanation please!
+

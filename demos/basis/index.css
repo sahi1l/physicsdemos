@@ -1,0 +1,78 @@
+.source {
+    width:200px;
+    height:200px;
+    background-color:white;
+    display:inline-block;
+    text-align;
+}
+#basis {
+    width:100px;
+    height:100px;
+    vertical-align:top;
+    font-size:48px;
+    float:right;
+    position: absolute;
+    right: 50px;
+    top:50px;
+    text-align:center;
+}
+
+div.button {
+    width:95px;
+    height:95px;
+    border:5px outset;
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px grey;
+    background-color:#ccc;
+    margin: 0px 10px;
+    display:inline-block;
+}
+#correct {
+         font-size:48px;
+         width:100%;
+         text-align:center;
+	 background-color:white;
+}
+
+.quiz {
+      border:1px solid;
+      width:525px;
+      height:400px;
+      position:relative;
+}
+.quiz>h1 {
+         font-size:150%; 
+         text-align:center;
+         margin:0;
+         width:100%;
+         background:linear-gradient(to right,rgba(0,0,255,0.5),rgba(0,0,255,0.1));
+         padding:3px;
+        padding-right:0px;
+}
+.quiz>#count {
+             position:absolute;
+             left:0px;
+             top:5px;
+             text-align:left;
+             font-size:125%;
+             color:yellow;
+             padding-left:5px;
+}
+.quiz>#score {
+             position:absolute;
+             right:0px;
+             top:5px;
+             text-align:right;
+             font-size:125%;
+             color:red;
+             padding-right:5px;
+}
+.playagain {
+           font-size:36px;
+           border:3px solid;
+           border-radius:12px;
+           padding:8px;
+           background-color:#ddd;
+           box-shadow: 3px 3px 3px grey;
+           cursor:pointer;
+}

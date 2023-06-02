@@ -1,0 +1,40 @@
+UI should contain
+* DONE a canvas with a grid underneath
+* DONE A text box which shows potential (rounded to the nearest tenth maybe), and the position x,y on the grid (optional?)
+* DONE A button that starts a new line (maybe with a textbox that lets you label it)
+* DONE A set of charges (filled in circles with labels underneath)
+
+Moving the mouse = updating the textbox
+Clicking on grid = draw a line from the previous point to this point (or extend the path rather)
+
+# Things to do:
+* DONE Make canvas with grid
+* DONE Function to place charges at x,y with label q
+* DONE Function to track mouse
+** Start by showing x
+** Have it show potential (rounded to nearest tenth)
+* DONE Click mouse to link point to previous point
+** DONE Leave points when clicked
+** DONE Add the line joining
+   Not as a whole path, just individual paths so they can be deleted
+   Store the lines in an array associated with the current label
+** DONE New line button
+** DONE Click on a line to delete it
+** DONE Click on a point to delete it (will need to delete lines connected to, hmm)
+   This might be optional?
+* Alternative idea: fill in the label automatically? Sure, why not. 
+  Problem: if points done out of order, the lines will be connected incorrectly
+  I need an algorithm that connects lines properly
+  Might be tricky if there are multiple lines with the same label? Like two positive charges. Maybe add restrictions.
+* DONE Labels
+  Find the line on that potential which is longest, put label in the middle
+  If potential box is empty, fill in current potential when a point is placed
+  When New Line is pressed, empty the potential box
+* TODO Delete curve
+  Hold down Shift-X when hovering over a curve to delete entire curve
+* DONE Better instructions
+* TODO Switch between different charge configurations
+  Easy way out: different pages
+* TODO Figure out what charge configurations I *want*
+* Readjust grid to the size of the window
+* TODO Undo button

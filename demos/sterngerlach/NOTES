@@ -1,0 +1,60 @@
+TO FIT THE ORIGINAL BETTER
+X Generate 1, 10, 100, 1000, or 10000 photons
+* Allow Spin-1 particles (and SU-3?)
+* Allow the guns to create an arbitrary state which has to be guessed
+  * Student enters a code given by the professor, which is decrypted into the initial theta and phi.
+  * theta: 0-180, phi:0-360 
+  * With 10-degree intervals, that's 648 possibilities, or log(180/10)+log(360/10)<10 bits
+  * Two letters contains *just* enough information to contain this
+  * Conversion method:
+               "BD"=(1)*26+3=29=x
+               y=(a*x+b)%648 to scramble, where a and b are fairly large prime numbers. (a>26.  a=151, b=107.)
+               (y%18*5)/360 is theta, int(y/18)*5/360 is phi.  theta is the low-end, phi the high
+  * To encode given th=0-180, ph=0-360.  
+              * x=(th/10)+(ph/10)*18
+              * y=((x*103-5)%648 #103 is the modulo inverse of 151, 5=103*107%648
+              * A=(y%26), B=int(y/26)
+              
+              
+
+
+
+
+TO CLARIFY VARIABLES
+Each link has two objects: its source and its target
+     source is always defined and can't be changed
+     target starts out undefined
+     target.connect(object) will connect the link to that object
+     target.disconnect() will disconnect the link
+
+TODO
+X Add button to reset counters, start all guns at once
+X Add slider to toolbar changing rate
+* Add magnet
+X Add a beam-joiner (the original had this built into the analyzer)
+X Multiple detectors up top, for Z, X, Y, and theta.
+* Rotator might kachunk at 45 degrees, others?  Or allow me to type in the angle?
+X Draw axes (in toolbar, on right side?) to show folks
+* When analyzer is set to theta, show the angle as an integer (in place of theta? in second line?)
+X Add floating text to explain what different components do.
+
+
+X Z and X analyzers should twist the rotator dots to the right points. (Y should...make them disappear?)
+
+* Represent states via four variables instead of 3: (a+bi,c+di).  It's just as easy to do the dot product, and adding vectors will be so much easier.)
+
+
+
+JOINER
+X NOTE: It looks like the original SPINS only allows joining of the outputs of a single analyzer, the result of which (I think) is just the original input signal.  I could probably handle that inside link: if the object is already linked to an object with the same analyzer, then go ahead and both link, and have the analyzer behave differently, pass on the state and the rate, and ignore the second link.
+
+MAGNET:
+The magnet causes time-dependent precession.  I'm going to wait a while before implementing it, I think. 
+
+The instructions should pop up with a button?
+
+
+
+
+
+

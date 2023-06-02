@@ -1,0 +1,32 @@
+@import url('/lib/palette.css');
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    font-weight: normal;  
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--main-color);
+    color: var(--accent-color);
+    text-align: center;
+    padding: 5px 5px;
+    border-radius: 6px;
+    line-width: 1em;
+    
+  position: absolute;
+  z-index: 1;
+}
+.tooltip {padding: 2px 2px;}
+.tooltip:hover {
+    padding: 0px 0px !important;
+    border:2px solid var(--accent-color);
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

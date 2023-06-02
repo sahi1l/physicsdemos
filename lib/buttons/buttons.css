@@ -1,0 +1,7 @@
+.mybutton {
+     font-size: 150%;
+    color: white;
+    background-color:#884;
+    border-radius: 0.5em;
+}
+.mybutton.onQ {color: yellow;}

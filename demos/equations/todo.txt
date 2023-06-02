@@ -1,0 +1,12 @@
+Equation Game
+
+Choose a set of eight letter variables (capital letters), four inner and four outer, arranged in circles.
+Construct four equations, each with one outer and two inner.  Either sums or products.  Each equation has its own color. 
+Assume the first outer is given. Choose three other variables to be given according to difficulty.  Choose target value.  Known variables are in bold?
+DIsplay the four equations on buttons, and the four givens.
+Drag an equation down to the "playing board" to start with it.  (Must contain the target value.)
+Drag another equation on top of it, and if the equation is of the form X=f(_,_) and X is in the first equation (on the right side?), then that equation is replaced.  If not, it is rejected.  
+Click on an equation to swap which variable it depends on.  Only equations up top, not on the playing board.
+When the final equation contains the target value and only known quantities, then you win!
+
+Working equation must be stored as display (with boldfaced etc) and encoded (just the letters, so they can be searched for).  Maybe in the code, all parentheses can be grouping [(->\(] and fractions are replaced with ÷.  Then the variables can be lowercase as well.

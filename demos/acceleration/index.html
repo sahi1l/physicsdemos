@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <script src="/lib/jquery.js"></script>
+  <script src="/lib/raphael.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="module" src="index.js"></script>
+<link rel="stylesheet" href="index.css">
+<style>
+  .forces {color: blue;}
+  .velocity {color: red;}
+  .acceleration {color: purple;}
+  .sbs {width:200px; display:inline-block;vertical-align:top;}
+  ul {margin-top: 0px;}
+  #main {display:block;}
+</style>
+
+<h1>Newton's Second Law</h1>
+<div class="sbs">Use Newton's Second Law $$a=F_{net}/m$$ to find the magnitude of the unknown force <i class="forces">F</i>.</div>
+<div class="sbs">
+<ul>
+  <li class="forces">Forces</li>
+  <li class="velocity">Direction of Velocity<br>(magnitude is irrelevant)</li>
+  <li class="acceleration">Magnitude of Acceleration<br>(direction is up to you)</li>
+</ul>
+</div>
+
+<div id="main"></div>
+
