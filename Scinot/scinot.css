@@ -1,4 +1,4 @@
-@import url("../../lib/default.css");
+@import url("../lib/default.css");
 .mybutton {
     background-color: var(--main-color);
     width:100px;
