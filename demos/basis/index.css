@@ -1,78 +1,61 @@
-.source {
-    width:200px;
-    height:200px;
-    background-color:white;
-    display:inline-block;
-    text-align;
-}
-#basis {
+@import url("/lib/default.css");
+.mybutton {
+    background-color: var(--main-color);
     width:100px;
-    height:100px;
-    vertical-align:top;
-    font-size:48px;
-    float:right;
-    position: absolute;
-    right: 50px;
-    top:50px;
+}
+#uber {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+#main {
+    display:inline-block;
+    position:relative;
+    text-align:center;
+    width:400px;
+    border: 1px solid var(--text-color);
+    padding-bottom:10px;
+    margin-bottom: 20px;
+}
+.score {
+    background-color: var(--main-color);
+    display:inline-block;
+    color: var(--bg-color);
+    width: 100%;
+    padding: 10px 0px;
+}
+.numbers>span:first-child {color: var(--right-color);}
+.question {font-size: 150%;}
+.reaction {font-size: 200%;}
+.reaction.right {color: var(--right-color);}
+.reaction.wrong {color: var(--wrong-color);}
+//#uber {display:flex;}
+body {text-align: center;}
+#help {margin: auto; width: 550px;height:400px;
+//       display:flex;align-items: top;flex-wrap:wrap;
+       position:relative;margin-left:5px;}
+body {text-align:left;display:inline-block;}
+#help img {width:500px;margin:auto;margin-top:40px;}
+
+#help .header {
+    position:absolute;
+    cursor: pointer;
+    z-index: 1;
+    display:inline-block;
+    color: var(--bg-color);
+}
+#help .arrow {
+    font-size: 300%;
+    top: -18px;
+    z-index: 3;
+}
+#help .title {
+    font-size: 24px;
+    width:100%;
+    z-index:1;
+    top:0px;
+    margin:0px;
     text-align:center;
 }
 
-div.button {
-    width:95px;
-    height:95px;
-    border:5px outset;
-    border-radius: 10px;
-    box-shadow: 3px 3px 6px grey;
-    background-color:#ccc;
-    margin: 0px 10px;
-    display:inline-block;
-}
-#correct {
-         font-size:48px;
-         width:100%;
-         text-align:center;
-	 background-color:white;
-}
-
-.quiz {
-      border:1px solid;
-      width:525px;
-      height:400px;
-      position:relative;
-}
-.quiz>h1 {
-         font-size:150%; 
-         text-align:center;
-         margin:0;
-         width:100%;
-         background:linear-gradient(to right,rgba(0,0,255,0.5),rgba(0,0,255,0.1));
-         padding:3px;
-        padding-right:0px;
-}
-.quiz>#count {
-             position:absolute;
-             left:0px;
-             top:5px;
-             text-align:left;
-             font-size:125%;
-             color:yellow;
-             padding-left:5px;
-}
-.quiz>#score {
-             position:absolute;
-             right:0px;
-             top:5px;
-             text-align:right;
-             font-size:125%;
-             color:red;
-             padding-right:5px;
-}
-.playagain {
-           font-size:36px;
-           border:3px solid;
-           border-radius:12px;
-           padding:8px;
-           background-color:#ddd;
-           box-shadow: 3px 3px 3px grey;
-           cursor:pointer;
-}
+.mybutton {width:150px;}

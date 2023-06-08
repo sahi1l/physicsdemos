@@ -1,5 +1,5 @@
-import Score from "/lib/quiz.js";
-import {randint,choose} from "/lib/default.js";
+import {Score} from "/lib/quiz.js";
+import {randint,choose,Slideshow} from "/lib/default.js";
 function round(number) {
     if (number>=10) {return number.toFixed(0);}
     return number.toPrecision(2);
@@ -76,60 +76,8 @@ function generator() {
             others: others};
 }
 
-class Slideshow {
-    constructor($w) {//$w should be a div of img tags
-        this.imgs = $w.children("img");
-        this.imgdiv = $("<div>").appendTo($w).css("height",400);
-        this.imgs.appendTo(this.imgdiv);
-        this.prev = $("<div>")
-            .addClass("arrow header")
-            .css("left",0)
-            .html("☜")
-            .on("click",(e)=>{this.advance(-1);})
-            .appendTo($w);
-        this.title = $("<h2>")
-            .addClass("header title")
-            .html("Help &#x25BD;")
-            .appendTo($w)
-            .on("click",this.toggle.bind(this));
-        this.next = $("<div>")
-            .addClass("arrow header")
-            .css("right",0)
-            .html("☞")
-            .on("click",(e)=>{this.advance(1);})
-            .appendTo($w);
-        this.current = 0;
-        this.N = this.imgs.length;
-        this.show();
-        this.visible = true; this.toggle();
-    }
-    toggle(){
-        this.visible = !this.visible;
-        this.imgdiv.animate({
-            height: ["toggle", "swing"],
-            opacity: "toggle",
-        }, 400);
-//        if(this.visible) {
-//            this.imgs.animate({opacity:1,height:toggle},400);
-//        } else {
-//            this.imgdiv.animate({opacity:0,height:toggle},400);
-//            }
-
-    }
-    show(n) {
-        if (n==undefined) {n=this.current;} else {this.current=n;}
-        this.imgs.hide();
-        $(this.imgs[n]).show();
-    }
-    advance(dn) {
-        this.current = (this.current + dn + this.N)%this.N;
-        this.show();
-    }
-    
-}
 function init(){
-    new Score($("#main"), 10, generator, {multiple:2, noauto: true});
-    new Slideshow($("#help"));
+    new Score($("main"), 10, generator, {multiple:2, noauto: true});
 }
 
 $(init)

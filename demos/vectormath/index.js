@@ -1,4 +1,4 @@
-import Score from "/lib/quiz.js";
+import {Score} from "/lib/quiz.js";
 import {randint,choose} from "/lib/default.js";
 
 function Arrow(angle,cls="") {

@@ -1,147 +1,70 @@
-var N=4;
-var A=undefined,B=undefined;
-var rng=3;
-var score={correct:0, total:0, count:0, error:0};
-var maxquestions=10;
-arrow={"stroke-width":0.2,"arrow-end":"classic"};
-var btn=[];
-
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
-  while (0 !== currentIndex) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-  return array;
-}
-//========================================
-function init() {
-    score={correct:0, total:0, count:0, error:0};
-    $("#problem").empty();
-    $("#correct").empty();
-    $("#problem").append('<div id="A" class="source"></div>');
-    if(A!=undefined){
-        A.remove();
-        for(i=1;i<=N;i++){btn[i-1].remove();}
-    }
-    btn=[];
-    A=Raphael("A",200,200)
-        .setViewBox(-rng,-rng,2*rng,2*rng)
-        .path("M-1,0L1,0").attr(arrow);
-    let basis = Raphael("basis",100,100)
-	.setViewBox(-rng,-rng,2*rng,2*rng)
-    basis.path("M-2,-1.5L-2,2L1.5,2").attr(arrow).attr({"arrow-start":"classic"});
-    basis.text(-2,-2,"+y").attr({"font-size":1,"font-family":"Times"})
-    basis.text(2,2,"+x").attr({"font-size":1,"font-family":"Times"})
-    $("#choices").empty();
-    for(i=1;i<=N;i++){
-        $("#choices").append('<div id="c'+parseInt(i)+'" class="button"></div>')
-    }
+import {Score} from "/lib/quiz.js";
+import {randint,choose} from "/lib/default.js";
+let CANVAS = {};
+let H = 100;
+let W = 100;
+function setupCanvas() {
+    CANVAS.$w = $("<div>").appendTo("body");
+    CANVAS.paper = Raphael(CANVAS.$w[0], 3*W, H);
+    let ax = 50; let pad = 20; let fsz = 16;
+    CANVAS.paper.path(`M${3*W-ax-pad},${pad}  l0,${ax},20l${ax},0`)
+        .attr({"arrow-start":"classic",
+               "arrow-end":"classic",
+               "stroke-width":2});
+    let yax = CANVAS.paper.text(3*W-ax-pad,pad-fsz,"+y").attr("font-size",fsz);
+    let xax = CANVAS.paper.text(3*W-pad,pad+ax,"+x").attr({"font-size":fsz,"text-anchor":"start"});
     
-    for(i=1; i<=N; i++){
-        btn.push(
-            Raphael("c"+parseInt(i),100,100)
-                .setViewBox(-rng,-rng,2*rng,2*rng)
-		.text(0,0,"").attr({"font-size":2,"font-family":"Times"})
-//                .path("M-1,0L1,0").attr(arrow)
-        );
-        $("#c"+parseInt(i)).click({"b":i-1},clik);
-        $("#c"+parseInt(i)).mousedown({"b":i-1},mdown);
-        $("#c"+parseInt(i)).mouseout({"b":i-1},mup);
-        $("#c"+parseInt(i)).mouseup({"b":i-1},mup);
-    }
-    updateScore();
-    makeproblem();
 }
-function drawarrow(canvas,dx,dy){
-    console.debug("drawarrow",dx,dy)
-    canvas.attr("path",Raphael.format("M{0},{1}L{2},{3}",-dx,-dy,dx,dy));
-};
-function mdown(e){
-    e.preventDefault();
-    btn[e.data.b].attr("stroke-width",0.5);//.attr("stroke-width",0.4);
-};
-function mup(e){
-    e.preventDefault();
-    btn[e.data.b].attr("stroke-width",0.2);//.attr("stroke-width",0.2);
-};
-function clik(pram){
-    var b=pram.data.b;
-    if(b==soln){
-        console.log("Right!");
-        score.correct++; score.total++;
-        updateScore();
-        setTimeout(nextQuestion,3000);
-        $("#correct").html("Correct!");
-        for(i=0;i<4;i++){
-            if(i!=b){btn[i].hide();}
+function drawArrow(code,number) {
+    console.debug("code=",code);
+    console.debug("paper",CANVAS.paper);
+    if(!number) {number="";}
+    if(code[1]=="x"){
+        CANVAS.arrow.attr("path",`M0,${H/2}l${W},0`);
+        CANVAS.magnitude.attr({x:W/2, y:H/2-18, text:number});
+    } else {
+        CANVAS.arrow.attr("path",`M${W/2},${H}l0,${-H}`);
+        CANVAS.magnitude.attr({x:H/2+18, y:W/2, text:number});
+    };
+    if(code[0]=="+"){
+        CANVAS.arrow.attr({"arrow-start":"none","arrow-end":"classic"});
+    } else {
+        CANVAS.arrow.attr({"arrow-start":"classic","arrow-end":"none"});
+    }
+    console.debug("arrow",CANVAS.arrow);
+}
+function generator() {
+    CANVAS.$w.appendTo("body");
+    let M = randint(1,9);
+    let questionType = randint(2); //0 for +x, 1 for (+5,0)
+    let answers = {
+        "+x": {coords: `(+${M},0)`},
+        "-x": {coords: `(-${M},0)`},
+        "+y": {coords: `(0,+${M})`},
+        "-y": {coords: `(0,-${M})`}
+    };
+    let solution = choose(Object.keys(answers));
+    drawArrow(solution,M);
+    let correct = questionType ? answers[solution].coords : solution;
+    let others = [];
+    for (let key of Object.keys(answers)){
+        if (solution != key) {
+            others.push(questionType ? answers[key].coords : key);
         }
-        btn[b].attr("stroke-width",0.5);
-    } else {
-        console.log("Wrong!");
-        score.total++; score.error++;
-        updateScore();
-        $("#correct").html("Try again.");
-        btn[b].attr("path","M10,10l1,1");
     }
-}
-function updateScore(){
-    $("#count").html((score.count+1)+" of "+maxquestions);
-    var suffix="errors"; if(score.error==1){suffix="error";}
-    $("#score").html(score.error+" "+suffix);
+
+    return {text: CANVAS.$w, 
+            correct: correct,
+            others: others
+           };
 }
 
-function rn(){
-    var r;
-//    do {
-//        r=Math.floor(Math.random()*5-2);
-    //    } while (r==0);
-    return r;
-}
-var soln;
-function nextQuestion(){
-    for(i=0;i<4;i++){
-        btn[i].show().attr(arrow);
-    }
-    $("#correct").html("");
-    score.count++;
-    updateScore();
-    console.log("Number of questions:",score.count);
-    if(score.count==maxquestions){
-        //Ending scenario
-        $("#count").html("");
-        $("#correct").html(score.error+' errors<br>'+maxquestions+' questions<br><div class="playagain">Try Again?</div>');
-        $(".playagain").click(init);
-    } else {
-        makeproblem();
-    }
+function init() {
+    setupCanvas();
+    CANVAS.arrow = CANVAS.paper.path("M0,0L2,2").attr({stroke:"black", "stroke-width":8});
+    CANVAS.magnitude = CANVAS.paper.text(0,0,"")
+        .attr({"font-size":18});
+    new Score($("#main"), 10, generator, {multiple: 2, noauto: true});
 }
 
-function makeproblem(){
-    let L = 1;
-    let yQ = Math.floor(Math.random()*2)
-    let sgn = Math.floor(Math.random()*2)*2-1
-    let answers = [["+x", "-x", "+y", "-y"],
-		   ["(+5,0)", "(-5,0)", "(0,+5)", "(0,-5)"]]
-    answers = shuffle(answers)[0]
-    soln=0;
-    
-    if (!yQ) {
-	drawarrow(A,sgn*L, 0)
-    } else {
-	drawarrow(A,0,-sgn*L)
-    }
-    soln = yQ*2 + (1-sgn)/2
-    console.log("yQ,sgn,soln",yQ,sgn,soln)
-    let b = [0,1,2,3];
-//    var b=shuffle([0,1,2,3]);
-    soln=b[soln];
-    for (let i=0; i<4; i++) {
-	btn[b[i]].attr("text", answers[i])
-    }
-	
-}
-$(init);
+$(init)

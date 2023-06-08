@@ -3,12 +3,16 @@
     background-color: var(--main-color);
     width:100px;
 }
-#uber {
+body {
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
+    align-content: flex-start;
 }
-#main {
+//body {text-align:left;display:inline-block;}
+main {
     display:inline-block;
     position:relative;
     text-align:center;
@@ -30,32 +34,5 @@
 .reaction.right {color: var(--right-color);}
 .reaction.wrong {color: var(--wrong-color);}
 //#uber {display:flex;}
-body {text-align: center;}
-#help {margin: auto; width: 550px;height:400px;
-//       display:flex;align-items: top;flex-wrap:wrap;
-       position:relative;margin-left:5px;}
-body {text-align:left;display:inline-block;}
-#help img {width:500px;margin:auto;margin-top:40px;}
-
-#help .header {
-    position:absolute;
-    cursor: pointer;
-    z-index: 1;
-    display:inline-block;
-    color: var(--bg-color);
-}
-#help .arrow {
-    font-size: 300%;
-    top: -18px;
-    z-index: 3;
-}
-#help .title {
-    font-size: 24px;
-    width:100%;
-    z-index:1;
-    top:0px;
-    margin:0px;
-    text-align:center;
-}
 
 .mybutton {width:150px;}
