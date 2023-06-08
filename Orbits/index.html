@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+<meta name="viewport" content="width=400">
+<title>Orbiter</title>
+<style>
+body {background-color:#222;color:white;}
+#game {background-color:black;}
+#infopanel {font-size:150%;text-align:right;}
+#ship {display:none;}
+.units{padding-right:20px;}
+.button {border:1px solid;margin:2px; font-size:150%;display:inline-block;vertical-align:top;padding:4px;cursor:pointer;}
+.buttondone {background-color: yellow; color:black;}
+.selected {border:3px solid;margin:0px;}
+table {display:inline-block;}
+.value {width:40px;}
+#buttons {
+position:absolute;
+ top:900px;
+left:300px;
+margin-left:200px;display:inline-block;
+}
+#buttons>img{
+-webkit-user-select: none;
+}
+#buttons td {text-align:center;font-size:150%}
+#buttons>figure {display:inline-block;}
+</style>
+<script src="../../lib/jquery.js"></script>
+<script src="../../lib/raphael.js"></script>
+</head>
+<body>
+<h1>Orbiter</h1>
+  <div style="display:inline-block" id="game"></div>
+<div style="display:inline-block;">
+  <img src="Instructions.png" width="400px">
+</div>
+<table id="buttons">
+  <tr><td>
+  <img id="upbutton" src="UpButton.png" width="150px">
+  <td>  <img id="downbutton" src="DownButton.png" width="150px">
+    <tr><td>Faster<td>Slower
+</table>
+<script src="index.js"></script>
+
+  
+</div>
+  </body>
+</html>

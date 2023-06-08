@@ -1,0 +1,647 @@
+* mom1.gif 289 images
+  logical screen 1338x436
+  global color table [256]
+  |   0: #000000      64: #000055     128: #0000AA     192: #0000FF
+  |   1: #240000      65: #240055     129: #2400AA     193: #2400FF
+  |   2: #480000      66: #480055     130: #4800AA     194: #4800FF
+  |   3: #6C0000      67: #6C0055     131: #6C00AA     195: #6C00FF
+  |   4: #900000      68: #900055     132: #9000AA     196: #9000FF
+  |   5: #B40000      69: #B40055     133: #B400AA     197: #B400FF
+  |   6: #D80000      70: #D80055     134: #D800AA     198: #D800FF
+  |   7: #FC0000      71: #FC0055     135: #FC00AA     199: #FC00FF
+  |   8: #002400      72: #002455     136: #0024AA     200: #0024FF
+  |   9: #242400      73: #242455     137: #2424AA     201: #2424FF
+  |  10: #482400      74: #482455     138: #4824AA     202: #4824FF
+  |  11: #6C2400      75: #6C2455     139: #6C24AA     203: #6C24FF
+  |  12: #902400      76: #902455     140: #9024AA     204: #9024FF
+  |  13: #B42400      77: #B42455     141: #B424AA     205: #B424FF
+  |  14: #D82400      78: #D82455     142: #D824AA     206: #D824FF
+  |  15: #FC2400      79: #FC2455     143: #FC24AA     207: #FC24FF
+  |  16: #004800      80: #004855     144: #0048AA     208: #0048FF
+  |  17: #244800      81: #244855     145: #2448AA     209: #2448FF
+  |  18: #484800      82: #484855     146: #4848AA     210: #4848FF
+  |  19: #6C4800      83: #6C4855     147: #6C48AA     211: #6C48FF
+  |  20: #904800      84: #904855     148: #9048AA     212: #9048FF
+  |  21: #B44800      85: #B44855     149: #B448AA     213: #B448FF
+  |  22: #D84800      86: #D84855     150: #D848AA     214: #D848FF
+  |  23: #FC4800      87: #FC4855     151: #FC48AA     215: #FC48FF
+  |  24: #006C00      88: #006C55     152: #006CAA     216: #006CFF
+  |  25: #246C00      89: #246C55     153: #246CAA     217: #246CFF
+  |  26: #486C00      90: #486C55     154: #486CAA     218: #486CFF
+  |  27: #6C6C00      91: #6C6C55     155: #6C6CAA     219: #6C6CFF
+  |  28: #906C00      92: #906C55     156: #906CAA     220: #906CFF
+  |  29: #B46C00      93: #B46C55     157: #B46CAA     221: #B46CFF
+  |  30: #D86C00      94: #D86C55     158: #D86CAA     222: #D86CFF
+  |  31: #FC6C00      95: #FC6C55     159: #FC6CAA     223: #FC6CFF
+  |  32: #009000      96: #009055     160: #0090AA     224: #0090FF
+  |  33: #249000      97: #249055     161: #2490AA     225: #2490FF
+  |  34: #489000      98: #489055     162: #4890AA     226: #4890FF
+  |  35: #6C9000      99: #6C9055     163: #6C90AA     227: #6C90FF
+  |  36: #909000     100: #909055     164: #9090AA     228: #9090FF
+  |  37: #B49000     101: #B49055     165: #B490AA     229: #B490FF
+  |  38: #D89000     102: #D89055     166: #D890AA     230: #D890FF
+  |  39: #FC9000     103: #FC9055     167: #FC90AA     231: #FC90FF
+  |  40: #00B400     104: #00B455     168: #00B4AA     232: #00B4FF
+  |  41: #24B400     105: #24B455     169: #24B4AA     233: #24B4FF
+  |  42: #48B400     106: #48B455     170: #48B4AA     234: #48B4FF
+  |  43: #6CB400     107: #6CB455     171: #6CB4AA     235: #6CB4FF
+  |  44: #90B400     108: #90B455     172: #90B4AA     236: #90B4FF
+  |  45: #B4B400     109: #B4B455     173: #B4B4AA     237: #B4B4FF
+  |  46: #D8B400     110: #D8B455     174: #D8B4AA     238: #D8B4FF
+  |  47: #FCB400     111: #FCB455     175: #FCB4AA     239: #FCB4FF
+  |  48: #00D800     112: #00D855     176: #00D8AA     240: #00D8FF
+  |  49: #24D800     113: #24D855     177: #24D8AA     241: #24D8FF
+  |  50: #48D800     114: #48D855     178: #48D8AA     242: #48D8FF
+  |  51: #6CD800     115: #6CD855     179: #6CD8AA     243: #6CD8FF
+  |  52: #90D800     116: #90D855     180: #90D8AA     244: #90D8FF
+  |  53: #B4D800     117: #B4D855     181: #B4D8AA     245: #B4D8FF
+  |  54: #D8D800     118: #D8D855     182: #D8D8AA     246: #D8D8FF
+  |  55: #FCD800     119: #FCD855     183: #FCD8AA     247: #FCD8FF
+  |  56: #00FC00     120: #00FC55     184: #00FCAA     248: #00FCFF
+  |  57: #24FC00     121: #24FC55     185: #24FCAA     249: #24FCFF
+  |  58: #48FC00     122: #48FC55     186: #48FCAA     250: #48FCFF
+  |  59: #6CFC00     123: #6CFC55     187: #6CFCAA     251: #6CFCFF
+  |  60: #90FC00     124: #90FC55     188: #90FCAA     252: #90FCFF
+  |  61: #B4FC00     125: #B4FC55     189: #B4FCAA     253: #B4FCFF
+  |  62: #D8FC00     126: #D8FC55     190: #D8FCAA     254: #D8FCFF
+  |  63: #FCFC00     127: #FCFC55     191: #FCFCAA     255: #FCFCFF
+  background 31
+  loop forever
+  + image #0 1338x436
+    disposal asis delay 0.04s
+  + image #1 1330x305 at 3,127 transparent 2
+    disposal asis delay 0.04s
+  + image #2 1330x303 at 3,129 transparent 2
+    disposal asis delay 0.05s
+  + image #3 155x308 at 1183,128 transparent 2
+    disposal asis delay 0.04s
+  + image #4 130x210 at 1183,128 transparent 2
+    disposal asis delay 0.04s
+  + image #5 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #6 127x201 at 1184,135 transparent 2
+    disposal asis delay 0.04s
+  + image #7 81x164 at 1201,170 transparent 2
+    disposal asis delay 0.04s
+  + image #8 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.05s
+  + image #9 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #10 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #11 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #12 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #13 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #14 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.05s
+  + image #15 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #16 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #17 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #18 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #19 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #20 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.05s
+  + image #21 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #22 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #23 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #24 112x46 at 1184,192 transparent 2
+    disposal asis delay 0.04s
+  + image #25 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #26 1336x429 at 2,7 transparent 2
+    disposal asis delay 0.05s
+  + image #27 7x63 at 1274,188 transparent 1
+    disposal asis delay 0.04s
+  + image #28 1x1 at 1239,181 transparent 0
+    disposal asis delay 0.04s
+  + image #29 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #30 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #31 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #32 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #33 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #34 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #35 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #36 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #37 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #38 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #39 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #40 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #41 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #42 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #43 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #44 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #45 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #46 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #47 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #48 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #49 107x208 at 1190,136 transparent 2
+    disposal asis delay 0.04s
+  + image #50 87x138 at 1193,166 transparent 2
+    disposal asis delay 0.05s
+  + image #51 3x1 at 1202,162 transparent 0
+    disposal asis delay 0.04s
+  + image #52 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #53 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #54 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #55 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #56 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #57 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #58 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #59 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #60 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #61 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #62 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #63 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #64 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #65 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #66 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #67 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #68 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #69 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #70 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #71 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #72 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #73 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #74 1338x308 at 0,128 transparent 2
+    disposal asis delay 0.05s
+  + image #75 3x5 at 1202,162 transparent 0
+    disposal asis delay 0.04s
+  + image #76 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #77 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #78 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #79 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #80 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #81 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #82 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #83 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #84 128x217 at 1184,127 transparent 2
+    disposal asis delay 0.04s
+  + image #85 134x225 at 1176,127 transparent 2
+    disposal asis delay 0.04s
+  + image #86 135x221 at 1170,131 transparent 2
+    disposal asis delay 0.05s
+  + image #87 1296x224 at 0,128 transparent 2
+    disposal asis delay 0.04s
+  + image #88 1296x225 at 0,127 transparent 12
+    disposal asis delay 0.04s
+  + image #89 1285x225 at 0,127 transparent 12
+    disposal asis delay 0.04s
+  + image #90 1280x225 at 0,127 transparent 12
+    disposal asis delay 0.04s
+  + image #91 1269x221 at 0,131 transparent 12
+    disposal asis delay 0.04s
+  + image #92 1268x225 at 0,127 transparent 12
+    disposal asis delay 0.05s
+  + image #93 1265x225 at 0,127 transparent 12
+    disposal asis delay 0.04s
+  + image #94 1264x225 at 0,127 transparent 13
+    disposal asis delay 0.04s
+  + image #95 1240x224 at 0,128 transparent 16
+    disposal asis delay 0.04s
+  + image #96 1236x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #97 1281x225 at 0,127 transparent 15
+    disposal asis delay 0.04s
+  + image #98 1221x225 at 0,127 transparent 21
+    disposal asis delay 0.05s
+  + image #99 1216x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #100 1224x223 at 0,129 transparent 21
+    disposal asis delay 0.04s
+  + image #101 1221x224 at 0,128 transparent 21
+    disposal asis delay 0.04s
+  + image #102 1208x224 at 0,128 transparent 21
+    disposal asis delay 0.04s
+  + image #103 1188x224 at 0,128 transparent 16
+    disposal asis delay 0.04s
+  + image #104 1216x221 at 0,131 transparent 16
+    disposal asis delay 0.05s
+  + image #105 1329x305 at 0,131 transparent 20
+    disposal asis delay 0.04s
+  + image #106 1169x225 at 0,127 transparent 21
+    disposal asis delay 0.04s
+  + image #107 1168x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #108 1169x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #109 1152x221 at 0,131 transparent 21
+    disposal asis delay 0.04s
+  + image #110 1144x225 at 0,127 transparent 21
+    disposal asis delay 0.05s
+  + image #111 1133x225 at 0,127 transparent 21
+    disposal asis delay 0.04s
+  + image #112 1130x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #113 1120x221 at 0,131 transparent 21
+    disposal asis delay 0.04s
+  + image #114 1120x225 at 0,127 transparent 21
+    disposal asis delay 0.04s
+  + image #115 1108x225 at 0,127 transparent 21
+    disposal asis delay 0.04s
+  + image #116 1104x225 at 0,127 transparent 21
+    disposal asis delay 0.05s
+  + image #117 1088x223 at 0,129 transparent 21
+    disposal asis delay 0.04s
+  + image #118 1080x225 at 0,127 transparent 16
+    disposal asis delay 0.04s
+  + image #119 1070x225 at 6,127 transparent 21
+    disposal asis delay 0.04s
+  + image #120 1062x225 at 11,127 transparent 21
+    disposal asis delay 0.04s
+  + image #121 1044x224 at 16,128 transparent 21
+    disposal asis delay 0.04s
+  + image #122 1329x308 at 0,128 transparent 21
+    disposal asis delay 0.05s
+  + image #123 1024x224 at 24,128 transparent 21
+    disposal asis delay 0.04s
+  + image #124 1024x225 at 24,127 transparent 21
+    disposal asis delay 0.04s
+  + image #125 1013x225 at 32,127 transparent 21
+    disposal asis delay 0.04s
+  + image #126 1001x225 at 40,127 transparent 21
+    disposal asis delay 0.04s
+  + image #127 984x224 at 40,128 transparent 21
+    disposal asis delay 0.04s
+  + image #128 973x225 at 40,127 transparent 21
+    disposal asis delay 0.05s
+  + image #129 962x225 at 47,127 transparent 21
+    disposal asis delay 0.04s
+  + image #130 962x225 at 47,127 transparent 21
+    disposal asis delay 0.04s
+  + image #131 938x224 at 52,128 transparent 21
+    disposal asis delay 0.04s
+  + image #132 921x225 at 63,127 transparent 21
+    disposal asis delay 0.04s
+  + image #133 917x225 at 63,127 transparent 21
+    disposal asis delay 0.04s
+  + image #134 912x225 at 64,127 transparent 16
+    disposal asis delay 0.05s
+  + image #135 896x224 at 68,128 transparent 21
+    disposal asis delay 0.04s
+  + image #136 882x225 at 79,127 transparent 21
+    disposal asis delay 0.04s
+  + image #137 882x225 at 79,127 transparent 21
+    disposal asis delay 0.04s
+  + image #138 858x225 at 80,127 transparent 21
+    disposal asis delay 0.04s
+  + image #139 850x224 at 84,128 transparent 21
+    disposal asis delay 0.04s
+  + image #140 828x225 at 96,127 transparent 21
+    disposal asis delay 0.05s
+  + image #141 824x225 at 96,127 transparent 16
+    disposal asis delay 0.04s
+  + image #142 820x225 at 96,127 transparent 21
+    disposal asis delay 0.04s
+  + image #143 800x224 at 112,128 transparent 21
+    disposal asis delay 0.04s
+  + image #144 786x225 at 110,127 transparent 21
+    disposal asis delay 0.04s
+  + image #145 1004x225 at 44,127 transparent 16
+    disposal asis delay 0.04s
+  + image #146 768x225 at 120,127 transparent 16
+    disposal asis delay 0.05s
+  + image #147 758x225 at 120,127 transparent 16
+    disposal asis delay 0.04s
+  + image #148 742x225 at 128,127 transparent 21
+    disposal asis delay 0.04s
+  + image #149 724x224 at 136,128 transparent 21
+    disposal asis delay 0.04s
+  + image #150 720x225 at 136,127 transparent 16
+    disposal asis delay 0.04s
+  + image #151 709x225 at 143,127 transparent 21
+    disposal asis delay 0.04s
+  + image #152 704x225 at 144,127 transparent 21
+    disposal asis delay 0.05s
+  + image #153 680x223 at 152,129 transparent 21
+    disposal asis delay 0.04s
+  + image #154 687x225 at 144,127 transparent 16
+    disposal asis delay 0.04s
+  + image #155 662x225 at 160,127 transparent 21
+    disposal asis delay 0.04s
+  + image #156 658x225 at 159,127 transparent 21
+    disposal asis delay 0.04s
+  + image #157 640x224 at 168,128 transparent 16
+    disposal asis delay 0.04s
+  + image #158 637x225 at 167,127 transparent 16
+    disposal asis delay 0.05s
+  + image #159 626x225 at 174,127 transparent 16
+    disposal asis delay 0.04s
+  + image #160 612x225 at 176,127 transparent 16
+    disposal asis delay 0.04s
+  + image #161 599x224 at 184,128 transparent 16
+    disposal asis delay 0.04s
+  + image #162 600x225 at 184,127 transparent 16
+    disposal asis delay 0.04s
+  + image #163 576x225 at 190,127 transparent 21
+    disposal asis delay 0.04s
+  + image #164 570x225 at 191,127 transparent 21
+    disposal asis delay 0.05s
+  + image #165 555x224 at 196,128 transparent 21
+    disposal asis delay 0.04s
+  + image #166 544x225 at 206,127 transparent 21
+    disposal asis delay 0.04s
+  + image #167 535x225 at 206,127 transparent 21
+    disposal asis delay 0.04s
+  + image #168 531x225 at 206,127 transparent 16
+    disposal asis delay 0.04s
+  + image #169 516x224 at 208,128 transparent 20
+    disposal asis delay 0.04s
+  + image #170 717x224 at 139,128 transparent 21
+    disposal asis delay 0.05s
+  + image #171 488x224 at 224,128 transparent 21
+    disposal asis delay 0.04s
+  + image #172 476x224 at 228,128 transparent 21
+    disposal asis delay 0.04s
+  + image #173 465x225 at 231,127 transparent 21
+    disposal asis delay 0.04s
+  + image #174 454x225 at 239,127 transparent 21
+    disposal asis delay 0.04s
+  + image #175 441x224 at 240,128 transparent 21
+    disposal asis delay 0.04s
+  + image #176 437x225 at 243,127 transparent 21
+    disposal asis delay 0.05s
+  + image #177 429x225 at 244,127 transparent 20
+    disposal asis delay 0.04s
+  + image #178 418x225 at 255,127 transparent 21
+    disposal asis delay 0.04s
+  + image #179 400x224 at 256,128 transparent 21
+    disposal asis delay 0.04s
+  + image #180 401x225 at 255,127 transparent 21
+    disposal asis delay 0.04s
+  + image #181 386x225 at 255,127 transparent 21
+    disposal asis delay 0.04s
+  + image #182 373x225 at 268,127 transparent 21
+    disposal asis delay 0.05s
+  + image #183 352x224 at 272,128 transparent 21
+    disposal asis delay 0.04s
+  + image #184 348x225 at 272,127 transparent 21
+    disposal asis delay 0.04s
+  + image #185 324x225 at 286,127 transparent 21
+    disposal asis delay 0.04s
+  + image #186 332x225 at 280,127 transparent 21
+    disposal asis delay 0.04s
+  + image #187 320x224 at 288,128 transparent 21
+    disposal asis delay 0.04s
+  + image #188 302x225 at 290,127 transparent 20
+    disposal asis delay 0.05s
+  + image #189 294x225 at 288,127 transparent 20
+    disposal asis delay 0.04s
+  + image #190 273x225 at 303,127 transparent 21
+    disposal asis delay 0.04s
+  + image #191 266x224 at 304,128 transparent 21
+    disposal asis delay 0.04s
+  + image #192 417x221 at 260,131 transparent 21
+    disposal asis delay 0.04s
+  + image #193 1338x308 at 0,128 transparent 21
+    disposal asis delay 0.04s
+  + image #194 253x217 at 312,135 transparent 21
+    disposal asis delay 0.05s
+  + image #195 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #196 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #197 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #198 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #199 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #200 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #201 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #202 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #203 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #204 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #205 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #206 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #207 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #208 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #209 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #210 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #211 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #212 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #213 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #214 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #215 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #216 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #217 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #218 1338x308 at 0,128 transparent 20
+    disposal asis delay 0.05s
+  + image #219 193x189 at 340,155 transparent 20
+    disposal asis delay 0.04s
+  + image #220 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #221 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #222 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #223 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #224 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #225 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #226 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #227 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #228 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #229 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #230 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #231 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #232 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #233 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #234 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #235 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #236 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #237 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #238 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #239 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #240 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #241 199x200 at 336,152 transparent 20
+    disposal asis delay 0.04s
+  + image #242 199x200 at 336,152 transparent 20
+    disposal asis delay 0.05s
+  + image #243 193x189 at 340,155 transparent 20
+    disposal asis delay 0.04s
+  + image #244 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #245 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #246 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #247 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #248 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #249 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #250 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #251 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #252 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #253 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #254 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #255 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #256 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #257 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #258 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #259 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #260 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #261 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #262 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #263 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #264 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #265 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #266 193x189 at 340,155 transparent 20
+    disposal asis delay 0.05s
+  + image #267 193x189 at 340,155 transparent 20
+    disposal asis delay 0.04s
+  + image #268 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #269 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #270 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #271 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #272 37x45 at 349,243 transparent 10
+    disposal asis delay 0.05s
+  + image #273 46x129 at 340,159 transparent 10
+    disposal asis delay 0.04s
+  + image #274 221x212 at 324,139 transparent 20
+    disposal asis delay 0.04s
+  + image #275 52x188 at 336,153 transparent 16
+    disposal asis delay 0.04s
+  + image #276 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #277 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #278 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #279 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #280 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #281 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #282 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #283 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #284 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.05s
+  + image #285 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #286 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #287 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s
+  + image #288 1x1 at 1337,435 transparent 0
+    disposal asis delay 0.04s

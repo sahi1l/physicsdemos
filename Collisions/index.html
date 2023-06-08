@@ -1,0 +1,39 @@
+
+<!doctype html>
+<html>
+<head>
+<script src="../../lib/jquery.js"></script>
+<script src="../../lib/raphael.js"></script>
+<script src="index.js"></script>
+<title>Elastic Collisions</title>
+</head>
+<style>
+.done {font-weight:bold;color:red;}
+.task {font-family:Helvetica;padding:4px 0px;}
+.task>I {font-family:Times;}
+.duh {display:inline-block;vertical-align:top;}
+.duh>button {width:100%;}
+</style>
+
+<body>
+<h1>Elastic Collisions</h1>
+<div class="duh">
+  <button id="start">Start</button><br>
+  <button id="stop">Stop</button><br>
+  <button id="reset">Reset</button><br>
+</div>
+<div class="duh" style="background-color:#eef" id="canvas"></div>
+<ul>
+  <li>Click on a number (mass or velocity) and drag left or right to
+  change its value.
+  <li>Press Start to launch the blocks.
+  <li>Press Reset to return them to their initial positions.
+  <li>Create the following scenarios. When they all turn red, the
+  simulation is complete.
+  <ul>
+    <li class="task" id="task2">Initially the blocks move toward each other; after the collision they move in the same direction.
+    <li class="task" id="task3">Initially the blocks move toward each other; after the collision they move in opposite directions.
+    <li class="task" id="task4">Initially both blocks move in the same direction; after the collision they move in opposite directions.
+    <li class="task" id="task1">Initially the right block is stationary; after the collision the left block is stationary. <I>Hint: it doesn't matter what the initial velocity of the left block is; only the relative masses of the two blocks matter.</I> 
+  </ul>
+</ul>

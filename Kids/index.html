@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/raphael.js"></script>
+<script type="text/javascript" src="single.js"></script>
+<style media="screen">
+  #canvas {
+  height:600px;
+  text-align: left;
+  width:600px;
+  background: #eee;
+  float:left;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-right:10px
+}
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){init("canvas",600,600,50)})
+</script>
+</head>
+<body>
+<H1>Kids Analogy</H1>
+ 
+<div id="canvas"></div>
+<div>
+  This is a very simplified model of what goes on inside a conductor
+  or an insulator.
+<BR>
+    The <IMG SRC="Positive.png" WIDTH=25/> are positive atomic
+    nuclei (plus the non-valence electrons).
+    <BR>The <IMG SRC="NegativeKid.png" WIDTH=25/> are negative
+    valence electrons; we're assuming there's one per atom.
+    <BR>If you click on the <SPAN STYLE="fill:orange">Insulator</SPAN> button, the electrons are forced to stay close to their own nucleus, like kids who have to stay in their own backyards.
+  <BR>If you click on the <SPAN>Conductor</SPAN> button, the electrons are allowed to roam everywhere inside the object, like kids who can roam the neighborhood.
+  <BR>Clicking on one of the long blue bars will extend it, and the electrons will react by being attracted to it.  In a conductor, the "kids" can all run over to the edge of the material to look at the positive charge.  In an insulator, the "kids" stay in their own yard, but get as close to the external charge as they can.
+  <BR>In both cases, notice that there is a layer of negative charge closest to the external source, and a layer of positive charge (due to the absence of electrons) on the far side.  The block has become <I>polarized</I>.
+  </UL>
+</div>
+  </body>
+</html>

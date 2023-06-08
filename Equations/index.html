@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+
+
+<style>
+.equation {
+border:1px solid;
+padding:3px;
+display:inline-block;
+cursor:pointer;
+height:65px;
+vertical-align:middle;
+width:90px;
+font-size:14px;
+}
+#workspace {
+background-color:#ddd;
+width:400px;
+height:200px;
+padding-top:20px;
+font-size:200%;
+}
+#need {font-size:150%;}
+#known {font-size: 150%;}
+#need>span {font-size:150%;color:red;}
+#known>span {color:blue;}
+</style>
+<script src="../../lib/jquery.js"></script>
+<!--  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+<script src="../../lib/jquery-ui/jquery-ui.js"></script>
+<!--<script src="../../lib/raphael.js"></script>-->
+<script src="../../lib/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="index.js"></script>
+<title>Equations</title>
+</head>
+<div id="need"><B>Solve for:</B> <span>E</span></div>
+<div id="known"><B>Known variables:</B> <span>A,B,C,D</span></div>
+<div id="equations">
+<div class="equation" id="eq0">\(\alpha\)</div>
+<div class="equation" id="eq1">\(\beta\)</div>
+<div class="equation" id="eq2">\(\alpha\)</div>
+<div class="equation" id="eq3">\(\beta\)</div>
+</div>
+<div id="workspace">
+<div style="font-size:75%;text-align:center;width:100%;">Click on an equation above to <br>solve it for the needed variable.
+  <br>Drag the equation here.
+<br>Then drag other equations here to make substitutions until we've solved for what we <span style="color:red">want</span> in terms of what we <span style="color:blue">know</span>.</div>
+</div>
+<div id="win" style="display:none"><div style="font-size:200%;">Congratulations!</div>
+  <br>
+  Click <input type="button" onclick="location.reload()" value="here"></input> to try another problem.
+</div>

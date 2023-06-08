@@ -1,107 +1,107 @@
-:math:QUIZ:scinot
+:math:QUIZ:Scinot
 Scientific Notation
 IMG:scinot.gif
 Converting between scientific, metric, and decimal notation
 
-:math:QUIZ:basis
+:math:QUIZ:Basis
 Using a Basis
 IMG:basis.png
 Correctly describe a vector's direction in a standard basis.
 
-:math:QUIZ:components
+:math:QUIZ:Components
 Vector Components
 IMG:components.png
 Given a vector with an angle, find the <i>x</i> and <i>y</i> components in terms of sines and cosines.
 
-:math:QUIZ:vectormath
+:math:QUIZ:Vectormath
 Vector Addition
 IMG:vectormath.png
 Given two vectors, find their sum or difference.
 
-:mechanics:QUIZ:acceleration
+:mechanics:QUIZ:Acceleration
 Elevator
 IMG:acceleration.png
 Use Newton's Second Law to find the force on an <i>accelerating</i> box.
 
-:mechanics:QUIZ:collisions
+:mechanics:QUIZ:Collisions
 Elastic Collisions
 IMG:collisions.gif
 Fling two blocks at each other with different speeds, and try to recreate certain conditions after they collide.
 
-:mechanics:QUIZ:equilibrium
+:mechanics:QUIZ:Equilibrium
 Equilibrium
 IMG:equilibrium.png
 
-:mechanics:GAME:lander
+:mechanics:GAME:Lander
 Lander
 IMG:lander.gif
 Land a rocket ship on a pad, with gravity and without, and gain some intuition about inertia.
 
-:mechanics:QUIZ:momentum
+:mechanics:QUIZ:Momentum
 Inelastic Collisions
 IMG:momentum.gif
 Choose the velocity of the red ball so that both balls come to a stop when they collide.
 Topics: Momentum, Inelastic Collisions
 
-:mechanics:GAME:orbiter
+:mechanics:GAME:Orbiter
 Orbiter
 IMG:orbits.png
 
-:mechanics:DEMO:tilt
+:mechanics:DEMO:Tilt
 Stability
 IMG:tilt.png
 
-:optics:DEMO:flatmirror
+:optics:DEMO:Flatmirror
 Image in a Flat Mirror
 IMG:flatmirror.png
 
-:optics:DEMO:refraction
+:optics:DEMO:Refraction
 Refraction
 IMG:refraction.png
 
-:optics:DEMO:lens
+:optics:DEMO:Lens
 Ray Tracing
 IMG:lens.png
 An interactive demo that shows the principal rays of converging and diverging lenses and mirrors.
 
-:waves:DEMO:2Dinterference
+:waves:DEMO:TwoDinterference
 Two-Dimensional Interference
 IMG:interference2D.gif
 
-:misc:DEMO:diffusion
+:misc:DEMO:Diffusion
 Diffusion
 IMG:diffusion.png
 
-:misc:GAME:pipe
+:misc:GAME:Pipe
 Fluid Through a Pipe
 IMG:pipe.png
 
-:misc:DEMO:minkowski
+:misc:DEMO:Minkowski
 Minkowski Diagram
 IMG:minkowski.png
 Draw events and worldlines on a Minkowski diagram, then adjust the observer's speed to see how they are related.
 
-:misc:DEMO:relativetrain
+:misc:DEMO:Relativetrain
 Relativistic Train
 IMG:train.png
 Light pulses are emitted from the center of a train. How long do they take to reach the ends? And what does it say about relativity?
 
-:math:DEMO:coins
+:math:DEMO:Coins
 Statistics of Coins
 IMG:coins.gif
 Simulate flipping a large number of coins many times, and see how many times heads comes up.
 
-:misc:GAME:equipotentials
+:misc:GAME:Equipotentials
 Equipotential Lines
 IMG:equipotentials.png
 Given a set of charges and a voltage probe, draw the equipotential lines created by those charges.
 
-:misc:DEMO:sterngerlach
+:misc:DEMO:Sterngerlach
 Stern-Gerlach
 IMG:sterngerlach.png
 Inspired by David McIntyre's <I>Quantum Mechanics</I> book: create a chain of Stern-Gerlach devices, send photos through them, and witness the statistics.
 
-:waves:DEMO:wavesimulator
+:waves:DEMO:Wavesimulator
 Wave Simulator
 IMG:wavesim.gif
 Simulates different types of waves and the medium the waves are travelling through

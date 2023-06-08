@@ -1,0 +1,98 @@
+<desc>Created with Raphaël 2.2.0
+</desc>
+<defs>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="blue" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="blue" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="#000" stroke="none">
+</use>
+</marker>
+<path stroke-linecap="round" d="M5,0 0,2.5 5,5 3.5,3 3.5,2z" id="">
+</path>
+<marker id="" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5">
+<use xlink:href="#raphael-marker-classic" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="red" stroke="none">
+</use>
+</marker>
+</defs>
+<rect x="0" y="0" width="300" height="300" rx="0" ry="0" fill="none" stroke="#800080" style="">
+</rect>
+<rect x="25" y="25" width="150" height="150" rx="0" ry="0" fill="none" stroke="#000" style="" stroke-width="2">
+</rect>
+<rect x="70" y="115" width="60" height="60" rx="0" ry="0" fill="#aaaaaa" stroke="#000" style="">
+</rect>
+<text style="text-anchor: middle; font-family: &quot;Arial&quot;; font-size: 18px;" x="100" y="145" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="18px" stroke="none" fill="#000000">
+<tspan dy="145">5kg
+</tspan>
+</text>
+<path style="" fill="none" stroke="#0000ff" d="M100,175C100,175,100,211.39256954193115,100,227.4920168099925" marker-end="url(#raphael-marker-endclassic33-objtbeuc)" stroke-width="5">
+</path>
+<text style="text-anchor: start; font-family: &quot;Arial&quot;; font-size: 18px;" x="105" y="205" text-anchor="start" font-family="&quot;Arial&quot;" font-size="18px" stroke="none" fill="#0000ff">
+<tspan dy="205">50N
+</tspan>
+</text>
+<path style="" fill="none" stroke="#0000ff" d="M100,115C100,115,100,78.60743045806885,100,62.50798319000751" marker-end="url(#raphael-marker-endclassic33-objdzyjc)" stroke-width="5">
+</path>
+<text style="text-anchor: start; font-family: &quot;Arial&quot;; font-size: 18px;" x="105" y="85" text-anchor="start" font-family="&quot;Arial&quot;" font-size="18px" stroke="none" fill="#0000ff">
+<tspan dy="85">F
+</tspan>
+</text>
+<text style="text-anchor: middle; font-family: &quot;Arial&quot;; font-size: 18px;" x="100" y="41.5" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="18px" stroke="none" fill="#800080">
+<tspan dy="41.5">|a| = 1m/s²
+</tspan>
+</text>
+<path style="" fill="none" stroke="#ff0000" d="M205,100C205,100,205,63.60743045806885,205,47.50798319000751" marker-end="url(#raphael-marker-endclassic33-objcit9o)" stroke-width="5">
+</path>
+<text style="text-anchor: start; font-family: &quot;Arial&quot;; font-size: 18px;" x="210" y="70" text-anchor="start" font-family="&quot;Arial&quot;" font-size="18px" stroke="none" fill="#ff0000">
+<tspan dy="70">v
+</tspan>
+</text>
+<text style="text-anchor: middle; font-family: Times Italic; font-size: 14px;" x="205" y="22" text-anchor="middle" font-family="Times Italic" font-size="14px" stroke="none" fill="#ff0000">
+<tspan dy="22">speeding
+</tspan>
+</text>
+<text style="text-anchor: middle; font-family: Times Italic; font-size: 14px;" x="205" y="32.8" text-anchor="middle" font-family="Times Italic" font-size="14px" stroke="none" fill="#ff0000">
+<tspan dy="32.8">up
+</tspan>
+</text>

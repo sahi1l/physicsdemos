@@ -1,0 +1,35 @@
+<html>
+<head>
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/raphael.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<style media="screen">
+  #canvas {
+  height:400px;
+  text-align: left;
+  width:400px;
+  background: #eee;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){init("canvas",1200,600)})
+</script>
+</head>
+<body>
+<H1>Coulomb</H1>
+<UL>
+  <LI>Drag a charge into the square to place it there
+  <LI>Click on a charge to see the forces acting on it
+  <LI>Drag a charge to move it
+  <LI>Drag a charge outside the square to delete it.
+  <LI>The black arrow is the net force on the charge;
+  <LI>The purple arrows are the individual forces due to the other charges; their sum is the black arrow
+</UL>
+  
+<div id="canvas"></div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+<head>
+<script type="text/javascript" src="../lib/jquery.js"></script>
+<script type="text/javascript" src="../lib/raphael.js"></script>
+<script type="text/javascript" src="field.js"></script>
+<style media="screen">
+  .canvas {
+  border-top-style: ridge;
+  border-right-style: ridge;
+  border-bottom-style: ridge;
+  border-left-style: ridge;
+  border-top-width: medium;
+  border-right-width: medium;
+  border-bottom-width: medium;
+  border-left-width: medium;
+
+  height:100px;
+  text-align: left;
+  width:400px;
+  background: #fff;
+ -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  margin-right:10px
+}
+  #text {
+  text-align:left;
+  height:60px;
+  width:400px;
+  }
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+  $(document).ready(function(){init("main",600,600)})
+</script>
+<div class="canvas" id="main"></div>
+<div id="text">
+  Drag a charge into the square to add it.<br/>
+  Drag a charge out of the square to remove it.
+</div>
+</body>
+</html>
