@@ -1,8 +1,10 @@
-import {Score} from "/lib/quiz.js";
-import {randint,choose} from "/lib/default.js";
+import {Score} from "../lib/quiz.js";
+import {randint,choose} from "../lib/default.js";
 let CANVAS = {};
 let H = 100;
 let W = 100;
+let unitvectors = ["xy","ıȷ"];
+let uvmode = 0; //or 1
 function setupCanvas() {
     CANVAS.$w = $("<div>").appendTo("body");
     CANVAS.paper = Raphael(CANVAS.$w[0], 3*W, H);
@@ -33,30 +35,41 @@ function drawArrow(code,number) {
     }
     console.debug("arrow",CANVAS.arrow);
 }
+function formatAnswer(answer,M,questionType){
+    let sign = answer[0];
+    let dir = answer[1];
+    let num = sign + parseInt(M);
+    let sfx1;
+    let sfx2;
+    if (questionType==1){
+	return (dir=="x")?(`(${num},0)`):(`(0,${num})`);
+    } else {
+	if (dir=="x") {sfx1 = unitvectors[uvmode][0];}
+	else {sfx1 = unitvectors[uvmode][1];}
+	sfx1 = `<span class="hatted">${sfx1}</span>`;
+	return `${num}${sfx1}`;
+    }
+}
 function generator() {
     CANVAS.$w.appendTo("body");
     let M = randint(1,9);
     let questionType = randint(2); //0 for +x, 1 for (+5,0)
-    let answers = {
-        "+x": {coords: `(+${M},0)`},
-        "-x": {coords: `(-${M},0)`},
-        "+y": {coords: `(0,+${M})`},
-        "-y": {coords: `(0,-${M})`}
-    };
-    let solution = choose(Object.keys(answers));
+    let answers = ["+x","-x","+y","-y"];
+	
+    let solution = choose(answers);
     drawArrow(solution,M);
-    let correct = questionType ? answers[solution].coords : solution;
+    let correct = formatAnswer(solution, M, questionType);
     let others = [];
-    for (let key of Object.keys(answers)){
+    for (let key of answers) {
         if (solution != key) {
-            others.push(questionType ? answers[key].coords : key);
+	    others.push(formatAnswer(key,M,questionType));
         }
     }
-
-    return {text: CANVAS.$w, 
+return {text: CANVAS.$w, 
             correct: correct,
             others: others
            };
+    
 }
 
 function init() {

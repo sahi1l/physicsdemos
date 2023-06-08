@@ -1,4 +1,4 @@
-@import url("/lib/default.css");
+@import url("../lib/default.css");
 .mybutton {
     background-color: var(--main-color);
     width:100px;
@@ -59,3 +59,16 @@ body {text-align:left;display:inline-block;}
 }
 
 .mybutton {width:150px;}
+
+.hatted {
+    display: inline;
+    font-style: italic;
+    position: relative;
+}
+.hatted:after {
+    content: "^";
+    position: absolute;
+    left: -0.05em;
+    top: -0.2em;
+}
+
