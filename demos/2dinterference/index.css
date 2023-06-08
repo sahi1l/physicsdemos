@@ -1,9 +1,0 @@
-@import url('/lib/default.css');
-.canvas {display:flex;}
-.text {padding-left:5px;}
-.card {margin:5px; border:4px outset black;padding:5px;}
-.color {color: white;padding:2px;margin:2px 0px}
-p {margin:3px;}
-.vocab {
-    padding:2px;
-}

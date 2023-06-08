@@ -1,5 +1,0 @@
-//NOTE: I did the arrowheads on my own because every other time, they would just disappear.
-    //Something happened to #raphael-marker-classic and it would disappear every other time
-    //Theory: when I create the new canvas, there are now two SVGs which share divs
-    //But the first one is then deleted through garbage collection, and matching defs also disappear
-    //
