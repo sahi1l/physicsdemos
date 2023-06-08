@@ -1,5 +1,5 @@
-import {shuffle, randint} from "/lib/default.js";
-import {Button} from "/lib/buttons.js";
+import {shuffle, randint} from "../lib/default.js";
+import {Button} from "../lib/buttons.js";
 //================================================================================
 function qgen() {
     return {"text": "What is 2+2?",
