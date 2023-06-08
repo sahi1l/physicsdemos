@@ -1,0 +1,7 @@
+main {margin:auto;} //not sure how important this is?
+.scoreheader {display:inline;}
+.scoreheader.right {background-color: var(--right-color);padding:2px; margin:4px;}
+.scoreheader.right:after {content: " correct";}
+.scoreheader.wrong {background-color: var(--wrong-color);padding:2px; margin:4px;}
+.scoreheader.wrong:after {content: " errors";}
+.reaction {height: 80px;}

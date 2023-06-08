@@ -1,0 +1,17 @@
+h1,h2,h3 {
+    font-family: var(--display-font);
+    color: var(--accent-color);
+    background-color: var(--main-color);
+    padding:4px;
+}
+header > h1 {
+    padding:4px 15px;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+header {position: fixed; width: 100%; top: 0px;}
+header img {
+    height: 40px;
+    padding: 0px 5px;
+    cursor: pointer;
+}
