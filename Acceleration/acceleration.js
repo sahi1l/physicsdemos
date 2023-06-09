@@ -1,5 +1,5 @@
-import {Score} from "/lib/quiz.js";
-import {randint,choose} from "/lib/default.js";
+import {Score} from "../lib/quiz.js";
+import {randint,choose} from "../lib/default.js";
 let W=300; let H=300;
 let extras = 0; //difficulty level, maybe implement with a slider? or over time?
 let txtshift = 0;
