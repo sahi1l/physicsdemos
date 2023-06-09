@@ -1,4 +1,4 @@
-import Button from "/lib/buttons.js";
+import Button from "../lib/buttons.js";
 let coins=4;
 let trials=12;
 let N=0;
