@@ -80,6 +80,9 @@
 .card.demo::before {
     background-image: url(img/demo.png);
 }
+.card.lab::before {
+    background-image: url(img/lab.png);
+}
 .cards>a {color:var(--text-color);}
 .cards>a:visited {color:var(--text-color);}
 .card:hover {background-color:var(--bg-color);}

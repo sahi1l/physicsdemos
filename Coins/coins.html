@@ -2,16 +2,16 @@
 <meta charset="utf-8">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <script src="/lib/jquery.js"></script>
-    <script src="/lib/default.js"></script>
+    <script src="../lib/jquery.js"></script>
+    <script type="module" src="../lib/default.js"></script>
     <script type="module" src="coins.js"></script>
     <link rel="stylesheet" href="coins.css">
     <title>Coin Simulation</title>
   </head>
   <body>
     <div id="topmatter">
-    <h1>Flipping Coins</h1>
-    <div>In this simulation we will simulate flipping a set of coins a number of times (or "trials"), and see how often we get no heads, one head, etc.</div>
+    <header>Flipping Coins</header>
+    <div class="instructions">In this simulation we will simulate flipping a set of coins a number of times (or "trials"), and see how often we get no heads, one head, etc.</div>
     <div id="sliders">
       <div id="Ncoins">
         <label for="coins">Number of coins: <span id="coin">4</span></label>

@@ -1,4 +1,4 @@
-@import url('/lib/default.css');
+@import url('../lib/default.css');
 .count {
     background-color: var(--right-color);
 /*    border:1px solid var(--text-color);*/

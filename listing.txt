@@ -86,12 +86,12 @@ Relativistic Train
 IMG:train.png
 Light pulses are emitted from the center of a train. How long do they take to reach the ends? And what does it say about relativity?
 
-:math:DEMO:Coins
+:math:LAB:Coins
 Statistics of Coins
 IMG:coins.gif
 Simulate flipping a large number of coins many times, and see how many times heads comes up.
 
-:misc:GAME:Equipotentials
+:misc:LAB:Equipotentials
 Equipotential Lines
 IMG:equipotentials.png
 Given a set of charges and a voltage probe, draw the equipotential lines created by those charges.
