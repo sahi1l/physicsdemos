@@ -21,3 +21,7 @@ body {
 main {
 }
           
+.instructions {
+    margin-bottom: 15px;
+    font-style: italic;
+}

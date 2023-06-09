@@ -41,6 +41,7 @@ function formatAnswer(answer,M,questionType){
     if (questionType==1){
 	return (dir=="x")?(`(${num},0)`):(`(0,${num})`);
     } else {
+        console.log("uvmode=",uvmode);
 	if (dir=="x") {sfx1 = unitvectors[uvmode][0];}
 	else {sfx1 = unitvectors[uvmode][1];}
 	sfx1 = `<span class="hatted">${sfx1}</span>`;
@@ -49,8 +50,10 @@ function formatAnswer(answer,M,questionType){
 }
 function generator() {
     CANVAS.$w.appendTo("body");
-    let M = randint(1,9);
-    let questionType = randint(2); //0 for +x, 1 for (+5,0)
+    let M = randint(2,9);
+    let questionType = choose([0,1],{id:"questiontype",N:2});
+//    let questionType = randint(2); //0 for +x, 1 for (+5,0)
+    
     let answers = ["+x","-x","+y","-y"];
 	
     let solution = choose(answers,{id:"solution"});
@@ -71,6 +74,12 @@ return {text: CANVAS.$w,
 
 function init() {
     setupCanvas();
+    $("#units input").on("change",(e) => {
+        console.debug("e=",e);
+        let value = $("#units input[name=unit]:checked").prop("value");
+        uvmode = 0+(value == "ij");
+        
+    });
     CANVAS.arrow = CANVAS.paper.path("M0,0L2,2").attr({stroke:"black", "stroke-width":8});
     CANVAS.magnitude = CANVAS.paper.text(0,0,"")
         .attr({"font-size":18});
