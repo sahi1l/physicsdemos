@@ -18,8 +18,6 @@ function setupCanvas() {
     
 }
 function drawArrow(code,number) {
-    console.debug("code=",code);
-    console.debug("paper",CANVAS.paper);
     if(!number) {number="";}
     if(code[1]=="x"){
         CANVAS.arrow.attr("path",`M0,${H/2}l${W},0`);
@@ -33,7 +31,6 @@ function drawArrow(code,number) {
     } else {
         CANVAS.arrow.attr({"arrow-start":"classic","arrow-end":"none"});
     }
-    console.debug("arrow",CANVAS.arrow);
 }
 function formatAnswer(answer,M,questionType){
     let sign = answer[0];
@@ -56,7 +53,7 @@ function generator() {
     let questionType = randint(2); //0 for +x, 1 for (+5,0)
     let answers = ["+x","-x","+y","-y"];
 	
-    let solution = choose(answers);
+    let solution = choose(answers,{id:"solution"});
     drawArrow(solution,M);
     let correct = formatAnswer(solution, M, questionType);
     let others = [];
@@ -77,7 +74,7 @@ function init() {
     CANVAS.arrow = CANVAS.paper.path("M0,0L2,2").attr({stroke:"black", "stroke-width":8});
     CANVAS.magnitude = CANVAS.paper.text(0,0,"")
         .attr({"font-size":18});
-    new Score($("#main"), 10, generator, {multiple: 2, noauto: true});
+    new Score($("main"), 10, generator, {multiple: 2, noauto: true});
 }
 
 $(init)
