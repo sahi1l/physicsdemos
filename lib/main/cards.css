@@ -1,8 +1,13 @@
 @import url("../default.css");
+@import url("https://fonts.googleapis.com/css2?family=Righteous");
+h1,#title h2 {font-family: "Righteous";}
+#title h1 {font-size: 300%;}
+#title h1,#title h2 {position:relative;z-index:2;}
 .cards {
     display:flex;
     overflow-x:scroll;
 }
+.card h2 {font-family: Righteous;}
 .card {
     text-align:center;
     border:1px solid var(--text-color);
@@ -89,8 +94,27 @@
 .card:hover h2 {color:var(--right-color);}
 
 #title {
-    background-color: var(--main-color);
+//    background-color: var(--main-color);
     text-align:center;
 }
-#title h1,#title h2 {margin:0px;}
-body {background-color: var(--main-color);}
+#title h1,#title h2 {
+    margin:0px;
+    background-color: rgba(0,0,0,0);
+}
+body {background-color: var(--main-color);
+     }
+#bg {
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index: -2;
+    background: url("../img/circuitbg.png");
+    background-size: 100px;
+}
+#title img {
+    position:absolute;
+    opacity:50%;
+    height: 100px;
+}
+#title h2 {margin-top: -15px;}
+
