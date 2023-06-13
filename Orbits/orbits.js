@@ -1,43 +1,34 @@
-var paper;
-var W=800; var H=800;
-var rmin=10;
-var rmax=48;
-var planet; var dots, tdots;
-var angle=0,r=20;
-var ship, target;
-var acceleration=0;
-var collected=0;
+let paper;
+//var W=800; var H=800;
+let rmin=10;
+let rmax=48;
+let planet;
+let dots, tdots;
+let r=20;
+let ship, target;
+let acceleration = 0;
+let collected = 0;
 var captured;
 var flame;
 var firing=0;
 var maxcollected=3;
 dangle=0.1;
 var count=0;
-var fuel=0,fuelW,winW;
-var timeW;
+let fuel=0;
+let winW;
 var winQ=false;
 var clickhandle,stephandle;
 var start,elapsed;
 function init(){
     start=new Date();
-    paper=Raphael("game",W,H);
-    $("#game").width(W);
-    $("#game").height(H);
+    paper=Raphael("game","100%","100%");
     paper.setViewBox(-50,-50,100,100);
-//    var upbtn=paper.image("UpButton.png",30,40,9,9);
-//    var dnbtn=paper.image("DownButton.png",40,40,9,9);
-    fuelW=paper.text(-49,44,"Fuel used: 0").attr({fill:"white","font-size":2,"text-anchor":"start"});
-    timeW=paper.text(-49,46,"Time elapsed: 0").attr({fill:"white","font-size":2,"text-anchor":"start"});
-    //FIX: Add time elapsed
     planet=paper.circle(0,0,rmin*0.9).attr({fill:"blue"});
-//    flame=paper.ellipse(rmin,0,0.5,2).attr({fill:"orange",stroke:""});
     paper.setStart();
-    
-    //ship=paper.circle(rmin,0,1).attr({fill:"grey",stroke:""});
     flame=paper.ellipse(rmin,0,0.5,2).attr({fill:"orange",stroke:""}).hide();
     paper.circle(rmin,0,1).attr({fill:"grey",stroke:""});
     ship=paper.setFinish();
-    ship.angle=0; ship.r=r;
+    ship.angle=0; ship.r = r;
     target=paper.circle(rmin,0,1).attr({fill:"yellow",stroke:""});
     placeTarget();
     dots=paper.set();
@@ -112,20 +103,10 @@ function keyPressed(event){
     case 38:
         speedUp();
         event.preventDefault();
-/*        if(changevel(1)){
-            acceleration=-1;
-            flame.show();
-        } else {flame.hide();}
-*/
         break;
     case 40:
         slowDown();
         event.preventDefault();
-/*        if(changevel(-1)){
-            acceleration=1;
-            flame.show();
-        } else {flame.hide();}
-*/
         break;
     }
 }
@@ -137,18 +118,16 @@ function keyReleased(event){
 function step(){
     if(winQ){return;}
     elapsed=new Date()-start;
-    timeW.attr("text","Time elapsed: "+parseInt(elapsed/1000));
+    $("#time").html(parseInt(elapsed/1000));
     count++;
     flame.attr({ry:Math.random()+1});
     ship.X=ship.r*Math.cos(ship.angle);
     ship.Y=ship.r*Math.sin(ship.angle);
     ship.attr({cx:ship.X,cy:ship.Y});
- //   flame.attr({cx:ship.r*Math.cos(ship.angle),cy:ship.r*Math.sin(ship.angle)})
     target.attr({cx:target.r*Math.cos(target.angle),cy:target.r*Math.sin(target.angle)});
     ship.transform('r'+ship.angle*180/Math.PI);
     
     flame.translate(0,acceleration);
-//    flame.transform('t0,1'+'r'+ship.angle*180/Math.PI+','+ship.cx+','+ship.cy);
     dots.push(
         paper.circle(ship.r*Math.cos(ship.angle),ship.r*Math.sin(ship.angle),0.1)
             .attr({"fill":"red","stroke-width":0})
@@ -180,16 +159,7 @@ function changevel(dv){
     ship.r=nr; return 1;
 }
 function UpdateFuel(){
-    fuelW.attr("text","Fuel used: "+fuel);
+    $("#fuel").html(fuel);
 }
 $(init);
 
-/*TYPES OF GOALS:
-1. Stationary target
-2. Moving target
-3. Match period of flashing?
-*/
-
-/*
-Should be some indiction (flame?) that it's speeding up or slowing down
-*/

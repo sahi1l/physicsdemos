@@ -19,7 +19,7 @@ IMG:vectormath.png
 Given two vectors, find their sum or difference.
 
 :mechanics:QUIZ:Acceleration
-Elevator
+Acceleration
 IMG:acceleration.png
 Use Newton's Second Law to find the force on an <i>accelerating</i> box.
 
