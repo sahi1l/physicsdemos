@@ -3,7 +3,7 @@ var FlatMirror=new function(){
     var name,W,H;
     var paper;
     var device,dvcx;
-    var object,objx,objy,objr;
+    let objx,objy,objr;
     var f="flat";//focal length, "flat" for flat mirror
     var type="m"; //m or l
     //----------------------------------------    
@@ -127,18 +127,19 @@ var FlatMirror=new function(){
     //----------------------------------------
     this.init=function(_name,_W,_H){
         name=_name;W=_W;H=_H;
-        paper=Raphael(name,W,H);
+        paper=Raphael(name,"100%","100%");
+        W=400; H=400;
+        paper.setViewBox(0,0,W,H);
         dvcx=W/2;
-        objx=W/4; objy=H/2; objr=10;
-        device=paper.path(Raphael.format("M{0},0L{0},{1}",dvcx,H))
+        objx = W/4;
+        objy = H/2;
+        objr = 10;
+        device = paper.path(Raphael.format("M{0},0L{0},{1}",dvcx,H))
             .attr({"stroke-width":3});
-        obj=new Principal(objx,objy);
+        obj = new Principal(objx,objy);
         obj.rays.push(new Ray(100,obj));
         obj.rays.push(new Ray(200,obj));
         obj.rays.push(new Ray(300,obj));
         obj.set(objx,objy);
-        $("#"+name).css("height",H+"px");
-        $("#"+name).css("width",W+"px");
-        $("#txt-"+name).css("width",W+"px");
     };
 }
