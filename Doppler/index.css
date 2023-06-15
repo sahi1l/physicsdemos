@@ -1,0 +1,24 @@
+
+#canvas {border: 1px solid;margin-bottom:5px;}
+
+input[type="range"] {
+  width: 200px;
+  margin: 0;
+}
+#slider {display:inline-block;text-align:center;
+         width:200px;
+        }
+.under>.tic {display:inline-block;line-height:0.5;}
+.under {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  justify-content: space-between;
+}
+#controls {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+#buttons {display: inline-block;}align-content:
+button {margin: 5px 5px;}

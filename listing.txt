@@ -68,6 +68,10 @@ An interactive demo that shows the principal rays of converging and diverging le
 Two-Dimensional Interference
 IMG:interference2D.gif
 
+:waves:DEMO:Doppler
+Doppler Effect
+IMG:doppler.gif
+
 :misc:DEMO:Diffusion
 Diffusion
 IMG:diffusion.png

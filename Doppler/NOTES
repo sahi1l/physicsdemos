@@ -1,0 +1,13 @@
+There are cntmax counts between every wavefront.  Each count takes time dt.
+
+Thus the period of the wave is T = dt*cntmax.
+The radius of the circle is r = vw * t.  Thus in time T, the edge travels a disance vw * T; this is the wavelength.
+
+in the current case, lambda = 15.  That means the canvas is 511px wide.
+So there should be 34 wavefronts, which is about right, sure.
+
+I want the ears to be an integer number of wavelengths away, but within 1 wavelength of the edge.
+
+So the distance across in wavelengths is W/2/lambda.
+Let's reduce it to an integer: Math.floor(W/lambda)
+subtract one, then multiple by lambda
