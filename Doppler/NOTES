@@ -11,3 +11,16 @@ I want the ears to be an integer number of wavelengths away, but within 1 wavele
 So the distance across in wavelengths is W/2/lambda.
 Let's reduce it to an integer: Math.floor(W/lambda)
 subtract one, then multiple by lambda
+
+
+
+So comparing width W' (%2L) to phase, I get that
+phase = 0.033*W' - 0.072.
+
+let w = W/2/lambda, and w' = w%1
+then earDelta = ((w-w') - 1 - phase)*lambda
+
+so (w - w' - 1 - 0.033*w' * (2*lambda) + 0.072) * lambda
+
+so lambda^2 shows up in here? that's weird
+

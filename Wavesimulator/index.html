@@ -1,17 +1,40 @@
 <meta charset="utf-8">
-<script src="../../lib/jquery.js"></script>
-<script src="../../lib/raphael.js"></script>
-<script src="index.js"></script>
+<script src="/lib/jquery.js"></script>
+<script src="/lib/raphael.js"></script>
+<script type="module" src="../lib/default.js"></script>
+<script type="module" src="../lib/buttons.js"></script>
+<link rel="stylesheet" href="../lib/default.css">
+<link rel="stylesheet" href="../lib/buttons.css">
+<script type="module" src="index.js"></script>
 <style>
 #canvas {
-background-color:#ccd;
-width:400px;
-height:400px;
+    width:400px;
+    height:400px;
+}
+.mybutton {
+    display: inline-block;
+    padding:5px;
+}
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    height: 120px;
+    flex-direction:column;
+    align-content: flex-start;
+    align-items: flex-end;
 }
 </style>
 <body>
-<div id="canvas">
+  <header>Wave Simulator</header>
+  <div id="instructions">
+    Change the settings and press Run to watch the corresponding wave pass through the dots.<BR>
+    See which settings increase or decrease the speed of the wave.<BR>
+    Click "Highlight Some" to show the oscillation of certain dots in the medium,<BR>
+    So you can see that it isn't the dots that are moving to the right.
+    </div>
+<div id="canvas" style="width:100%;">
 </div>
+<div id="controls">
 <div>Wavelength: <input type="range" min="20" max="200" value="100" class="slider" id="wavelength"></div>
 <div>Frequency: <input type="range" min="0.1" max="2" value="1" step="0.1" class="slider" id="frequency"></div>
 <div>Amplitude: <input type="range" min="1" max="100" value="20" class="slider" id="amplitude"></div>
@@ -19,5 +42,8 @@ height:400px;
   <input type="radio" name="type" value="false">Longitudinal
 </div>
 <div><input type="checkbox" id="highlight"> Highlight Some</input></div>
-<button onclick="run()">Run</button>
+<div id="runstop"></div>
+</div>
+<!--<button onclick="run()">Run</button>
 <button onclick="stoppedQ=1">Stop</button>
+-->
