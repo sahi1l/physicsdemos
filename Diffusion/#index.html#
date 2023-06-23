@@ -32,7 +32,7 @@
 <div class="graph" id="graph"></div>
 </div>
 <div>
-Reaches equilibrium at t = <B><span id="tmatch"></span></B><br>
+Reaches equilibrium at t = <B> `<span id="tmatch"></span></B><br>
 Size of fluctuations: <B><span id="fluctuation"></span></B>
 </div>
 <div class="instructions">

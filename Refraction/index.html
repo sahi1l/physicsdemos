@@ -3,18 +3,48 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<script type="text/javascript" src="../../lib/jquery.js"></script>
-<script type="text/javascript" src="../../lib/raphael.js"></script>
-<!--<script type="text/javascript" src="../../lib/preprocess.js"></script>-->
-<!--<link rel="stylesheet" type="text/css" href="../../lib/chapter.css">-->
+<script type="text/javascript" src="/lib/jquery.js"></script>
+<script type="text/javascript" src="/lib/raphael.js"></script>
+<script type="module" src="../lib/default.js"></script>
+<script src="refraction.js"></script>
+<link rel="stylesheet" href="../lib/default.css">
+<style>
+  :root {--size: 400px;}
+  #canvas {width: var(--size); height: var(--size);}
+  #values {font-size: 150%;
+           width: var(--size);
+           text-align: center;
+          }
+  #values td {width: 50%;}
+</style>
+<header>Snell's Law</header>
 <!--SCRIPT BEGIN-->
 <div class="figure center interactive">
-<script type="text/javascript" src="refraction.js"></script>
-<div class="canvas" id="refraction"></div>
+<div id="canvas" style="width: 400px; height:400px" ></div>
+<table id="values">
+  <tr>
+  <td class="equation" id="incident" style="text-align:right">
+    <span class="index"></span>
+    sin <span class="angle"></span>
+    <BR><span class="value"></span>
+  </span></td>
+<td class="equation" id="refracted" style="text-align:left">
+  <span class="notir">
+    = <span class="index"></span>
+    sin <span class="angle"></span>
+    <BR>= <span class="value"></span>
+  </span>
+  <span class="tir" style="display:flex">
+    <span style="font-size:200%;font-family: Times,serif;">} </span> <span>Total Internal Reflection</span></span>
+    
+    </span>
+  </td>
+</tr>
+</table>
 <div class="jstext" id="txt-refraction">
 </div>
 <script type="text/javascript">
-$(document).ready(function(){Refraction.init("refraction",400,400);});
+//$(document).ready(function(){Refraction.init("refraction",400,400);});
 </script>
 </div>
 <!--SCRIPT END-->

@@ -1,0 +1,6 @@
+* Check the math; something is wrong here.
+* When you press reset, a couple things need to happen:
+** First, change the velocities to something round and sensible, don't just keep the values.
+** Second, clear out the KE bars.
+* Show the momentum and kinetic energy before and after the collision, with the math worked out.
+** The momentum could have the arrows set up as an addition problem

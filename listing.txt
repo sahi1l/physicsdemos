@@ -23,7 +23,7 @@ Acceleration
 IMG:acceleration.png
 Use Newton's Second Law to find the force on an <i>accelerating</i> box.
 
-:mechanics:QUIZ:Collisions
+:mechanics:LAB:Collisions
 Elastic Collisions
 IMG:collisions.gif
 Fling two blocks at each other with different speeds, and try to recreate certain conditions after they collide.
@@ -74,11 +74,11 @@ IMG:doppler.gif
 
 :misc:DEMO:Diffusion
 Diffusion
-IMG:diffusion.png
+IMG:diffusion.gif
 
 :misc:GAME:Pipe
 Fluid Through a Pipe
-IMG:pipe.png
+IMG:pipe.gif
 
 :misc:DEMO:Minkowski
 Minkowski Diagram

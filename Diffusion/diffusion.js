@@ -1,315 +1,393 @@
-//Make a time graph of particles in each bin versus time
-//When reset, move the graph over to the right
-//What is changeable? height, number of particles
-//Add additional particles that take two steps every time: color red, start on opposite side
-//Add a reset button (need a function to reset the positions of the buttons)
-var Diffusion=new function(){
-    var name,W,H;
-    var paper;
-    var Nx=10; var Ny=10;
-    var d=5;
-    var N=100;
-    var twoQ=0;
-    var graphQ=1;
-    var intervalHandle;
-    var bin=Nx/2;
-    var wwindow={
-        h:100, //height of window
-        w:100, //width of window
-        padx:5,
-        pady:5,
-        border:{},
-        bars:[],
-        walker:[], //list of walkers
-        walker2:[] //list of red walkers that move twice
+import {randint,range,HSVtoRGB} from "../lib/default.js";
+import Button from "../lib/buttons.js";
+function hex(num) {
+    let val = num.toString(16);
+    while(val.length<2) {val="0"+val;}
+    return val;
+}
+function randomColor(min=0,max=1){//min,max range from 0 to 1
+    let result = "#";
+    for (let i = 0; i<3; i++){
+        result += hex(randint(min*255,max*255));
+    }
+    return result;
+}
+function progressColor(p) {
+    let color = HSVtoRGB(p,1,0.8);
+    return `#${hex(color.r)}${hex(color.g)}${hex(color.b)}`;
+    //p ranges from 0 to 1
+}
+let Rcolor = "#7A1BBC"; //"#8C6F23"; //"#F5C344";
+let Lcolor = "#1E4C40";
+let Ccolor = "#75AFF1";
+let Hcolor = "#CB8035";//"#C63361";
+
+let canvas;
+let graph;
+let animation;
+
+//--------------------------------------------------------------------------------
+class Point {
+    constructor(canvas,x,y,color,size=1) {
+        this.canvas = canvas;
+        this.x = x;
+        this.y = y;
+        this.r = 0.4;
+        this.color = color??"black";//progressColor(size);
+        this.tail = {
+            dx: 1.2*this.r * Math.cos(size*2*Math.PI),
+            dy: 1.2*this.r * Math.sin(size*2*Math.PI),
+            obj: this.canvas.paper.path("").attr({stroke:this.color, "stroke-width":0.1})
+        };
+        this.obj = this.canvas.paper.circle(0,0,this.r).attr({fill: this.color, stroke:""});// "stroke-width":0.05,stroke: "black"});
+        this.place(this.x,this.y);
+    }
+    place(x,y) {
+        this.x = x;
+        this.y = y;
+        x +=0.5;
+        y +=0.5;
+        this.obj.attr({cx:x, cy:y});
+        this.tail.obj.attr("path",`M${x},${y}l${this.tail.dx},${this.tail.dy}`);
+    }
+    remove() {
+        this.obj.remove();
+        this.tail.obj.remove();
+    }
+    move() {
+        let dir = randint(4);
+        let dx = [1,0,-1,0][dir];
+        let dy = [0,1,0,-1][dir];
+        let nx = this.x + dx;
+        let ny = this.y + dy;
+        if ( nx<0 || nx>=this.canvas.Nx || ny<0 || ny>=this.canvas.Ny){
+            if(nx>=0 && ny>=0){
+            }
+            return 1;}
+        this.place(nx,ny);
+        return 0;
     };
-    var Graph={
-        x0:200,
-        y0:100,
-        dx:100,
-        dy:100,
-        axis:[],
-        left:[],
-        right:[],
-        data:[],
-	first:1,
-        Tmax:100.0, //time on the right side
-        init:function(){
-            this.axis=paper.path(
-                "M"+this.x0+","+(this.y0+this.dy)
-                    +"l0,"+(-this.dy)+"l"+this.dx+",0")
-                .attr({"stroke-width":4,
-                       "arrow-start":"classic",
-                       "arrow-end":"classic"});
-	    if(this.first){
-		this.first=0;
-	    paper.setStart();
-	    var P=10;
-	    for(px=1;px<=P;px++){
-		paper.path("M"+(this.x0+this.dx*px/P)+","+(this.y0+this.dy)+"l0,"+(-this.dy)).attr({"stroke-width":1,"stroke-dasharray":"."});
-	    }
-	    for(let py=1;py<=P;py++){
-		paper.path("M"+(this.x0+this.dx)+","+(this.y0+this.dy*py/P)+"l"+(-this.dx)+",0").attr({"stroke-width":1,"stroke-dasharray":"."})
-	    }
-	    this.grid=paper.setFinish()
-	    paper.setStart()
-	    for(px=1;px<=P;px++){
-		paper.text(this.x0+this.dx*px/P,this.y0+10,"xxx").attr({
-		    "font-size":14,"text-anchor":"middle"})
-	    }
-	    this.lblx=paper.setFinish()
-	    paper.setStart()
-	    for(py=1;py<=P;py++){
-		paper.text(this.x0-10,this.y0+this.dy*py/P,"yyy").attr({
-		    "font-size":14,"text-anchor":"end"})
-	    }
-		this.lbly=paper.setFinish()
-		this.xlabels()
-		this.ylabels()
-	    }
-            this.left=paper.path("").attr({stroke:"red","stroke-width":2});
-            this.right=paper.path("").attr({stroke:"blue","stroke-width":2});
-        },
-	xlabels:function(){
-	    for(let i=1;i<=10;i++){
-		var lbl=this.Tmax*i/10
-		if(lbl>1e6){lbl=(lbl/1e6)+"M"}
-		else if (lbl>1e3){lbl=(lbl/1e3)+"k"}
-		Graph.lblx[i-1].attr({"text":lbl})
-	    }
-	},
-	ylabels:function(){
-	    for(let i=1;i<=10;i++){
-		Graph.lbly[i-1].attr("text",i*N/10)
-	    }
-	},
-        draw:function(n){
-            if(n!=undefined){this.data.push(n);}
-            if(this.data.length%(this.Tmax/10)){return;}
-            if(this.data.length>this.Tmax){
-		this.Tmax*=2;
-		this.xlabels()
-	    }
-            var p=this.data[0]/((1.0+2*twoQ)*N);
-//            console.log(this.data[0]+","+p);
-            var Lpath="M"+this.x0+","+(this.y0+this.dy*p);
-            var Rpath="M"+this.x0+","+(this.y0+this.dy*(1-p));
-            var i;
-            for(i=1;i<this.data.length;i++){
-                //this is called too frequently, yes?
-                var p=this.data[i]/((1.0+2*twoQ)*N);
-                Lpath+="L"+(this.x0+this.dx*i/this.Tmax)+","
-                    +(this.y0+this.dy*p);
-                Rpath+="L"+(this.x0+this.dx*i/this.Tmax)+","
-                    +(this.y0+this.dy*(1-p));
+}
+//================================================================================
+class Canvas {    
+    constructor(name) {
+        this.$w = $(`#${name}`);
+        this.W = this.$w.width();
+        this.H = this.$w.height();
+        this.maxAR = this.W/this.H; //how wide can it be versus tall?
+        this.Nx = 10; //number of grid squares horizontally, should be even
+        this.Ny = 10; //number of grid squares vertically
+        this.N = 20;
+        this.twoQ = false; 
+        this.paper = Raphael(name,this.W,this.H);
+        this.sides = {
+            left: this.paper.rect(0,0,this.W/2,this.H).attr({fill:Lcolor,stroke:""}),
+            right: this.paper.rect(this.W/2,0,this.W/2,this.H).attr({fill:Rcolor,stroke:""})
+        };
+        this.resize(this.Nx,this.Ny);
+        this.border = {};
+        this.bars = [];
+        this.walkers = [[],[]]; //lists of walkers, cold and hot
+        this.addPoint = this.addPoint.bind(this);
+        this.setup();
+    }
+    setup() {
+        this.clear();
+        for(let n=0; n<this.N; n++){
+            let x = randint(0,this.Nx/2);
+            let y = randint(0,this.Ny);
+            this.addPoint(x,y,false);
+        }
+    }
+    resize(Nx,Ny) {
+        this.Ny = Ny??this.Ny;
+        this.maxNx = this.Ny * this.maxAR;
+        this.paper.setViewBox(0,0,this.maxNx, this.Ny); //each grid space is 1x1
+        Nx = Nx??this.Nx;
+        this.Nx = Math.min(Nx,this.maxNx)??Nx;
+        this.sides.left.attr({width:this.Nx/2, height:this.Ny});
+        this.sides.right.attr({width:this.Nx/2, height: this.Ny, x: this.Nx/2});
+        this.sides.left.toBack();
+        this.sides.right.toBack();
+        return this.Nx;
+    }
+    addPoint(x,y,hotQ=false){
+        hotQ = hotQ + 0;
+        let color = ["blue","red"][hotQ];
+        if (!this.twoQ) {color=null;} //random colors
+        let sz = 1 - (this.walkers[hotQ].length/this.N);
+        this.walkers[hotQ].push(new Point(this,x,y,color,sz));
+    }
+    clear() {
+        for (let ty of [0,1]) {
+            for (let w of this.walkers[ty]){
+                w.remove();
             }
-            this.left.attr({path:Lpath});
-            this.right.attr({path:Rpath});
-        },
-        hide:function(){
-            if(this.left.attr==undefined){return;}
-            this.data=[];
-            this.Tmax=100;
-            this.left.attr({path:""});
-            this.right.attr({path:""});
-            this.axis.attr({path:""});
         }
-    };
-    this.Graph=Graph
-    var ctrl={
-        y:100,
-        dy:100,
-        obj:{}
-    }; //control
-    var startButton;
-    var Button=function(label,x,y,fn){
-        var fnt=W/50;
-        var wd=fnt*6; var ht=fnt*2;
-        paper.setStart();
-        paper.rect(x-wd/2,y-ht/2,wd,ht).attr({fill:"#ccc"});
-        paper.text(x,y,label).attr({"font-size":fnt,"text-anchor":"middle"});
-        this.all=paper.setFinish();
-        this.all.click(fn);
+        this.walkers = [[],[]];
     }
-    var pt=function(x,y,color){
-        if(color==undefined){color="blue";}
-        this.x=x;
-        this.y=y;
-        this.obj=paper.circle(0,0,0).attr({fill:color,stroke:""});
-        this.place=function(_x,_y,rQ){
-            this.x=_x; this.y=_y;
-            var X=(0.5+this.x)*d+wwindow.padx;
-            var Y=(0.5+this.y)*d+wwindow.pady;
-            if(rQ){this.obj.attr({r:Math.ceil((d-1)/2)})};
-            this.obj.attr({cx:X,cy:Y});
-        }
-        this.remove=function(){
-            this.obj.remove();
-        }
-        this.move=function(dir){
-            var dx=[1,0,-1,0][dir];
-            var dy=[0,1,0,-1][dir];
-            var nx=this.x+dx;
-            var ny=this.y+dy;
-            if(nx<0 || nx>=Nx || ny<0 || ny>=Ny){return 1;}
-            //add to bin
-            this.place(nx,ny);
-        }
-    }
-    this.start=function(){
-        if(intervalHandle==undefined){
-	    Graph.xlabels()
-	    Graph.ylabels()
+};
 
-        console.log("start");
-            intervalHandle=window.setInterval(Diffusion.step,100);
-        }
-	
-    }
-    this.stop=function(){
-        if(intervalHandle!=undefined){
-            window.clearInterval(intervalHandle);
-            intervalHandle=undefined;
-        }
-    }
-    this.step=function(){
-        var left=0;
-        var iterations=Math.ceil(N/20),i;
-        for (w in wwindow.walker) {
-            for(i=0;i<iterations;i++){
-                wwindow.walker[w].move(Math.floor(Math.random()*4));
-            }
-            if(graphQ){
-                left+=(wwindow.walker[w].x<Nx/2);}
-            if(twoQ){
-                for(i=0;i<2*iterations;i++){
-                    wwindow.walker2[w].move(Math.floor(Math.random()*4));
-                }
-                if(graphQ){left+=2*(wwindow.walker2[w].x<Nx/2);}
-
-            }
-        }
-        if(graphQ){Graph.draw(left);}
-        //Draw Bars
-    }
-    this.reset=function(){
-        var i,x;
-        console.log("reset");
-        this.stop();
-        this.getprams();
-        bin=Nx/2;
-        d=(Math.min(wwindow.h/Ny,wwindow.w/Nx))-0.5;
-        wwindow.pady=wwindow.h-Ny*d;
-        wwindow.borderL.attr({x:wwindow.padx,y:wwindow.pady,
-                             width:Nx*d/2,height:Ny*d});
-        wwindow.borderR.attr({x:wwindow.padx+Nx*d/2,y:wwindow.pady,
-                             width:Nx*d/2,height:Ny*d});
-        Graph.hide();
-        if(graphQ){
-            Graph.x0=100;
-            Graph.dy=-200;
-            Graph.y0=ctrl.y+ctrl.dy-Graph.dy+10;
-            Graph.dx=W-120;
-            Graph.init();
-        }
-        for (w in wwindow.walker){wwindow.walker[w].remove();}
-        for (w in wwindow.walker2){wwindow.walker2[w].remove();}
-        wwindow.walker=[];
-        wwindow.walker2=[];
-        for(i=0;i<N;i++){
-            wwindow.walker.push(new pt(0,0));
-            var x=Math.floor(Math.random()*Nx/2);
-            var y=Math.floor(Math.random()*Ny);
-            wwindow.walker[i].place(x,y,1);
-            if(twoQ){
-                wwindow.walker2.push(new pt(0,0,"red"));
-                var x=Math.floor((Math.random()+1)*Nx/2);
-                var y=Math.floor(Math.random()*Ny);
-                wwindow.walker2[i].place(x,y,1);
-            }
-        }
-        //bars
-        if(wwindow.bars.length){
-            wwindow.bars.remove();
-        }
-        paper.setStart();
-        paper.path("M"+((0.5+Nx/2)*d+wwindow.padx-d/2)+","+wwindow.pady+"l0,"+(H/2-wwindow.pady))
-                .attr({stroke:"red"});
-        wwindow.bars=paper.setFinish();
-        wwindow.bars.toBack();
-	Graph.xlabels()
-	Graph.ylabels()
-
-    }
-    this.init=function(_name,_W,_H){
-        name=_name;W=_W;H=_H;
-        paper=Raphael(name,W,H);
-        wwindow.w=W;
-        wwindow.h=H/2;
-        //Control Bar with buttons
-        ctrl.y=wwindow.h; ctrl.dy=W/50*3; //position of blue control bar
-        ctrl.obj=paper.rect(0,ctrl.y,W,ctrl.dy).attr({fill:"blue",stroke:""});
-        startButton=new Button("Start",50,ctrl.y+ctrl.dy/2,this.start);
-        stopButton=new Button("Stop",150,ctrl.y+ctrl.dy/2,this.stop);
-        resetButton=new Button("Reset",250,ctrl.y+ctrl.dy/2,
-                               $.proxy(this.reset,this));
-        wwindow.padx=5;
-        wwindow.borderL=paper.rect(0,0,0,0).attr({fill:"#f88"});
-        wwindow.borderR=paper.rect(0,0,0,0).attr({fill:"#88f"});
+//================================================================================
+class Animation {
+    constructor(canvas,graph) {
+        this.canvas = canvas;
+        this.graph = graph;
+        this.step = this.step.bind(this);
+        this.start = this.start.bind(this);
+        this.stop = this.stop.bind(this);
+        this.reset = this.reset.bind(this);
+        this.buttons = $("#buttons");
+        this.$start = new Button("Start", this.start);
+        this.$stop = new Button("Stop", this.stop);
+        this.$start.$w.appendTo(this.buttons);
+        this.$stop.$w.appendTo(this.buttons);
+/*        $("<button>").appendTo(this.buttons).html("Start").on("click",this.start);
+        $("<button>").appendTo(this.buttons).html("Stop").on("click",this.stop);*/
         
-        this.setprams();
-        this.reset();
     }
-    this.setprams=function(){
-        $("#N").val(N);
-        $("#X").val(Nx);
-        $("#Y").val(Ny);
-        $("#two").prop("checked",twoQ);
-        $("#graph").prop("checked",graphQ);
+    
+    start() {
+        if(this.handle == undefined) {
+            this.handle = setInterval(this.step,100);
+        }
     }
-    range=function(val,min,max){
-        if(val<min){return min;}
-        if(val>max){return max;}
-        return val;
+    stop() {
+        if (this.handle != undefined) {
+            clearInterval(this.handle);
+            this.handle = undefined;
+        }
     }
-    this.getprams=function(){
-        N =range($("#N").val(),1,5000);
-        Nx=range($("#X").val(),2,100);
-        Ny=range($("#Y").val(),1,100);
-        twoQ=$("#two").prop("checked");
-        graphQ=$("#graph").prop("checked");
-        this.setprams();
+    step() {
+        let left=0;
+        let iterations = Math.ceil(this.canvas.N / 20);
+        iterations = 1;
+        for (let ty=0; ty<=(this.canvas.twoQ+0); ty++){//cold and then maybe hot
+            for(let w of this.canvas.walkers[ty]) {
+                for (let i=0; i < (ty+1) * iterations; i++) { //hot particles move twice as much
+                    w.move();
+                }
+                if (this.graph.active) {
+                    left += (1+ty) * (w.x < this.canvas.Nx/2); //hot particles count for twice
+                }
+            }
+        }
+        if (this.graph.active) {
+            this.graph.add(left);
+        }
+    }
+    reset() {
+        this.canvas.setup();
+        this.graph.reset();
     }
 }
-function getLabel(wid){
-    return wid.parent().children("span");
+function reset() {
+    canvas.setup();
+    graph.reset();
 }
-function setLabel(wid){
-    getLabel(wid).text($(wid).val());
+//================================================================================
+class Graph {
+    constructor() {
+        this.$w = $("#graph");
+        this.W = 600;
+        this.H = 200;
+        this.paper = Raphael("graph",this.W,this.H);
+        this.axis = this.paper.path(`M${this.co(0,1)}L${this.co(0,0)}L${this.co(1,0)}`)
+            .attr({"stroke-width":4,
+                   "arrow-start":"classic",
+                   "arrow-end":"classic"});
+        //add grid lines next
+        let gridattr = {"stroke-width":1, "stroke-dasharray":"."};
+        let gridN=10.0; //number of grid lines
+        this.gridN = gridN;
+        this.matchT = 0;
+        this.stdev = {N: 0,
+                      S: 0,
+                      SS: 0,
+                      get: function() {
+                          return Math.sqrt(this.SS/this.N - (this.S/this.N)**2);
+                      },
+                      clear: function() {
+                          this.N = 0;
+                          this.S = 0;
+                          this.SS = 0;
+                      }
+                     };
+        for(let i=1; i<=gridN; i++){
+            let width = (i*2==gridN) ? {"stroke-width":2} : {};
+            this.paper.path(this.M(0,i/gridN)
+                            +this.L(1,i/gridN)).attr(gridattr).attr(width);
+            this.paper.path(this.M(i/gridN,0)
+                            +this.L(i/gridN,1)).attr(gridattr).attr(width);
+        }
+        
+        this.lblfsize = 12;
+        this.xlabels = this.makeLabels(0);
+        this.ylabels = this.makeLabels(1);
+        this.paper.text(...this.Co(0.5,0,0,-this.lblfsize*1.9),"time").attr({"text-anchor":"middle","font-size":1.5*this.lblfsize});
+        let ypos = [this.lblfsize, this.Co(0,0.5)[1]];
+        this.paper.text(...ypos,"# particles").attr({"font-size":1.5*this.lblfsize}).rotate(-90,...ypos);
+        this.active = true;
+        this.paper.setStart();
+        this.paper.path("").attr({stroke: Lcolor,"stroke-width":2});
+        this.paper.path("").attr({stroke: Rcolor,"stroke-width":2});
+        this.curves = this.paper.setFinish();
+        this.data = [[],[]]; //these are the coordinates that go into the path
+        this.t = 0;
+        this.dt = 1;
+        this.Tmax = 100; //maximum time, grows over time
+        this.Nmax = 100; //needs to be set somewhere, maybe in reset by Animation?
+        this.setLabels();
+        this.add(this.Nmax);
+    }
+    reset(Nmax) {
+        if(Nmax) {this.Nmax = Nmax;}
+        this.data = [[],[]];
+        this.t = 0;
+        this.Tmax = 100;
+        this.add(this.Nmax);
+        this.setLabels();
+        this.stdev.N = 0;
+        this.stdev.S = 0;
+        this.matchT = 0;
+        this.stdev.clear();
+        $("#fluctuation").html("--");
+        $("#tmatch").html("--");
+    }
+    makeLabels(yQ,skips=1) {
+        let my = yQ;
+        let mx = 1-yQ;
+        let result = {};
+        let adj = [{dx:0, dy:-10, anchor: "middle"}, {dx:-5, dy:0, anchor: "end"}][my];
+        for (let i=skips; i<=this.gridN; i+=skips){
+            let val = i/this.gridN;
+            result[val] = this.paper.text(...this.Co(mx*val,my*val,adj.dx,adj.dy))
+                .attr({"font-size":this.lblfsize,"text-anchor":adj.anchor, text:"xx"});
+        }
+        return result;
+    }
+    makePath(L) {
+        //L is of the form [ [x0,y0], [x1,y1], [x2,y2], ...]
+        let pfx = "M";
+        let path = "";
+        for(let [x,y] of L){
+            let [X,Y] = this.Co((x/this.Tmax),(y/this.Nmax)).map(fix);
+            path += `${pfx}${X},${Y}`;
+            pfx = "L";
+        }
+        return path;
+    }
+    draw(){
+        for(let i of [0,1]) {
+            let line=this.curves[i];
+            let path = this.makePath(this.data[i]);
+            this.curves[i].attr("path",path);
+        }
+    }
+    add(left) {
+        let val = left;
+        if (!this.matchT && left<=this.Nmax/2) {this.matchT = this.t; $("#tmatch").html(this.t);}
+//                                                console.debug("equal at t=",this.t);}
+        if(this.matchT) {
+            this.stdev.N += 1;
+            this.stdev.S += val;
+            this.stdev.SS += val*val;
+            $("#fluctuation").html((this.stdev.get()/this.Nmax*100).toFixed(1)+"%");
+        }
+        this.data[0].push([this.t, val]);
+        this.data[1].push([this.t, this.Nmax-val]);
+        this.draw();
+        this.t += this.dt;
+        this.adjustTime();
+    }
+    setLabels() {
+        for (let x in this.xlabels){
+            this.xlabels[x].attr("text",this.Tmax*x);
+        }
+        for (let y in this.ylabels){
+            this.ylabels[y].attr("text",this.Nmax*y);
+        }
+    }
+    adjustTime() {
+        if (this.t > this.Tmax) {
+            this.Tmax *= 2;
+            this.setLabels();
+        }
+    }
+    M(x,y) {return `M${this.co(x,y)}`;}
+    L(x,y) {return `L${this.co(x,y)}`;}
+    Co(x,y,dx,dy) {return this.co(x,y,dx,dy).split(" ").map(Number);}
+                        
+    co(x,y,dx=0,dy=0) {
+        //input: x and y between 0 and 1
+        //output: coordinates in the Raphael box
+        //returns as a space-delimited string
+        //dx and dy are adjustments in pixels, although dy is reversed so that down is negative
+        this.Mpad = 60;
+        this.mpad = 10;
+        let X = Number((x*(this.W-this.Mpad-this.mpad) + this.Mpad+dx).toPrecision(8));
+        let Y = Number(((1-y)*(this.H-this.Mpad-this.mpad) + this.mpad - dy).toPrecision(8));
+        return `${X} ${Y}`;
+    }
 }
-function SetUpSliders(){
-    console.log(getLabel($("#N")));
-    $("#N").slider({
-	max:1000,
-	min:10,
-	step:10,
-	value:100});
-    $("#X").slider({max:100,min:2,value:5});
-    $("#Y").slider({max:100,min:1,value:10});
-    setLabel($("#N"));
-    setLabel($("#X"));
-    setLabel($("#Y"));
-    $(".slider").slider({
-	create:function(){getLabel($(this)).text($(this).slider("value"));},
-	slide:function(event,ui){getLabel($(this)).text(ui.value);
-				 $(this).val(ui.value);
-				}
-    });
-	
+function fix(n) {
+    return n.toPrecision(8).replace(/0+$/,"");
 }
-console.log("yup");
-$(function(){
-    console.log("hi");
-    Diffusion.init("diffusion",600,600);
-    SetUpSliders();
-})
+//================================================================================
+class Slider {
+    constructor($root, label, prams, fn){
+        this.fn = fn;
+        let $w = $("<div>").addClass("slider").appendTo($root);
+        let $label = $("<span>").addClass("label").html(label+": ").appendTo($w);
+        this.$value = $("<span>").addClass("value").html(".").appendTo($w);
+        this.$slider = $(`<input type="range" min=${prams.min} max=${prams.max} step=${prams.step} value=${prams.default}>`).appendTo($w);
+
+        /*
+        let $w = $("<tr>").appendTo($root);
+        $("<td>").html(label+":").appendTo($w);
+        let td = $("<td>").appendTo($w);
+        this.$value = $("<span>").html(".").appendTo(td);
+        td = $("<td>").appendTo($w);
+        this.$slider = $(`<input type="range" min=${prams.min} max=${prams.max} step=${prams.step} value=${prams.default}>`).appendTo(td);
+        this.$slider.addClass("slider");
+        */
+        this.update = this.update.bind(this);
+        this.$slider.on("input",this.update);
+        this.update();
+    }
+    val() {
+        return this.$slider.val();
+    }
+    update() {
+        let val = this.$slider.val();
+        this.$value.html(val);
+        if(this.fn) {this.fn(val);}
+        animation.reset();
+    }
+}
+//================================================================================
+let init = () => {
+    canvas = new Canvas("diffusion");
+    graph = new Graph();
+    graph.reset(canvas.N);
+    animation = new Animation(canvas,graph);
+    animation.start();
+    let $controls = $("#controls");
+    new Slider($controls, "# Particles",{min: 100, max: 1000,step: 100, default: 100},
+               (N)=>{
+                   graph.reset(N);
+                   canvas.N = N;
+               });
+    new Slider($controls, "Width", {min: 2, max: 40, step: 2, default: 10},
+               (width) => {
+                   canvas.resize(width,undefined);
+               }
+              );
+    new Slider($controls, "Height", {min: 2, max: 40, step: 1, default: 10},
+               (height) => {
+                   canvas.resize(undefined, height);
+               }
+              );
+};
+
+$(init);
