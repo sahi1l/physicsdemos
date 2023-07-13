@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<html>
-<link rel="stylesheet" href="index.css">
-<script src="../../lib/jquery.js"></script>
-<script src="../../lib/MathJax/MathJax.js?config=TeX-AMS_CHTML"></script>
-<script src="../../lib/raphael.min.js"></script>
-<script src="index.js"></script>
-<div id="component" style="display:inline-block">
-<h1></h1>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>QUIZ: Vector Components</title>
+
+  <script src="/lib/jquery.js"></script>
+  
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script src="/lib/raphael.js"></script>
+  <script type="module" src="../lib/default.js"></script>
+  <script type="module" src="index.js"></script>
+  <script type="module" src="help.js"></script>
+  <link rel="stylesheet" href="../lib/default.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<header>[QUIZ]Vector Components</header>
+  <div id="component" style="display:inline-block">
 <div id="win">
 Final score:
 <div id="percentage">x</div>
 <div class="click fill">Try again?</div>
 </div>
-<div class="number">1 of 20</div>
+<div id="scoreheader">
+<div id="number">1 of 20</div>
 <div id="score">0 errors</div>
+</div>
 <div id="canvas"></div>
 <div id="input">
 
@@ -32,7 +46,30 @@ Final score:
 \()\)
 <span id="check" class="click fill">OK?</span>
 </div>
-<img src="ButtonInfo.png" width=510px style="margin-left:-10px">
+<div id="labels" style="width:100%;height=100px;">
+  <div class="signinfo">Click on a sign to toggle it.</div>
+  <div class="triginfo">Click on a trig function to swap it with the other one.</div>
+  <div>Click on "OK" when you think your expression matches the vector.</div>
 </div>
-<img width=400px src="Instructions.png" style="vertical-align:top; border:3px inset; display:inline-block">
+<!--<img src="ButtonInfo.png" width=510px style="margin-left:-10px">-->
+  </div>
 
+<!--<img width=400px src="Instructions.png" style="vertical-align:top; border:3px inset; display:inline-block">-->
+
+
+  <div id="help" style="border: 1px solid; padding:10px;display:inline-block;width:300px;">
+    <h2>Help</h2>
+  \(\def\rect{\sqsubset\!\sqsupset}\)
+All vectors can be written in the form $$\vec v = \pm|v|\rect\theta \pm |v|\rect\theta,$$ where one \(\rect\) is replaced with "sin" and one with "cos".  The axis (x or y) that the angle is measured from gets the cosine.
+  
+  <div id="triangle" style="position:relative"></div>
+<p>  For example, this vector \(\vec v\) can be written
+  $$\vec v = ({\color{red} -}|v|{\color{blue}\cos}\ 60^\circ, {\color{red}-}|v|{\color{blue}\sin}\ 60^\circ)$$
+  because</p>
+  <ul>
+    <li>The 60&deg; angle is measured from the <i>x</i> axis, so the cosine goes in the x component, while the y component gets the sign.</li>
+    <li>The arrow points in a leftward direction, so the <i>x</i> component is negative (in this basis).</li>
+    <li>The arrow points in a downward direction, so the <i>y</i> component is also negative.</li>
+    </ul>
+</div>
+  

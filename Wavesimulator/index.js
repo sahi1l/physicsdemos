@@ -22,6 +22,9 @@ let prams = {"wavelength":200,
 let time=0;
 let dt=0.1;
 let stoppedQ=false;
+function opacity(dots,val){
+    for (let dot of dots) {dot.obj.attr({opacity:val});}
+}
 function run(){
     if(!stoppedQ){
         move(time);
@@ -73,29 +76,27 @@ class Highlighted {
         console.debug("running setup");
         this.lines.remove();
         if (this.active()) {
-//            this.dots.attr({fill:"white", stroke:"black", "stroke-width":3});
+            opacity(dots,0.2);;
             for (let co of this.coords) {
                 
                 let line =
-                    paper.rect(0,0,0,0).attr({stroke:"black","stroke-width":5});
-                    //paper.path("M0,0").attr({stroke:"black", "stroke-width":5});
+                    paper.rect(0,0,0,0).attr({stroke:"black","stroke-width":5,fill:"black",opacity:0.0});
                 this.lines.push(line);
                 let path;
                 let w = 4;
                 let A = parseFloat(prams.amplitude);
                 if (prams.transverse) {
                     line.attr({x: co.x-w, y: co.y-A, width: 2*w, height: 2*A});
-//                    path = this.getPath(co.x, co.y + A, co.x, co.y - A);
                 } else {
                     line.attr({y: co.y-w, x: co.x-A, height: 2*w, width: 2*A});
-//                    path = this.getPath(co.x+A, co.y, co.x - A, co.y);
                 }
-//                line.attr({path: path});
                 line.toFront();
                 
             }
+            this.dots.attr({opacity:1});
             this.dots.toFront();
         } else {
+            opacity(dots,1);
 //            this.dots.attr("fill",choose(colors));
         }
     }
@@ -185,7 +186,7 @@ function init(){
         else {O.obj.toBack();}
     }
     move(0);
-    
+    $("#highlight").prop("checked",false);
     
 }
 $(init);

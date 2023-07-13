@@ -1,52 +1,43 @@
-var canvas = document.getElementById("game");
-var context = canvas.getContext("2d");
-var gravity=0.0025;
-var scale=800;
-var xmax=canvas.width;
-var ymax=canvas.height;
-var wins=[false,false];
-var target =
+let canvas;
+let context;
+let handle;
+let gravity=0.0025;
+let scale=800;
+let xmax,ymax;
+let showingHelp = 1;
+let wins=[false,false];
+let target =
     {
         width: 70,
         height: 10,
         color: "yellow",
         maxspeed: 0.5,
-        shift: xmax*0.8,
+        shift: 0,
         win:false,
         mode:0 //0 for no gravity, 1 for gravity
     };
-dots=[];
-dotcount=0;
-var spaceship =
-{
+let dots=[];
+let dotcount=0;
+let spaceship = {
     color: "grey",
     width: 24,
     height: 36,
-    position:
-    {
-        x: 50,
-        y: 60
-    },
-    velocity:
-    {
-        x: 0,
-        y: 0
-    },
+    position: {x: 50,y: 60},
+    velocity: {x: 0, y: 0},
     angle: 0,
     thrust:2*gravity,
     engineOn: false,
     rotatingLeft: false,
     rotatingRight: false,
-}
+};
 
-function drawSpaceship()
-{
+function drawSpaceship() {
     context.save();
     if(wins[0] && wins[1]){
         context.save();
         context.beginPath();
         context.translate(xmax/2,ymax/2);
-        context.fillStyle="yellow"
+        context.fillStyle="yellow";
         context.font="96px sans";
         context.textAlign="center";
         context.fillText("Complete!",0,0);
@@ -54,17 +45,19 @@ function drawSpaceship()
         context.restore();
     }
     //target
-        context.beginPath();
-        context.translate(0,0);
-    context.rect(target.shift-target.width*0.5,ymax-target.height,
-                 target.width,target.height);
+    context.beginPath();
+    context.translate(0,0);
+    context.rect(target.shift-target.width*0.5,
+                 ymax-target.height,
+                 target.width,
+                 target.height);
     context.fillStyle=target.color;
     context.fill();
     context.closePath();
     //dots
-    var Ndots=50;
-    for(i=0;i<Ndots;i++){
-        var D=dots[i];
+    let Ndots=50;
+    for(let i=0;i<Ndots;i++){
+        let D=dots[i];
         if(D==undefined){break;}
         context.beginPath();
         context.globalAlpha=1-i/(Ndots+0.0);
@@ -94,9 +87,8 @@ function drawSpaceship()
     
     context.beginPath();
     context.rotate(spaceship.angle);
-    var img=document.getElementById("ship");
+    let img=document.getElementById("ship");
     context.drawImage(img,-spaceship.width/2, -spaceship.height/2, spaceship.width, spaceship.height);
-//    context.rect(spaceship.width * -0.5, spaceship.height * -0.5, spaceship.width, spaceship.height);
     context.fillStyle = spaceship.color;
     context.fill();
     context.closePath();
@@ -120,16 +112,16 @@ function updateSpaceship()
     if((dotcount++)%20==0){dots.unshift({x:spaceship.position.x, y:spaceship.position.y});}
     spaceship.position.x+=spaceship.velocity.x;
     spaceship.position.y+=spaceship.velocity.y;
-    var bounciness=1.0;
-    var padding=spaceship.width/2;
-    var X=spaceship.position.x;
-    var Y=spaceship.position.y;
-    var collide=0;
+    let bounciness=1.0;
+    let padding=spaceship.width/2;
+    let X=spaceship.position.x;
+    let Y=spaceship.position.y;
+    let collide=0;
     if(Y>ymax-target.height-padding){
         if(Math.abs(X-target.shift)<target.width/2){
             if(Math.hypot(spaceship.velocity.x,spaceship.velocity.y)<target.maxspeed){
                 collide=2;
-                wins[target.mode]=true
+                wins[target.mode]=true;
                 target.win=true;
                 spaceship.velocity.x=0;
                 spaceship.velocity.y=0;
@@ -157,7 +149,7 @@ function updateSpaceship()
     
     if(spaceship.rotatingRight){spaceship.angle += 2*Math.PI / 180;}
     else if(spaceship.rotatingLeft){spaceship.angle -= 2*Math.PI / 180;}
-    var acceleration={x:0,y:gravity*target.mode};
+    let acceleration={x:0,y:gravity*target.mode};
     if(spaceship.engineOn)
     {
         acceleration.x=spaceship.thrust*Math.sin(spaceship.angle);
@@ -167,7 +159,7 @@ function updateSpaceship()
     spaceship.velocity.y+=acceleration.y;
     $("#vx").html(formV(spaceship.velocity.x));
     $("#vy").html(formV(spaceship.velocity.y));
-    var vmag=Math.hypot(spaceship.velocity.x,spaceship.velocity.y);
+    let vmag=Math.hypot(spaceship.velocity.x,spaceship.velocity.y);
     $("#vmag").html(formV(vmag));
     if(vmag<target.maxspeed){
         $("#vmag").addClass("slowenough");
@@ -180,16 +172,15 @@ function updateSpaceship()
     $("#amag").html(formA(Math.hypot(acceleration.x,acceleration.y)));
 }
 function formV(val){
-    var sign=" ";
+    let sign=" ";
     if(val<0){sign="";}
     return sign+((0.001*scale*val).toFixed(1));
 }
 function formA(val){
-    var sign=" ";
+    let sign=" ";
     if(val<0){sign="";}
     return sign+((scale*val).toFixed(1));
 }
-var handle;
 function draw()
 {
     // Clear entire screen
@@ -200,24 +191,29 @@ function draw()
     // Begin drawing
     drawSpaceship();
     /* other draw methods (to add later) */
-
+    if(showingHelp>=0) {
+        if (showingHelp < 1) {
+            showingHelp -= 0.01;
+        }
+        showHelp();
+    }
     handle=requestAnimationFrame(draw);
 }
 
+let leftArrow = 37;
+let rightArrow = 39;
+let upArrow = 38;
 function keyLetGo(event)
 {
     switch(event.keyCode)
     {
-        case 37:
-            // Left Arrow key
+        case leftArrow:
             spaceship.rotatingLeft = false;
             break;
-        case 39:
-            // Right Arrow key
+        case rightArrow:
             spaceship.rotatingRight = false;
             break;
-        case 38:
-            // Up Arrow key
+        case upArrow:
             spaceship.engineOn = false;
             break;
     }
@@ -227,28 +223,58 @@ document.addEventListener('keyup', keyLetGo);
 
 function keyPressed(event)
 {
+    if(showingHelp==1) {showingHelp = 0.99;}
     switch(event.keyCode)
     {
-        case 37:
-            // Left Arrow key
+        case leftArrow:
             spaceship.rotatingLeft = true;
             break;
-        case 39:
-            // Right Arrow key
+        case rightArrow:
             spaceship.rotatingRight = true;
             break;
-        case 38:
-            // Up Arrow key
+        case upArrow:
             spaceship.engineOn = true;
             break;
     }
 }
+function drawHelpLine(x1,y1,dx,dy){
+        context.beginPath();
+    context.strokeStyle = "white";
+    context.moveTo(x1,y1);
+    context.lineTo(x1+dx,y1+dy);
+    context.lineWidth = 5;
+    context.stroke();
+    return {x:x1+dx,y:y1+dy};
 
-document.addEventListener('keydown', keyPressed);
-function init(mode){
+}
+function drawTextLines(text,x,y){
+    text = text.split("|");
+    for (let i in text) {
+        context.fillText(text[i], x, y+20*i);
+    }
+}
+function showHelp(){
+    let cursor = drawHelpLine(60,60,40,15);
+    context.font = "16px serif";
+    context.lineCap = "round";
+    context.fillStyle="white";
+    context.globalAlpha = showingHelp>0?showingHelp:0;
+    drawTextLines("Press the up key for thrust,|left/right to rotate the ship",
+                  cursor.x+5, cursor.y-5);
+    cursor = drawHelpLine(800,100,-100,40);
+    drawTextLines("The ship will bounce|off walls and floors.",cursor.x-140, cursor.y);
+    cursor = drawHelpLine(target.shift, ymax-10, -40, -100);
+    drawTextLines("Hit this target with|a speed less than 0.5.",cursor.x-120,cursor.y-30);
+    drawHelpLine(50,ymax,40,-100);
+    cursor = drawHelpLine(150,ymax,-60,-100);
+    drawTextLines("Two missions to choose from.",cursor.x-50,cursor.y-10);
+    context.globalAlpha = 1;
+}
+function startGame(mode) {
     cancelAnimationFrame(handle);
     $(".button").removeClass("selected");
     $("#G"+mode).addClass("selected");
+    if(mode==1 && showingHelp==1) {showingHelp = 0.99;}
     dots=[];
     target.mode=mode;
     spaceship.win=false;
@@ -260,25 +286,18 @@ function init(mode){
     spaceship.rotatingRight=false;
     draw();
 }
-$(function(){
-    $("#G0").click(function(){init(0);});
-    $("#G1").click(function(){init(1);});
-    init(0);
-});
+function init() {
+    xmax = 800;
+    ymax = 500;
+    canvas = document.getElementById("game");
+    $(canvas).attr({width:xmax,height:ymax});
+    context = canvas.getContext("2d");
+    context.globalAlpha = 1;
+    document.addEventListener('keydown', keyPressed);
+    target.shift = xmax*0.8;
+    $("#G0").click(function(){startGame(0);});
+    $("#G1").click(function(){startGame(1);});
+    startGame(0);
+};
+$(init);
 
-/*TODO:
- X When both buttons are lit up, give a congratulatory message.
- X When velocity is ok for entry, light up vmag.
- * Add instructions
- * - Up for thrust, left/right to turn
- * - No crashing; bounce off walls
- * - Must hit target with speed less than maximum
- * - Click on a button to start the game.  Deep Space means no gravity.
- * - You can click on a button to restart a game.
- * - Button turns yellow when complete.
- * Console.log to make sure I don't get a cheater who knows HTML.
- * Title: "Lander"? or "Newton's 2nd Law"
- * Add axes. (y points down)
- * I never did include a "different mass" game.
- * Add a fuel counter just for bragging rights.
- */

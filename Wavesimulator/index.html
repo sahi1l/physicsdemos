@@ -1,5 +1,10 @@
-<meta charset="utf-8">
-<script src="/lib/jquery.js"></script>
+<!DOCTYPE html>
+<html lang=en>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Wave Simulator</title>
+  <script src="/lib/jquery.js"></script>
 <script src="/lib/raphael.js"></script>
 <script type="module" src="../lib/default.js"></script>
 <script type="module" src="../lib/buttons.js"></script>
@@ -25,12 +30,13 @@
 }
 </style>
 <body>
-  <header>Wave Simulator</header>
+  <header>[DEMO]Wave Simulator</header>
   <div id="instructions">
-    Change the settings and press Run to watch the corresponding wave pass through the dots.<BR>
-    See which settings increase or decrease the speed of the wave.<BR>
-    Click "Highlight Some" to show the oscillation of certain dots in the medium,<BR>
-    So you can see that it isn't the dots that are moving to the right.
+    <ul>
+    <li>Change the settings and press Run to watch the corresponding wave pass through the dots.
+    <li>See which settings increase or decrease the speed of the wave.
+    <li>Click "Highlight Some" to show the oscillation of certain dots in the medium,<br>
+      so you can see that it isn't the dots that are moving to the right.
     </div>
 <div id="canvas" style="width:100%;">
 </div>

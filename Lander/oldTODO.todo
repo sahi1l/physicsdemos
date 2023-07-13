@@ -1,0 +1,15 @@
+ X When both buttons are lit up, give a congratulatory message.
+ X When velocity is ok for entry, light up vmag.
+ * Add instructions
+ * - Up for thrust, left/right to turn
+ * - No crashing; bounce off walls
+ * - Must hit target with speed less than maximum
+ * - Click on a button to start the game.  Deep Space means no gravity.
+ * - You can click on a button to restart a game.
+ * - Button turns yellow when complete.
+ * Console.log to make sure I don't get a cheater who knows HTML.
+ * Title: "Lander"? or "Newton's 2nd Law"
+ * Add axes. (y points down)
+ * I never did include a "different mass" game.
+ * Add a fuel counter just for bragging rights.
+

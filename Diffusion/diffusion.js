@@ -1,5 +1,6 @@
 import {randint,range,HSVtoRGB} from "../lib/default.js";
 import Button from "../lib/buttons.js";
+import { Help } from "../lib/default.js";
 function hex(num) {
     let val = num.toString(16);
     while(val.length<2) {val="0"+val;}
@@ -140,11 +141,10 @@ class Animation {
         this.buttons = $("#buttons");
         this.$start = new Button("Start", this.start);
         this.$stop = new Button("Stop", this.stop);
+        this.$reset = new Button("Reset", this.reset);
         this.$start.$w.appendTo(this.buttons);
         this.$stop.$w.appendTo(this.buttons);
-/*        $("<button>").appendTo(this.buttons).html("Start").on("click",this.start);
-        $("<button>").appendTo(this.buttons).html("Stop").on("click",this.stop);*/
-        
+        this.$reset.$w.appendTo(this.buttons);
     }
     
     start() {
@@ -371,7 +371,6 @@ let init = () => {
     graph = new Graph();
     graph.reset(canvas.N);
     animation = new Animation(canvas,graph);
-    animation.start();
     let $controls = $("#controls");
     new Slider($controls, "# Particles",{min: 100, max: 1000,step: 100, default: 100},
                (N)=>{
@@ -379,15 +378,14 @@ let init = () => {
                    canvas.N = N;
                });
     new Slider($controls, "Width", {min: 2, max: 40, step: 2, default: 10},
-               (width) => {
-                   canvas.resize(width,undefined);
-               }
+               (width) => {canvas.resize(width,undefined);}
               );
     new Slider($controls, "Height", {min: 2, max: 40, step: 1, default: 10},
-               (height) => {
-                   canvas.resize(undefined, height);
-               }
+               (height) => {canvas.resize(undefined, height);}
               );
+    $("#stats").appendTo($controls);
+    new Help($("#help"),"toggle");
+
 };
 
 $(init);

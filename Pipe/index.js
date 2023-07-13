@@ -1,4 +1,8 @@
-var paper;
+/*global $, jQuery,Raphael*/
+import { Help } from "../lib/default.js";
+let stream; let win; let ui;
+let paper;
+let dot;
 //============================================================
 function constrain(val,min,max){
     if(val<min){return min;}
@@ -6,24 +10,23 @@ function constrain(val,min,max){
     return val;
 }
 function splinify(points,curviness){
-    var result=Raphael.format("M{0},{1}", points[0].x, points[0].y);
-    for(i=1;i<points.length;i++){
-        var p=points[i-1], c=points[i];
-        var D=(c.x-p.x)*curviness;
+    let result=Raphael.format("M{0},{1}", points[0].x, points[0].y);
+    for(let i=1;i<points.length;i++){
+        let p=points[i-1], c=points[i];
+        let D=(c.x-p.x)*curviness;
         result+=Raphael.format("C{0},{1},{2},{3},{4},{3}",p.x+D,p.y,c.x-D,c.y,c.x);
     }
     return result;
 }
 //============================================================
-Stream=function(points){
+function Stream(points){ 
     this.points=points;
     this.x0=25; this.dx=200;
-
     //------------------------------------------------------------
     //LINES
-    var Nlines=3; //number of lines on either side of center
+    let Nlines=3; //number of lines on either side of center
     this.lines=[];
-    for(var i=-Nlines;i<=Nlines;i++){
+    for(let i=-Nlines;i<=Nlines;i++){
         this.lines[i]=paper.path("").attr({stroke:"blue","stroke-width":0.5});
     }
     this.lines[Nlines].attr({stroke:"black","stroke-width":1});
@@ -31,10 +34,10 @@ Stream=function(points){
     //------------------------------------------------------------
     //HANDLES
     this.min=5; this.max=100;
-    var handlemin=this.min, handlemax=this.max;
+    let handlemin=this.min, handlemax=this.max;
     this.handles=[];
-    for(var i=0;i<this.points.length;i++){
-        var halfwidth=20;
+    for(let i=0;i<this.points.length;i++){
+        const halfwidth=20;
         this.handles[i]=
             paper.image("handle.png",this.x0+i*this.dx-halfwidth,50,halfwidth*2,50);
             
@@ -42,127 +45,126 @@ Stream=function(points){
         this.handles[i].oy=0;
         this.handles[i].drag(
             function(dx,dy){
-                var y=S.points[this.n].y;
+                let y=stream.points[this.n].y;
                 this.attr({y:constrain(this.oy+dy,y+handlemin,y+handlemax)});
-                S.points[this.n].dy=constrain(this.ody+dy,handlemin,handlemax);
-                S.draw(1);
+                stream.points[this.n].dy=constrain(this.ody+dy,handlemin,handlemax);
+                stream.draw(1);
             },
             function(x,y){
                 ui.hidehelp();
-                this.ody=S.points[this.n].dy;
-                this.oy=S.points[this.n].y+S.points[this.n].dy;
+                this.ody=stream.points[this.n].dy;
+                this.oy=stream.points[this.n].y+stream.points[this.n].dy;
             }, 
             undefined,this.handles[i],this.handles[i]);
     }
 
     //------------------------------------------------------------
     //------------------------------------------------------------
-    pt=function(x,y){return {x:x,y:y};}
+    function pt(x,y){return {x:x,y:y};}
     this.draw=function(nohandles){
-        for(var L=-Nlines; L<=Nlines; L++){
-            var yshift=L/(Nlines+0.0);
-            var x=this.x0;
-            var result=[];
-            for(i=0;i<points.length;i++,x+=this.dx){
+        for(let L=-Nlines; L<=Nlines; L++){
+            let yshift=L/(Nlines+0.0);
+            let x=this.x0;
+            let result=[];
+            for(let i=0;i<points.length;i++,x+=this.dx){
                 result.push( {x:x, y:points[i].y+points[i].dy * yshift} );
             }
             
             this.lines[L].attr("path",splinify(result,0.6));
         }
         if(!nohandles){
-            for(var i=0;i<points.length;i++){
+            for(let i=0;i<points.length;i++){
                 this.handles[i].attr({y:points[i].y+points[i].dy});
             }
         }
-    }
+    };
     //------------------------------------------------------------
     this.width=function(p){//p is percentage along the line
-        var len=this.lines[0].getTotalLength();
-        var s=this.lines[0].getPointAtLength(len*p);
-        var xidx=Math.floor((s.x-this.x0)/this.dx);
+        let len=this.lines[0].getTotalLength();
+        let s=this.lines[0].getPointAtLength(len*p);
+        let xidx=Math.floor((s.x-this.x0)/this.dx);
         if(xidx>=points.length-1){return 0;}
-        var xL=xidx*this.dx+this.x0;
-        var xR=(xidx+1)*this.dx+this.x0;
-        var dyL=points[xidx].dy;
-        var dyR=points[xidx+1].dy;
-        var P=(s.x-xL)/this.dx;
+        let xL=xidx*this.dx+this.x0;
+        let xR=(xidx+1)*this.dx+this.x0;
+        let dyL=points[xidx].dy;
+        let dyR=points[xidx+1].dy;
+        let P=(s.x-xL)/this.dx;
         return (1-P)*dyL+(P)*dyR;
-    }
+    };
     //------------------------------------------------------------
     this.solutionwidth=function(p){//p is percentage along the line
-        var len=this.lines[0].getTotalLength();
-        var s=this.lines[0].getPointAtLength(len*p);
-        var xidx=Math.floor((s.x-this.x0)/this.dx);
-        if(xidx>=S.solution.length-1){return 0;}
-        var xL=xidx*this.dx+this.x0;
-        var xR=(xidx+1)*this.dx+this.x0;
-        var dyL=S.solution[xidx];
-        var dyR=S.solution[xidx+1];
-        var P=(s.x-xL)/this.dx;
+        let len=this.lines[0].getTotalLength();
+        let s=this.lines[0].getPointAtLength(len*p);
+        let xidx=Math.floor((s.x-this.x0)/this.dx);
+        if(xidx>=stream.solution.length-1){return 0;}
+        let xL=xidx*this.dx+this.x0;
+        let xR=(xidx+1)*this.dx+this.x0;
+        let dyL=stream.solution[xidx];
+        let dyR=stream.solution[xidx+1];
+        let P=(s.x-xL)/this.dx;
         return (1-P)*dyL+(P)*dyR;
-    }
+    };
 
     //------------------------------------------------------------
-    var Dot=function(phi){
+    this.Dot = function(phi){
         this.phi=phi;
         this.obj=paper.circle(0,0,4).attr({"fill":"blue","stroke":"","opacity":0.5});
         this.idx=Math.floor(Math.random()*(2*Nlines-1))-(Nlines-1);
         this.step=function(ph){
             if(ph!=undefined){this.phi=ph;}
-            var s=S.lines[this.idx].getPointAtLength(S.lines[this.idx].getTotalLength()*this.phi);
+            let s=stream.lines[this.idx].getPointAtLength(stream.lines[this.idx].getTotalLength()*this.phi);
             this.obj.attr({cx:s.x,cy:s.y});
-            this.phi+=0.2/S.width(this.phi);
+            this.phi+=0.2/stream.width(this.phi);
             if(this.phi>1){this.obj.remove();}
-        }
-    }
-    dot=[new Dot(0)];
+        };
+    };
     this.time=0;
     //------------------------------------------------------------
     this.solution=[];
     this.chooseSolution=function(){
-        for(var i=25;i<=100;i+=25){
+        for(let i=25;i<=100;i+=25){
             this.solution.push(i);
         }
         this.solution.push(Math.floor(Math.random()*4+1)*25);
-        for(var i=this.solution.length-1; i>0; i--){
-            var j=Math.floor(Math.random()*(i+1));
-            var temp=this.solution[i];
+        for(let i=this.solution.length-1; i>0; i--){
+            let j=Math.floor(Math.random()*(i+1));
+            let temp=this.solution[i];
             this.solution[i]=this.solution[j];
             this.solution[j]=temp;
         }
-//        for(var i=0; i<this.points.length; i++){
+//        for(let i=0; i<this.points.length; i++){
 //            this.solution.push(Math.floor(Math.random()*4+1)*25);
 //            this.solution.push(Math.floor(Math.random()*(this.max-this.min)+this.min));
 //        }
     };
     this.chooseSolution();
-    var Pacer=function(){
+    function Pacer(){
         this.phi=0;
         this.obj=paper.rect(0,75,10,150).attr({"fill":"red",stroke:"",opacity:0.1}).toBack();
         this.step=function(ph){
             if(ui.buttonmode){this.obj.show();} else {this.obj.hide();}
             if(ph!=undefined){this.phi=ph;}
-            var s=S.lines[0].getPointAtLength(S.lines[0].getTotalLength()*this.phi);
+            let s=stream.lines[0].getPointAtLength(stream.lines[0].getTotalLength()*this.phi);
             this.obj.attr({x:s.x});
-            this.phi+=0.2/S.solutionwidth(this.phi);
+            this.phi+=0.2/stream.solutionwidth(this.phi);
             if(this.phi>1){this.obj.remove();}
-        }
+        };
     };
-    pacer=[new Pacer()];
+    let pacer=[new Pacer()];
 
     //------------------------------------------------------------
     this.step=function(){
         this.time++;
         if((this.time+1)%2==0){
-            dot.unshift(new Dot(0));
+            dot.unshift(new this.Dot(0));
         }
         if((this.time+1)%10==0){
             pacer.unshift(new Pacer());
         }
-        for(var i=0;i<dot.length;i++){
+        for(let i=0;i<dot.length;i++){
             dot[i].step();
         }
-        for(var i=0;i<pacer.length;i++){
+        for(let i=0;i<pacer.length;i++){
             pacer[i].step();
         }
         if(dot[dot.length-1].phi>1){
@@ -174,55 +176,57 @@ Stream=function(points){
             pacer.pop();
         }
         WinQ();
-    }
+    };
 };
 //============================================================
-WinQ=function(){
+function WinQ(){
     if(!ui.buttonmode){return false;}
-    var flag=true;
-    for(var i=0;i<S.points.length;i++){
-        if(Math.abs(S.points[i].dy-S.solution[i])>15){flag=false;break;}
+    let flag=true;
+    for(let i=0;i<stream.points.length;i++){
+        if(Math.abs(stream.points[i].dy-stream.solution[i])>15){flag=false;break;}
     }
     if(flag){win.show();} else {win.hide();}
     return flag;
 };
 //============================================================
-var UI=function(){
-    var helpobj=paper.text(S.x0+2*S.dx,250,"Drag a handle\nup and down\nto change the\npipe's width.").attr({"font-size":18});
-    var helpQ=true;
+function UI(){
+    let helpobj=paper.text(stream.x0+2*stream.dx,250,"Drag a handle\nup and down\nto change the\npipe's width.").attr({"font-size":18});
+    let helpQ=true;
     this.hidehelp=function(){
         if(helpQ){
             helpQ=false;
             helpobj.animate({opacity:0},1000,function(){helpobj.remove();});
         }
-    }
+    };
     paper.setStart();
-    var bwidth=140;
-    paper.rect(S.x0+20,260,bwidth,40).attr("cursor","pointer");
-    paper.text(S.x0+20+bwidth/2,280,"Go for it!").attr({cursor:"pointer","font-size":24,"text-anchor":"middle"});
-    var buttonobj=paper.setFinish();
+    let bwidth=140;
+    paper.rect(stream.x0+20,260,bwidth,40).attr("cursor","pointer");
+    paper.text(stream.x0+20+bwidth/2,280,"Play Game").attr({cursor:"pointer","font-size":24,"text-anchor":"middle"});
+    let buttonobj=paper.setFinish();
     this.buttonmode=false;
     this.toggleButton=function(){
         ui.buttonmode=!ui.buttonmode;
         if(!ui.buttonmode){
-            buttonobj[1].attr("text","Go for it!");
+            buttonobj[1].attr("text","Play Game");
         } else {
-            buttonobj[1].attr("text","Play around");
+            buttonobj[1].attr("text","Play Around");
         }
         console.log(ui.buttonmode);
-    }
+    };
     buttonobj.click(this.toggleButton);
-}
+};
 //============================================================
-    var S; var win; var ui;
-init=function(){
-    paper=Raphael("canvas",850,300);
-    var x;
-    S=new Stream([{y:150,dy:10},{y:150,dy:10},{y:150,dy:20},{y:150,dy:10},{y:150,dy:10}]);
-    S.draw();
-    setInterval($.proxy(S.step,S),100);
+function init(){
+    paper=Raphael("canvas","100%","100%");
+    paper.setViewBox(0,0,850,300);
+    let x;
+    stream=new Stream([{y:150,dy:10},{y:150,dy:10},{y:150,dy:20},{y:150,dy:10},{y:150,dy:10}]);
+    dot=[new stream.Dot(0)];
+    stream.draw();
+    setInterval($.proxy(stream.step,stream),100);
     win=paper.text(0,30,"Correct!").attr({"text-anchor":"start","font-size":48,fill:"purple",stroke:"pink"}).hide();
     ui=new UI();
+    new Help($("#help"),"toggle");
 }
 $(init);
 

@@ -12,27 +12,44 @@
 .click {border:2px outset #aaa; border-radius:6px;cursor:pointer;} /*background-color:wheat;}*/
 .click.fill {background-color:wheat;}
 .sign {margin-left:4px;width:21px;display:inline-block;text-align:center;}
-.trig {display:inline-block; text-align:center; width:48px;}
-.magnitude{margin-left:-6px;font-style:italic;}
-#score {
-             position:absolute;
-             right:0px;
-             top:5px;
-             text-align:right;
-             font-size:125%;
-             color:red;
-             padding-right:5px;
+.sign,.signinfo{color: red; background-color: #faa;}
+.trig {
+    display:inline-block;
+    text-align:center;
+    width:48px;
+    font-size:32px;
 }
-.number {
-        position:absolute;
-        left:0px;
-        top:5px;
-        text-align:center;
-        font-size:125%;
-        color:white;
-        padding-left:5px;
+.trig,.triginfo{
+    color: blue;
+    background-color: #aaf;
+}
+#labels>div {padding: 5px;}
+.magnitude{margin-left:-6px;font-style:italic;}
+#scoreheader {
+    position:absolute;
+    right:0px;
+    top:10px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+}
+#score {
+    position:relative;
+    right:0px;
+    text-align:right;
+    font-size:125%;
+    color:red;
+    padding-right:5px;
+}
+#number {
+    position:relative;
+    left:0px;
+    text-align:center;
+    font-size:125%;
+    color:black;
+    padding-left:5px;
         }
-h1 {
+/*h1 {
          font-size:150%; 
          text-align:left;
          margin:0;
@@ -41,7 +58,7 @@ h1 {
          background:linear-gradient(to right,rgba(0,0,255,0.5),rgba(0,0,255,0.1));
          padding:3px;
         padding-right:0px;
-}
+}*/
 #check {font-size:70%;margin-left:20px;}
 #win {
      position:absolute;
@@ -59,3 +76,17 @@ h1 {
     color:red;
 }
 #win>.click {display:inline-block; width:auto;}
+#help {
+    position:fixed;left:550px;
+    top:10px;
+    overflow-y:scroll;
+    height: 0px;
+    transition: height 1s linear, top 1s linear,z-index 1s linear;
+    z-index:-1;
+}
+#help h2 {margin:0px;text-align:center;margin-bottom:5px;}
+#help.shown {
+    top: 80px;
+    height: calc(100vh - 120px);
+    z-index:0;
+}

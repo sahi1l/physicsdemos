@@ -25,7 +25,6 @@ label {
     width:140px;
     font-weight: bold;
 }
-body {margin-left: 10px;}
 /*#stats, h1+p, #sliders, #buttons {margin-left:10px;}*/
 #sliders>div {display:block;margin: 10px 0px;}
 #sliders input {position: relative; top:6px;}
@@ -54,4 +53,5 @@ tbody>tr>td:first-child {text-align:right;}
 #topmatter {position:fixed; top:0; left:0; width:100%;background-color:var(--bg-color);}
 #topmatter>div {margin-left:15px;}
 
-body {margin-top: 255px;}
+body {margin-top: 270px;
+      margin-left: 10px;}

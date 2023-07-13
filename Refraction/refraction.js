@@ -3,6 +3,7 @@ let NA, NB;
 let sc;
 let H,W;
 let incident, refracted, reflected;
+let help;
 let color1 = "red";
 let color2 = "blue";
 
@@ -52,7 +53,11 @@ class Index {
         this.lolabel=paper.text(x,y+height,"x")
             .attr({"font-size":fsize,fill:"270-"+color+"-#444-#000",
                    "clip-rect":(x-width/2)+","+(y-height)+","+width+","+(2*height)});
-        
+        help.add(paper.path(`M${x+0.75*width},${y-height}l0,${2*height}`)
+                 .attr({stroke:color,"stroke-width":3,
+                        "arrow-start":"classic","arrow-end":"classic"},
+                      ));
+        help.addText(x+0.9*width,y,"Change\nindex",color);
         this.bg.toFront();
         this.bg.drag(this.drag,this.start,undefined,this,this,undefined);
         this.all=paper.setFinish();
@@ -61,7 +66,7 @@ class Index {
     start() {
         this.oval = this.val;
     }
-    drag(dx,dy) {this.set(this.oval + Math.floor(dy/10)*0.1);}
+    drag(dx,dy) {help.hide();this.set(this.oval + Math.floor(dy/10)*0.1);}
     set(nval) {
         this.val = Math.max(this.min, Math.min(this.max,nval));
         this.label.attr("text",(this.val).toFixed(1));
@@ -180,6 +185,7 @@ class IncidentRay extends Ray {
         DrawOtherRays(nval);
     }
     drag(dx,dy) {
+        help.hide();
         this.handle.hide();
         let Dx = this.ox+dx-cx;
         let Dy = this.oy+dy-cy;
@@ -252,12 +258,44 @@ function DrawOtherRays() {
     refracted.set(Math.asin(Sb)*Math.sign(ang));
     sc.update();
 }
+class Help {
+    constructor(paper) {
+        this.font = {"font-size":14,"font-family":"Times-Italic"};
+        this.arrow = {"arrow-start":"classic","arrow-end":"classic","stroke-width":3};
+        this.paper = paper;
+        this.collection = paper.set();
+        this.add(
+            paper.path(`M${W/2+20},${40}l110,0`).attr({stroke:color1,...this.arrow})
+        );
+        this.addText(W/2+75,40,"Drag on this ray\nto change its angle","red").attr({"text-anchor":"middle"});
+        this.hidden = false;
+    }
+    add(obj){
+        this.collection.push(obj);
+    }
+    addText(x,y,text,color="black") {
+        let txt = this.paper.text(x,y,text).attr({...this.font,"text-anchor":"start",fill:color});
+        console.debug(txt,txt.node);
+        txt.node.style.fontStyle = 'italic';
+        this.collection.push(txt);
+        return txt;
+    }
+    hide(){
+        if (!this.hidden){
+            this.hidden=true;
+            this.collection.animate({opacity:0},2000);
+        }
+    }
+}
+
 function init() {
     let name = "canvas";
     let $w = $(`#${name}`);
     W = $w.width();
     H = $w.height();
-    let paper = Raphael(name, W, H);
+    let paper = Raphael(name, "100%", "100%");
+    paper.setViewBox(0,0,W,H);
+    help = new Help(paper);
     paper.offset = $(paper.canvas).parent().offset;
     cx = W/2;
     cy = H/2;

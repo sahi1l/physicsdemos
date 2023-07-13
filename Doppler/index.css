@@ -17,8 +17,18 @@ input[type="range"] {
 }
 #controls {
     display: flex;
+    align-items: flex-start;
+}
+#buttons {display: inline-block; margin:10px;border:1px solid;}
+button {margin: 5px 5px;}
+main {
+    display:flex;
     flex-direction:column;
     align-items: center;
 }
-#buttons {display: inline-block;}align-content:
-button {margin: 5px 5px;}
+#controls {
+    display:flex;
+}
+label[for="carvel"] {
+    text-align: left;
+}

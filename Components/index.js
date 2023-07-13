@@ -1,3 +1,4 @@
+import {Score} from "../lib/quiz.js";
 //FIX: Add +x and +y axes
 var guess={x:1,y:1,trig:false};
 var correct={x:1,y:1,trig:false};
@@ -108,7 +109,7 @@ function RandomVector(){
     
 }
 var score={correct:0,total:0,number:1,max:10,error:0};
-function init(){
+function init() {
     if(paper!=undefined){paper.remove();}
     paper=Raphael("canvas",500,500);
     paper.setViewBox(-50,-50,100,100);

@@ -41,7 +41,6 @@ function formatAnswer(answer,M,questionType){
     if (questionType==1){
 	return (dir=="x")?(`(${num},0)`):(`(0,${num})`);
     } else {
-        console.log("uvmode=",uvmode);
 	if (dir=="x") {sfx1 = unitvectors[uvmode][0];}
 	else {sfx1 = unitvectors[uvmode][1];}
 	sfx1 = `<span class="hatted">${sfx1}</span>`;
@@ -51,6 +50,7 @@ function formatAnswer(answer,M,questionType){
 function generator() {
     CANVAS.$w.appendTo("body");
     let M = randint(2,9);
+    uvmode = randint(0,2)%2;
     let questionType = choose([0,1],{id:"questiontype",N:2});
 //    let questionType = randint(2); //0 for +x, 1 for (+5,0)
     

@@ -1,41 +1,90 @@
-
 <!doctype html>
-<html>
+<html lang="en"> 
 <head>
-<script src="/lib/jquery.js"></script>
-<script src="/lib/raphael.js"></script>
-<script src="../lib/default.js" type="module"></script>
-<script src="elastic.js"></script>
-<link rel="stylesheet" href="../lib/default.css">
-<title>Elastic Collisions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Elastic Collisions</title>
+  <script src="/lib/jquery.js"></script>
+  <script src="/lib/raphael.js"></script>
+  <script src="../lib/default.js" type="module"></script>
+  <script src="elastic.js"></script>
+  <link rel="stylesheet" href="../lib/default.css">
 </head>
 <style>
 .done {font-weight:bold;color:red;}
 .task {font-family:Helvetica;padding:4px 0px;}
 .task>I {font-family:Times;}
-.duh {display:inline-block;vertical-align:top;}
-.duh>button {width:100%;}
+.buttons,#canvas {display:inline-block;vertical-align:top;}
+#canvas {
+    background-color: #eef;
+    display:block;
+    width: 90%;
+    aspect-ratio: 3;
+}
+.buttons>button {width:100%;}
+.keleft {background-color: red;color:white;text-align:center;}
+.keright {background-color: blue;color:white;text-align:center;}
+.kerow {display:flex;wrap:nowrap;height:20}
+.kecontainer {border:1px solid;display:flex;flex-wrap:nowrap;width:calc(100vw - 80px);}
+.kelabel {width:52px;}
+#challenge {
+    max-width:600px;
+    display:flex;
+    list-style-type:none;
+    flex-wrap:wrap;
+    padding:5px;
+    margin:0px;
+    justify-content:center; }
+#challenge>li {border: 1px solid; padding:5px;margin:5px;}
+#challenge ul {list-style-type: none; margin: 0px;padding:0px;text-align:center;}
+#challenge img {height:25px;margin-left:5px;}
+/*#challenge ul>li {display:flex;align-content:center;}*/
+
+#challenge span[data-blocks] {font-size:24px; padding: 5px;margin-top:-2px;cursor: help;}
+#challengecontainer {display:inline-block;border:1px solid;
+                     user-select: none;
+                    }
+#challengecontainer h3 {margin:0px;margin-top:-20px;padding-left:15px;}
+#challengecontainer summary::marker {
+    background-color: var(--main-color);
+    color: var(--accent-color);
+}
+
 </style>
 
 <body>
-<header>Elastic Collisions</header>
-<div class="duh">
-  <button id="start">Start</button><br>
-  <button id="stop">Stop</button><br>
-  <button id="reset">Reset</button><br>
-</div>
-<div class="duh" style="background-color:#eef" id="canvas"></div>
-<ul>
-  <li>Click on a number (mass or velocity) and drag left or right to
-  change its value.
-  <li>Press Start to launch the blocks.
-  <li>Press Reset to return them to their initial positions.
-  <li>Create the following scenarios. When they all turn red, the
-  simulation is complete.
-  <ul>
-    <li class="task" id="task2">Initially the blocks move toward each other; after the collision they move in the same direction.
-    <li class="task" id="task3">Initially the blocks move toward each other; after the collision they move in opposite directions.
-    <li class="task" id="task4">Initially both blocks move in the same direction; after the collision they move in opposite directions.
-    <li class="task" id="task1">Initially the right block is stationary; after the collision the left block is stationary. <I>Hint: it doesn't matter what the initial velocity of the left block is; only the relative masses of the two blocks matter.</I> 
+  <header>[DEMO]Elastic Collisions</header>
+<ul class="buttons">
+  <li>Drag a number (mass or velocity) left or right to change its value.
+  <li>Press <button id="start">Start</button> to launch the blocks.
+  <li>Press <button id="stop">Stop</button> to pause their motion.
+  <li>Press <button id="reset">Reset</button> to reset the blocks to their initial positions.
+</ul>
+<details id="challengecontainer">
+<summary><h3>Challenge: Create the following scenarios</h3></summary>
+  <ul id="challenge">
+    
+    <li class="task" id="task2">
+      <ul>
+      <li><p><B>Before</B></p> <span data-blocks="+-"></span> 
+      <li><p><B>After</B></p> <span data-blocks="++"></span>
+      </ul>
+    <li class="task" id="task3"><ul>
+      <li><p><B>Before</B></p><span data-blocks="+-"></span>
+      <li><p><B>After</B></p><span data-blocks="-+"></span>
+      </ul>
+    <li class="task" id="task4">
+      <ul>
+      <li><p><B>Before</B></p> <span data-blocks="++"></span>
+      <li><p><B>After</B></p> <span data-blocks="-+"></span>
+      </ul>
+    <li class="task" id="task1">
+      <ul>
+      <li><p><B>Before</B></p> <span data-blocks="+0"></span>
+      <li><p><B>After</B></p> <span data-blocks="0+"></span>
+      </ul>
   </ul>
+</details>
+<div id="canvas"></div>
 </ul>

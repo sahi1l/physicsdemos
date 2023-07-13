@@ -1,23 +1,28 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<script type="text/javascript" src="/lib/jquery.js"></script>
-<script type="text/javascript" src="/lib/raphael.js"></script>
-<script type="module" src="../lib/default.js"></script>
-<script src="refraction.js"></script>
-<link rel="stylesheet" href="../lib/default.css">
-<style>
-  :root {--size: 400px;}
-  #canvas {width: var(--size); height: var(--size);}
-  #values {font-size: 150%;
-           width: var(--size);
-           text-align: center;
-          }
-  #values td {width: 50%;}
-</style>
-<header>Snell's Law</header>
+<html lang=en>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Snell's Law</title>
+  <head>
+    <script type="text/javascript" src="/lib/jquery.js"></script>
+    <script type="text/javascript" src="/lib/raphael.js"></script>
+    <script type="module" src="../lib/default.js"></script>
+    <script src="refraction.js"></script>
+    <link rel="stylesheet" href="../lib/default.css">
+    <style>
+      :root {--size: 350px;}
+      #canvas {width: var(--size); height: var(--size);
+               width: 100%; height: 100%;
+              }
+      #values {font-size: 150%;
+               width: var(--size);
+               text-align: center;
+              }
+      #values td {width: 50%;}
+    </style>
+<header>[DEMO]Snell's Law</header>
 <!--SCRIPT BEGIN-->
 <div class="figure center interactive">
 <div id="canvas" style="width: 400px; height:400px" ></div>

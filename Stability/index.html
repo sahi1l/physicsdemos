@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang=en>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Stability</title>
+  <script src="/lib/jquery.js"></script>
+  <script src="/lib/raphael.js"></script>
+  <script type=module src="../lib/default.js"></script>
+  <script type=module src="tilt.js"></script>
+  <link rel="stylesheet" href="../lib/default.css">
+  <link rel="stylesheet" href="tilt.css">
+  <!--<script type="text/javascript" src="coord.js"></script>-->
+  </head>
+<body>
+  <header>[DEMO]Stability</header>
+  <ul>
+    <li>Drag on the block to tilt it around the pivot. Let it go to see it fall.</li>
+    <li>Drag the center of mass to a new position. Usually a lower center of mass makes an object less likely to fall over; can you see why?</li>
+    <li>Resize the block by dragging on the upper-left corner. Can you see why a wider block is less likely to tip over?</li>
+</ul>
+  <div id="canvas"></div>
+  <div id="help" class="toggle">
+    <h2>Help</h2>
+    <p>When a block is tipped onto one corner and let go, it experiences two forces: its weight (acting at the center of mass), and the normal force from the floor, which acts at the point of contact.  If we consider that point of contact to be the pivot, then only the weight exerts a torque on the block, and the direction the block falls depends on the relative horizontal position of the center of mass and the point of contact.</p>
+    </div>
+</body>
+</html>

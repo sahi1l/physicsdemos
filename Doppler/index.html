@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang=en>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Doppler Effect</title>
+  <script src="/lib/jquery.js"></script>
+  <script src="/lib/raphael.js"></script>
+  <script type="module" src="../lib/default.js"></script>
+  <script type="module" src="doppler.js"></script>
+  <link rel="stylesheet" href="../lib/default.css">
+  <link rel="stylesheet" href="index.css">
+<header>[DEMO]Doppler Effect</header>
+<main>
+  <div style="font-size:125%">
+    The lines are wavefronts of a wave moving with speed <i>v</i><sub>w</sub>.
+    
+  </div>
+  <div id="canvas"></div>
+  <div id="controls">
+    <div id="buttons">
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    </div>
+    <div id="slider">
+      <label for="carvel"> <!--<i>v</i><sub>src</sub>=-->The source is moving<BR> with speed <span id="carvelValue">0</span><span id="vw"><i>v</i><sub>w</sub></span> <span id="direction"></span></label>
+      <input id="carvel" type="range" min=-1 max=1 step=0.1 value=0 list="markers">
+      <div class="under">
+        <span class="tic"><i>v</i><sub>w</sub><BR>&larr;</span>
+        <span class="tic">&frac12;<i>v</i><sub>w</sub><BR>&larr;</span>
+        <span class="tic">0</span>
+        <span class="tic">&frac12;<i>v</i><sub>w</sub><BR>&rarr;</span>
+        <span class="tic"><i>v</i><sub>w</sub><BR>&rarr;</span>
+      </div>
+      <datalist id="markers">
+        <option value="-1"></option>
+        <option value="-0.5"></option>
+        <option value="0"></option>
+        <option value="0.5"></option>
+        <option value="1"></option>
+      </datalist>
+    <div style="margin-top:5px; color: red;font-style:italic;">Use the slider to make the source move.</div>
+    </div slider>
+    </div>
+  </div controls>
+  
+</main>
+
+

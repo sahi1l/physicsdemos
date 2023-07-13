@@ -1,49 +1,78 @@
-<!--?xml version="1.0" encoding="UTF-8"?-->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang=en>
   <head>
-    <title>Diffusion Example</title>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<link href="slider/jquery-ui.css" rel="stylesheet">
-<script type="text/javascript" src="/lib/jquery.js"></script>
-<script type="text/javascript" src="/lib/raphael.js"></script>
-<script type="module" src="../lib/default.js"></script>
-<script type="module" src="../lib/buttons.js"></script>
-<script type="module" src="diffusion.js"></script>
-<link rel="stylesheet" href="../lib/buttons.css">
-<link rel="stylesheet" href="../lib/default.css">
-<script src="slider/jquery-ui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="icon" href="../lib/img/favicon.png">
+    
+    <title>Diffusion</title>
+<!--    <link href="slider/jquery-ui.css" rel="stylesheet">
+    <script src="slider/jquery-ui.js"></script>-->
+    <script src="/lib/jquery.js"></script>
+    <script src="/lib/raphael.js"></script>
+    <script type=module src="../lib/default.js"></script>
+    <script type=module src="../lib/buttons.js"></script>
+    <script type=module src="diffusion.js"></script>
+    <link rel="stylesheet" href="../lib/buttons.css">
+    <link rel="stylesheet" href="../lib/default.css">
 
-<style>
+    <style>
+      emph {font-style: italic;}
   .slider {width:120px;}
   #diffusion {height:200px; width:800px;}
   #top {display: flex; flex-wrap: wrap;}
-  #controls {text-align:right;margin-right:60px;}
+  #controls {text-align:right;margin-right:60px;
+             display:flex;flex-direction:column;
+             align-items: center;
+            }
   .graph {overflow-x: scroll;max-width:100%;}
+  #stats {
+      border: 3px inset black;
+      padding: 3px;
+      width: 250px;
+      background-color: var(--main-color);
+      color: var(--accent-color);
+      font-weight: normal;
+  }
+  #stats td {
+            font-weight: bold;
+  }
+  #stats th {font-weight: normal;}
+  .note {font-size: 12px;}
+  #help.toggle.shown {
+      height: 420px;
+      max-height: calc(100vh - 120px);
+  }
 </style>
 
 <header>Diffusion</header>
 <div id="buttons"></div>
 <div id="top">
-<table id="controls"></table>
+<div id="controls"></div>
 <div class="canvas" id="diffusion"></div>
 </div>
 <div class="graph" id="graph"></div>
 </div>
-<div>
-Reaches equilibrium at t = <B><span id="tmatch"></span></B><br>
-Size of fluctuations: <B><span id="fluctuation"></span></B>
-</div>
-<div class="instructions">
-  The black dots are particles that move randomly around the box.  Initially, all of the particles start in the left side of the box (which is colored green).  The graph shows the number of particles in the green section and the purple section as they move.  Note that the particles don't interfere with each other at all, and so you can have multiple particles in one location.
+<table id="stats">
+  <tr>
+    <th>Reaches equilibrium at t = </th>
+    <td id="tmatch"></td></tr>
+  <tr>
+    <th>Size of fluctuations:</th>
+    <td id="fluctuation"></td></tr>
+</table>
+<div id="help" class="toggle">
   <ul>
+    <li>The black dots are particles that move randomly around the box.
+    <li>Initially, all of the particles start in the left side of the box (which is colored green).
+    <li>The graph shows the number of particles in the green section and the purple section as they move.
+    <li>Note that the particles don't interfere with each other at all, and so you can have multiple particles in one location.
     <li>As the simulation runs, notice how the number of particles on both sides evens out to the average.  This is called <emph>diffusion</emph>, and is due purely to mathematical statistics rather than to any force.
     <li>You should also notice that while the number of particles on both sides is roughly the same, it fluctuates a bit.
     <li>Make a note of the time it takes for the two curves to intersect, and the size of the fluctuations after that.  Then see how that changes as you change
       <ul>
-        <li>the number of particles (typically more particles means smaller fluctuations)
-        <li>the width of the box (it takes longer for particles to move from one end of the box to the other)
+        <li>the number of particles<div class="note">(typically more particles means smaller fluctuations)</span>
+        <li>the width of the box<div class="note">(it takes longer for particles to move from one end of the box to the other)</div>
         <li>the height of the box
       </ul>
       </ul>

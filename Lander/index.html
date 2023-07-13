@@ -1,24 +1,20 @@
 <!doctype html>
-<html>
-  <head>
+<html lang=en>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>GAME: Lander</title>
 <title>Moon Lander</title>
-<style>
-#game {background-color:black;}
-#infopanel {font-size:150%;text-align:right;}
-#ship {display:none;}
-.units{padding-right:20px;}
-.button {border:1px solid;margin:2px; font-size:150%;display:inline-block;vertical-align:top;padding:4px;cursor:pointer;}
-.buttondone {background-color: yellow; color:black;}
-.selected {border:3px solid;margin:0px;}
-table {display:inline-block;}
-.value {width:40px;}
-.slowenough {background-color:yellow;}
-</style>
-<script src="../../lib/jquery.js"></script>
+<script src="/lib/jquery.js"></script>
+<script type=module src="../lib/default.js"></script>
+<script src="game.js"></script>
+<link rel="stylesheet" href="../lib/default.css">
+<link rel="stylesheet" href="game.css">
+
 </head>
 <body>
-<h1>Lander</h1>
-<div style="float:right;max-width:400px">
+<header>[GAME]Lander</header>
+<!--<div style="float:right;max-width:400px">
 Newton's Laws say that an object will maintain a constant
     velocity unless acted upon by an outside force.  This force will
   cause the ship to accelerate according to the formula a=F/m.
@@ -36,35 +32,31 @@ Newton's Laws say that an object will maintain a constant
     <li>Numbers above the ship show the components of its velocity and
     <span style="color:orange">acceleration</span>.
     </ul>
-  </div>
-    <canvas id="game" width="800" height="500"></canvas>
-<script src="game.js"></script>
+  </div>-->
+<canvas id="game"></canvas>
 <img id="ship" src="ship.png">
-<table id="infopanel">
-  <tr><th>Velocity:
-    <td>v<sub>x</sub>=
-  <td class="value" id="vx">0.0
-  <td class="units">km/s
-    <td>v<sub>y</sub>= 
-  <td class="value" id="vy">0.0
-  <td class="units">km/s
-  <td>|v|=
-  <td class="value" id="vmag">0.0
-    <td class="units">km/s
-      <tr style="color:#f80"><th>Acceleration:
-        <td>a<sub>x</sub>=
-    <td class="value" id="ax">0.0
-    <td class="units">m/s<sup>2</sup>
-      <td>a<sub>y</sub>= 
-      <td class="value" id="ay">0.0
-      <td class="units">m/s<sup>2</sup>
-      <td>|a|= 
-      <td class="value" id="amag">0.0
-      <td class="units">m/s<sup>2</sup>
-        </table>
-      <div class="button" id="G1">Gravity</div>
-      <div class="button" id="G0">Deep Space</div>
+<div id="infopanel">
+  <div id="missions">
+    <div class="button" id="G1">Gravity</div>
+    <div class="button" id="G0">Deep Space</div>
+  </div>
   
+  <table>
+    <tr><th colspan=2>Velocity <span class="units">(km/s)</span></th></tr>
+    <tr><td>v<sub>x</sub> = <td class="value" id="vx">0.0</td>
+    <tr><td>v<sub>y</sub>=  <td class="value" id="vy">0.0</td>
+    <tr><td>|v| = <td class="value" id="vmag">0.0</td>
+    </tr>
+  </table>
+  <table style="color:#f80">
+    <tr>
+      <th colspan=2>Acceleration <span class="units">(m/s<sup>2</sup>)</span>
+    </th></tr>
+    <tr><td>a<sub>x</sub> =</td> <td class="value" id="ax">0.0</td></tr>
+    <tr><td>a<sub>y</sub> =</td> <td class="value" id="ay">0.0</td></tr>
+    <tr><td>|a| =</td> <td class="value" id="amag">0.0</td></tr>
+</table>
+
 </div>
   </body>
 </html>

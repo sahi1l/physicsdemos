@@ -1,0 +1,76 @@
+body {
+    background-color:#222;
+    color:white;
+      position: relative;
+  }
+  #game {
+      background-color:black;
+      position: absolute;
+      width: 50%;
+      aspect-ratio: 1;
+      top: 50px;
+      left: 0px;
+      width: 50%;
+  }
+  #instructions {
+      position: absolute;
+//      width: 40%;
+      top: 50px;
+      left: 55%;
+  }
+  #infopanel {
+      font-size:150%;
+      text-align:right;
+  }
+#ship {display:none;}
+.units {padding-right:20px;}
+.button {border:1px solid;
+         margin:2px;
+         font-size:150%;
+         display:inline-block;
+         vertical-align:top;
+         padding:4px;
+         cursor:pointer;
+        }
+.buttondone {
+    background-color: yellow;
+    color:black;
+}
+.selected {
+    border:3px solid;
+    margin:0px;
+}
+table {display:inline-block;}
+.value {width:40px;}
+#buttons {
+    position:absolute;
+    top:900px;
+    left:300px;
+    margin-left:200px;display:inline-block;
+}
+#buttons>img{
+    -webkit-user-select: none;
+}
+#buttons td {text-align:center;font-size:150%}
+#buttons>figure {display:inline-block;}
+#id {display:inline-block;}
+#controls, #cast {display: flex;}
+.circle {clip-path: circle(10px);width: 100px; aspect-ratio: 1; margin: auto;}
+.earth {background: blue;clip-path:circle(30px);}
+.ship {background: grey;}
+.treasure {background: yellow;}
+#cast>span {display: inline-block;border: 1px solid white; padding:5px;text-align: center; width:100px}
+.name {font-size: 150%;}
+#controls img {display: block;margin: auto;}
+#controls span {width: 100px;text-align: center;}
+#controls span {margin: 10px;}
+#score {
+    position: fixed;
+    bottom: 0%;
+    left: 0%;
+    padding: 10px;
+    padding-left: 10px;
+    padding-bottom:10px;
+    border: 2px solid;
+    background: rgba(255,255,255,0.5);
+}

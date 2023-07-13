@@ -1,24 +1,47 @@
-<link rel="stylesheet" href="quiz.css">
-<script src="../../lib/jquery.js"></script>
-<script src="../../lib/raphael.js"></script>
-<script src="index.js"></script>
-<body>
-<div class="quiz">
-<h1>Equilibrium</h1>
+<!DOCTYPE html>
+<html lang=en>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Equilibrium</title>
+
+    <script src="/lib/jquery.js"></script>
+    <script src="/lib/raphael.js"></script>
+    <script type=module src="../lib/default.js"></script>
+    <script type=module src="index.js"></script>
+    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="../lib/default.css">
+  <body>
+      <header>[QUIZ]Equilibrium</header>
+      <div class="quiz">
+        <h1>Equilibrium</h1>
 <div id="score"></div>
 <div id="count"></div>
 
 <div id="canvas"></div>
-<div id="bothbox" style="position:relative">
+<!--<div id="bothbox" style="position:relative">-->
   <div id="correct"></div>
-  <div id="instructions">
-    Drag the <span class="red">red</span> arrow or number...
+<!--</div>-->
+  <div id="instructions" style="padding-left:5px;">
+    <B>Goal: </B>Adjust the <span style="color:red">third force</span> so that the ruler is in <I>equilibrium</I>.
+    <BR>Drag the <span class="red">red</span> arrow or number...
     <ul>
-      <li>left and right to position the force.
-      <li>up and down to change the magnitude of the force.
-	<li>to the other side of the ruler to change the direction of the force.
-</ul>
+      <li>...<B>left and right</B> to position the force.
+      <li>...<B>up and down</B> to change the magnitude of the force.
+      <li>...<B>to the other side</B> of the ruler to change the direction of the force.
+    </ul>
+    When you think the ruler is in equilibrium,<BR> press the "Check answer" button.
   </div>
-</div>
-</div>
-<img class="instructions" src="Instructions.png" width=400px>
+      </div>
+      <div id="help" class="toggle"> <!--class="instructions"-->
+        <h2>Help</h2>
+        <ul>
+          <li>The ruler is in equilibrium when the net force and the net torque on the ruler are zero.</li>
+          <li>The <dfn>torque</dfn> exerted by a force is its magnitude times the <dfn>lever arm</dfn> measured from a pivot point.  It points either <i>clockwise</i> or <i>counterclockwise</i>.
+          <li>You can choose the pivot point to be wherever you like:
+            <a href="pivot1.png"><img class="pivot" src="pivot1.png"></a>
+            <a href="pivot2.png"><img class="pivot" src="pivot2.png"></a>
+            <p>Whether we choose a pivot on the <span style="color:red">left side</span> of the ruler or in the <span style="color:blue">middle</span>, the torques still cancel.
+            </ul>
+        </div>
+<!--<img id="help" class="toggle" class="instructions" src="Instructions.png" width=400px>-->

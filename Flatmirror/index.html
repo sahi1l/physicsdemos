@@ -1,18 +1,34 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <!DOCTYPE html>
+<head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Image in a Flat Mirror</title>
+
 <script src="/lib/jquery.js"></script>
 <script src="/lib/raphael.js"></script>
 <script type="module" src="../lib/default.js"></script>
 <link rel="stylesheet" href="../lib/default.css">
 <script type="module" src="fm.js"></script>
+<style>
+  .object {color:var(--main-color);}
+  .reflected {color:var(--right-color);}
+  .image {color:var(--accent-color);
+          text-shadow: 1px 1px 0px black,
+                       -1px 1px 0px black,
+                       1px -1px 0px black,
+                       -1px -1px 0px black;
+         }
+  </style>
 </head>
-<header>Reflection in a Flat Mirror</header>
+<header>[DEMO]Image in a Flat Mirror</header>
 <main style="display:flex;flex-direction: column; align-items: center;width:100%;">
-  <div class="instructions" style="text-align:center">
+  <div class="instructions" style="text-align:center;max-width:500px;">
+    <p>This figure shows how a flat mirror creates an <span class="image">image</span> of an <span class="object">object</span>.
+<br><B>Rays of light</B> are emitted from the object, and <span class="reflected">reflected</span> by the mirror.  However, these diverging <span class="reflected">reflected rays</span>, appear to come from the <span class="image">image</span>, a point behind the mirror.
+    </p>
+
 <B>    Hover your mouse over different elements to see descriptions.</B>
     <div id="tooltip" style="height: 6ex;color: red;"></div><!-- style="position:fixed; top: 50%; left: 5%;"></div>-->
 

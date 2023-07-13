@@ -20,7 +20,7 @@
       position:relative;
 }
 #canvas {margin-left:50px; width:400px; height:400px;}
-h1 {
+.quiz h1 {
          font-size:150%; 
          text-align:center;
          margin:0;
@@ -68,3 +68,9 @@ h1 {
               border:1px solid;
 }
 .quiz {display:inline-block;}
+#help.toggle.shown {
+    height: auto !important;
+
+}
+dfn {font-style: italic;}
+#help .pivot  {width:250px;}

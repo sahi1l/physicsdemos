@@ -1,7 +1,8 @@
 @import url("../lib/default.css");
 .mybutton {
     background-color: var(--main-color);
-    width:100px;
+    width:25%;
+    font-size:24px;
 }
 #uber {
     display:flex;
@@ -29,12 +30,9 @@
 .reaction {font-size: 200%;}
 .reaction.right {color: var(--right-color);}
 .reaction.wrong {color: var(--wrong-color);}
-//#uber {display:flex;}
-body {text-align: center;}
 #help {margin: auto; width: 550px;height:400px;
-//       display:flex;align-items: top;flex-wrap:wrap;
        position:relative;margin-left:5px;}
-body {text-align:left;display:inline-block;}
+body {text-align:left;}
 #help img {width:500px;margin:auto;margin-top:40px;}
 
 #help .header {
@@ -72,3 +70,35 @@ body {text-align:left;display:inline-block;}
     top: -0.2em;
 }
 
+#units {
+    list-style-type: none;
+    margin:-5px 0px 0 20px;
+    padding:0;
+    display: inline-block;
+}
+#units li {
+    float: left;
+    position: relative;
+    margin: 0 5px 0 0;
+    width: 80px;
+    height: 35px;
+    text-align: center;
+}
+#units label,#units input {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+#units input {opacity:0.01; z-index:100;}
+#units input:checked+label {
+    background: var(--main-color);
+    color: var(--accent-color);
+}
+#units label {
+    cursor: pointer;
+    z-index: 90;
+    padding: 5px;
+    padding-bottom:1px;
+    border: 1px solid #CCC;}
+#units label:hover {background: #DDD;}

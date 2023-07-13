@@ -1,5 +1,5 @@
-import {Score} from "/lib/quiz.js";
-import {randint,choose} from "/lib/default.js";
+import {Score} from "../lib/quiz.js";
+import {randint,choose} from "../lib/default.js";
 
 function Arrow(angle,cls="") {
     let L = 50; //size of the viewbox
@@ -65,4 +65,4 @@ function init() {
     new Score($("#main"), 0, generator, {multiple: 2, noauto: true});
 }
 
-$(init)
+$(init);

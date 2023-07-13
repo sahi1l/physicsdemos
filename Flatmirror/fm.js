@@ -3,7 +3,28 @@ let H = 200;
 let mirX = W/2;
 let paper;
 let mirror;
+let fsize = 18;
 let dvcx; //this is the midpoint of the window and the x position of the device
+
+function arcseg (cx, cy, radius, start_r, finish_r) {
+  start_r = Raphael.rad(start_r);
+  finish_r = Raphael.rad(finish_r);
+
+  let start_x = cx + Math.cos( start_r ) * radius,
+  start_y = cy + Math.sin( start_r ) * radius,
+  finish_x = cx + Math.cos( finish_r ) * radius,
+  finish_y = cy + Math.sin( finish_r ) * radius,
+  path;
+
+  path = [
+    [ "M", start_x, start_y ],
+    [ "A", radius, radius, finish_r - start_r,
+      (finish_r - start_r > Raphael.rad( 180 )) ? 1 : 0, 
+      (finish_r > start_r) ? 1 : 0,        
+      finish_x, finish_y ]              
+  ];
+  return { path: path };
+};
 function Line (x0,y0,x1,y1) {
     let X = x1;
     let Y = y1;
@@ -91,17 +112,32 @@ class Ray {
         }
     }
 }
+function getNamedColor(csstag) {
+    let ncolor = `var(--${csstag}-color)`;
+    let $duh = $("<div id='duh'>").css({"width":100,"height":100,
+                                        color: ncolor,
+                                        "background-color":ncolor
+                              }).appendTo("body");
+    let color = window.getComputedStyle($duh[0]).color;
+    $duh.remove();
+    return color;
+}
+console.debug(getNamedColor("bg"));
+let normcolor = getNamedColor("text");
+let objcolor = getNamedColor("main");
+let reflcolor = getNamedColor("right");
+let imgcolor = getNamedColor("accent");
+
 class RaySet {
     constructor(y,parent) {
         this.y = y;
         this.parent = parent;
-        
         let normwidth = 50;
-        this.normal = new Ray("black",2,{"stroke-dasharray":"-"},"normal");
+        this.normal = new Ray(normcolor,2,{"stroke-dasharray":"-"},"normal");
         this.normal.set(-normwidth,y,normwidth,y);
-        this.ray = new Ray("blue",3,{"arrow-end":"classic"}, "reflection");
-        this.trace = new Ray("cyan",3,{"stroke-dasharray":"--"},"trace");
-        this.incident = new Ray("black",4,{"arrow-end":"classic"}, "incident");
+        this.ray = new Ray(reflcolor,3,{"arrow-end":"classic"}, "reflection");
+        this.trace = new Ray(imgcolor,3,{"stroke-dasharray":"--"},"trace");
+        this.incident = new Ray(objcolor,4,{"arrow-end":"classic"}, "incident");
         this.incident.cousins = [this.ray,this.trace];
         this.ray.cousins = [this.incident, this.trace];
         this.trace.cousins = [this.incident, this.ray];
@@ -148,7 +184,10 @@ class Circle {
         this.r = 10;
         this.highlighted = false;
         this.color = color;
+        this.labeldx = 20*((which=="object")?-1:1);
         this.obj = paper.circle(x,y,this.r).attr({fill:color});
+        this.label = paper.text(x,y-10,which)
+            .attr({fill:color, "font-size":fsize,stroke:objcolor});
         this.highlight = this.highlight.bind(this);
         setHover(this.obj, which, this);
         highlightable.push(this);
@@ -164,6 +203,7 @@ class Circle {
     }
     move(x,y) {
         this.obj.attr({cx: x,cy: y});
+        this.label.attr({x: x+this.labeldx, y: y-20});
     }
 }
 class Principal {
@@ -172,12 +212,8 @@ class Principal {
         this.r = r;
         this.x = x;
         this.y = y;
-        this.obj = new Circle(x,y,"black","object");
-        this.img = new Circle(-x,y,"cyan","image");
-//        this.obj = paper.circle(x,y,r).attr({fill:"black"});
-//        setHover(this.obj, "object",highlightObj(this.obj,"black",2));
-//        this.img = paper.circle(-x,y,r).attr({fill:"cyan"});
-//        setHover(this.img, "image",highlightObj(this.img,"black",2));
+        this.obj = new Circle(x,y,objcolor,"object");
+        this.img = new Circle(-x,y,imgcolor,"image");
         this.rays = [];
         this.imgx = 0; this.imgy = 0;
         this.obj.obj.drag(this.drag,this.start,undefined,this,this,this);
@@ -229,9 +265,10 @@ function init(){
     paper = Raphael("flatmirror", "100%","100%");
     paper.setViewBox(-W,-H,2*W,2*H); //last two are width and height
     //draw mirror
-//    mirror = paper.rect(-5,-H,10,2*H).attr("fill","black");
-    mirror = paper.path(`M0,${H} L0,-${H}`)
+//    mirror = paper.rect(-5,-H,10,2*H).attr("fill",objcolor);
+    mirror = paper.path(`M0,${H} L0,-${H-20}`)
         .attr({"stroke-width":8, stroke:"grey"});
+    paper.text(0,-H+10,"Mirror").attr({"font-size":fsize});
     setHover(mirror,"mirror");
     let obj = new Principal(-50, 0);
     obj.addRay(-50);

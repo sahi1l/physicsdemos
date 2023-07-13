@@ -1,0 +1,33 @@
+#game {
+    background-color:black;
+    width: min(80vw , calc(70vh * 1.6));
+}
+#infopanel {font-size:150%;}
+#ship {display:none;}
+.units{font-size:70%;}
+.button {
+    border:1px outset;
+    margin:2px;
+    font-size:24px;
+    text-align: center;
+    display:inline-block;
+    vertical-align:top;
+    padding:4px;
+    cursor:pointer;
+}
+.buttondone {background-color: yellow; color:black;}
+.selected {border:5px inset black;margin:0px;}
+table {display:inline-block;}
+.slowenough {background-color:yellow;}
+#infopanel td {width:50%;}
+.value {width:40px;}
+#infopanel {
+    display: flex;
+}
+#infopanel table {
+    font-size: 18px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#infopanel tr:nth-child(4) {
+    font-size:125%;}

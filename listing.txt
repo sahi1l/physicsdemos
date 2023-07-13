@@ -14,12 +14,12 @@ IMG:components.png
 Given a vector with an angle, find the <i>x</i> and <i>y</i> components in terms of sines and cosines.
 
 :math:QUIZ:Vectormath
-Vector Addition
+Vector Math
 IMG:vectormath.png
 Given two vectors, find their sum or difference.
 
 :mechanics:QUIZ:Acceleration
-Acceleration
+Newton's Second Law
 IMG:acceleration.png
 Use Newton's Second Law to find the force on an <i>accelerating</i> box.
 
@@ -47,7 +47,7 @@ Topics: Momentum, Inelastic Collisions
 Orbiter
 IMG:orbits.png
 
-:mechanics:DEMO:Tilt
+:mechanics:DEMO:Stability
 Stability
 IMG:tilt.png
 
@@ -56,7 +56,7 @@ Image in a Flat Mirror
 IMG:flatmirror.png
 
 :optics:DEMO:Refraction
-Refraction
+Snell's Law
 IMG:refraction.png
 
 :optics:DEMO:Lens
@@ -80,18 +80,8 @@ IMG:diffusion.gif
 Fluid Through a Pipe
 IMG:pipe.gif
 
-:misc:DEMO:Minkowski
-Minkowski Diagram
-IMG:minkowski.png
-Draw events and worldlines on a Minkowski diagram, then adjust the observer's speed to see how they are related.
-
-:misc:DEMO:Relativetrain
-Relativistic Train
-IMG:train.png
-Light pulses are emitted from the center of a train. How long do they take to reach the ends? And what does it say about relativity?
-
 :math:LAB:Coins
-Statistics of Coins
+Coin Statistics
 IMG:coins.gif
 Simulate flipping a large number of coins many times, and see how many times heads comes up.
 
@@ -102,8 +92,8 @@ Given a set of charges and a voltage probe, draw the equipotential lines created
 
 :misc:DEMO:Sterngerlach
 Stern-Gerlach
-IMG:sterngerlach.png
-Inspired by David McIntyre's <I>Quantum Mechanics</I> book: create a chain of Stern-Gerlach devices, send photos through them, and witness the statistics.
+IMG:sterngerlach.gif
+A Javascript partial adaptation of the SPINS package by David McIntyre: create a chain of Stern-Gerlach devices, send photons through them, and witness the statistics.
 
 :waves:DEMO:Wavesimulator
 Wave Simulator

@@ -1,0 +1,17 @@
+#canvas {
+    height:350px;
+    text-align: left;
+    width:600px;
+    background: #eee;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+#help {
+    padding:10px;
+    width: 300px;
+}
+#help.shown {
+    height: 280px !important;
+}

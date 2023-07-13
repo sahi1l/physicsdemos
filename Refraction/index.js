@@ -2,7 +2,7 @@ var Refraction=new function(){
     var name,W,H;
     var paper;
     //Object definitions
-    var IncidentRay=function(angle){
+    function IncidentRay (angle){
         paper.setStart();
         var arrow=paper.path("").attr({"stroke-width":6,"stroke":"red","arrow-end":"classic"});
         arrow.toBack();
@@ -38,10 +38,10 @@ var Refraction=new function(){
             var angle=Math.atan2(Dx,Dy);
             this.set(angle);
         };
-        this.end=function(){handle.show();}
+        this.end=function(){handle.show();};
         all.drag(this.drag,this.start,this.end,this,this,this);
     };
-    var RefractedRay=function(){
+    function RefractedRay(){
         paper.setStart();
         var arrow=paper.path("").attr({"stroke-width":6,"stroke":"blue","arrow-end":"classic"});
         arrow.toBack();
@@ -62,7 +62,7 @@ var Refraction=new function(){
             label.attr({x:cx-hyp*S/3,y:(H+2*cy+hyp*C)/3,
                         text:this.pretty});
 
-        }
+        };
         this.hide=function(){all.hide();this.pretty="tir";}
     }
     var ReflectedRay=function(){
@@ -84,12 +84,12 @@ var Refraction=new function(){
             var hyp=Math.min(Math.abs(cx-g)/Math.abs(S),Math.abs((cy-g)/C));
             var P=Raphael.format("M{0},{1}L{2},{3}",cx,cy,cx+hyp*S,cy+hyp*C);
             arrow.attr({path:P});
-        }
-    }
+        };
+    };
     var nA,nB;
     var cx,cy;
     var incident,refracted,reflected;
-    DrawOtherRays=function(ang){
+    function DrawOtherRays(ang){
         if(incident==undefined){return;}
         ang=incident.angle;
         var na=nA.val; var nb=nB.val;

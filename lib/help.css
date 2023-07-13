@@ -43,3 +43,18 @@
     padding: 0px;
     background-color: inherit;
 }
+#help.toggle {
+    position:fixed;
+    right: 10px;
+    background-color: var(--bg-color);
+    top:10px;
+    overflow-y:scroll;
+    height: 0px;
+    transition: height 1s linear, top 1s linear;
+    z-index:1;
+}
+#help.toggle h2 {margin:0px;text-align:center;margin-bottom:5px;}
+#help.toggle.shown {
+    top: 80px;
+    height: calc(100vh - 120px);
+}
