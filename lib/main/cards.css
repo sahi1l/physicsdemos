@@ -125,3 +125,12 @@ body {background-color: var(--main-color);
 }
 #title h2 {margin-top: -15px;}
 
+.topics {
+    font-size: 10px;
+    font-variant: small-caps;
+
+}
+.topics>span {
+    margin:0px 3px;
+    display:inline-block;
+}
