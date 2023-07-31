@@ -1,0 +1,102 @@
+:math:QUIZ:Scinot
+Scientific Notation
+IMG:scinot.gif
+Converting between scientific, metric, and decimal notation
+
+:math:QUIZ:Basis
+Using a Basis
+IMG:basis.png
+Correctly describe a vector's direction in a standard basis.
+
+:math:QUIZ:Components
+Vector Components
+IMG:components.png
+Given a vector with an angle, find the <i>x</i> and <i>y</i> components in terms of sines and cosines.
+
+:math:QUIZ:Vectormath
+Vector Math
+IMG:vectormath.png
+Given two vectors, find their sum or difference.
+
+:mechanics:QUIZ:Acceleration
+Newton's Second Law
+IMG:acceleration.png
+Use Newton's Second Law to find the force on an <i>accelerating</i> box.
+
+:mechanics:LAB:Collisions
+Elastic Collisions
+IMG:collisions.gif
+Fling two blocks at each other with different speeds, and try to recreate certain conditions after they collide.
+
+:mechanics:QUIZ:Equilibrium
+Equilibrium
+IMG:equilibrium.png
+
+:mechanics:GAME:Lander
+Lander
+IMG:lander.gif
+Land a rocket ship on a pad, with gravity and without, and gain some intuition about inertia.
+
+:mechanics:QUIZ:Momentum
+Inelastic Collisions
+IMG:momentum.gif
+Choose the velocity of the red ball so that both balls come to a stop when they collide.
+Topics: Momentum, Inelastic Collisions
+
+:mechanics:GAME:Orbits
+Orbiter
+IMG:orbits.png
+
+:mechanics:DEMO:Stability
+Stability
+IMG:tilt.png
+
+:optics:DEMO:Flatmirror
+Image in a Flat Mirror
+IMG:flatmirror.png
+
+:optics:DEMO:Refraction
+Snell's Law
+IMG:refraction.png
+
+:optics:DEMO:Lens
+Ray Tracing
+IMG:lens.png
+An interactive demo that shows the principal rays of converging and diverging lenses and mirrors.
+
+:waves:DEMO:TwoDinterference
+Two-Dimensional Interference
+IMG:interference2D.gif
+
+:waves:DEMO:Doppler
+Doppler Effect
+IMG:doppler.gif
+
+:misc:DEMO:Diffusion
+Diffusion
+IMG:diffusion.gif
+
+:misc:GAME:Pipe
+Fluid Through a Pipe
+IMG:pipe.gif
+
+:math:LAB:Coins
+Coin Statistics
+IMG:coins.gif
+Simulate flipping a large number of coins many times, and see how many times heads comes up.
+
+:misc:LAB:Equipotentials
+Equipotential Lines
+IMG:equipotentials.png
+Given a set of charges and a voltage probe, draw the equipotential lines created by those charges.
+
+:misc:DEMO:Sterngerlach
+Stern-Gerlach
+IMG:sterngerlach.gif
+A Javascript partial adaptation of the SPINS package by David McIntyre: create a chain of Stern-Gerlach devices, send photons through them, and witness the statistics.
+
+:waves:DEMO:Wavesimulator
+Wave Simulator
+IMG:wavesim.gif
+Simulates different types of waves and the medium the waves are travelling through
+
