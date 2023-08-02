@@ -1,8 +1,8 @@
 import { Help } from "../lib/default.js";
 /*global $, jQuery,Raphael*/
 let paper,Mgrid,mgrid;
-let W=800;
-let H=800;
+let W=600;
+let H=600;
 let NMgrid=16; //make this even!
 let Nmgrid=5;
 let points=[[]];
@@ -187,6 +187,11 @@ function Clear(){
     }
     charges=[];
 }
+function mouseConversion(mx,my) {
+    let px = (mx - $("#canvas").position().left)/$("#canvas").width();
+    let py = (my - $("#canvas").position().top)/$("#canvas").height();
+    return [px*W, py*H];
+}
 function init(){
     //FIX: set W and H 
     paper=Raphael("canvas","100%","100%");
@@ -213,8 +218,7 @@ function init(){
     let grid=paper.setFinish().attr("stroke","#999");
     $("#canvas").on("click",
 		    function(e){
-			let cx=e.pageX-$("#canvas").position().left;
-			let cy=e.pageY-$("#canvas").position().top;
+                        let [cx,cy] = mouseConversion(e.pageX,e.pageY);
 			let pointhere=ThisPoint();
 			if(pointhere){//They are clicking on a point
 			    let set=points[points.length-1];
@@ -255,15 +259,13 @@ function init(){
 	}
     });
     $(document).mousemove(function(e){
-	ptrx=e.pageX-$("#canvas").position().left;
-	ptry=e.pageY-$("#canvas").position().top;
+        let [ptrx,ptry] = mouseConversion(e.pageX,e.pageY);
 	oncanvas=(ptrx>0 && ptry>0 && ptrx<W && ptry<H);
         if(oncanvas) {voltmeter.show();} else {voltmeter.hide();}
     });
     $("#newline").on("click",NewLine);
     $("#canvas").mousemove(function(e){
-	let cx=e.pageX-$("#canvas").position().left;
-	let cy=e.pageY-$("#canvas").position().top;
+        let [cx,cy] = mouseConversion(e.pageX,e.pageY);
 	//cx is position in the canvas, now need to convert to actual coordinates
 	let x=(cx-W/2)/W*NMgrid;
 	let y=(H/2-cy)/H*NMgrid;

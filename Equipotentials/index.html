@@ -2,41 +2,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <link rel="icon" href="../lib/img/favicon.png">
-
-<title>Equipotentials</title>
+  
+  <title>Equipotentials</title>
   <script src="/lib/jquery.js"></script>
   <script src="../lib/raphael.js"></script>
   <script type=module src="../lib/default.js"></script>
   <script type=module src="equip.js"></script>
   <link rel="stylesheet" href="../lib/default.css">
   <link rel="stylesheet" href="index.css">
+  
   <body>
     <header>[LAB]Equipotentials</header>
-    <span id="drawing" class="invisible">Drawing </span>
-    <input id="label" placeholder="-"></input>
-    <span id="V">V</span>
-    <button id="newline">New Equipotential</button>
-    <div id="canvas"></div>
-	<div id="potentialbox">
-	<div id="potential"></div>		
-	Potential
-	</div>
-	<div id="configs">
-	  <B><U>Charge Configurations</U></B><br>
-	  <button class="configs">1</button>
-	  <button class="configs">2</button>
-	  <button class="configs">3</button>
-	  <button class="configs">4</button>
-	  <div>Find the following potentials:</div>
-	  <div id="suggestions"></div>
+    <div id="controlpanel">
+    <div id="drawingbox">
+      <div id="drawing" class="invisible">Drawing</div>
+<!--      <span id="drawing" class="invisible">Drawing </span>-->
+      <div>
+        <input id="label" placeholder="-"></input>
+        <span id="V">V</span>
+        </div>
+      <button id="newline">New Equipotential</button>
+    </div>
+    
+    
+    <div id="potentialbox">
+      <div id="potential"></div>		
+      Potential
+    </div>
 
-	  </div>
-	<div id="help" class="toggle">
-          <h2>Instructions</h2>
-	  <P>In this lab you will be drawing <i>equipotential lines</i> for several different charge configurations, using this interface.  <!--There is also a <A HREF="https://youtu.be/4v0-zveSn2I">video introduction</A> if you prefer.-->
-	    <UL>
-	      <LI>Choose the first charge configuration by pressing the button marked "1" (below).
-	      <LI> As you move the mouse around the grid, the potential at that location is shown in the meter at the bottom.  Explore the space and get a feel for the range of potentials that are present: what is the largest potential? the smallest potential?
+    <div id="configs">
+      <B><U>Charge Configurations</U></B><br>
+      <button class="configs">1</button>
+      <button class="configs">2</button>
+      <button class="configs">3</button>
+      <button class="configs">4</button>
+      <div>Find the following potentials:</div>
+      <div id="suggestions"></div>
+      
+    </div>
+    </div>
+    <div id="canvas"></div>
+
+    <div id="help" class="toggle">
+      <h2>Instructions</h2>
+      <P>In this lab you will be drawing <i>equipotential lines</i> for several different charge configurations, using this interface.  <!--There is also a <A HREF="https://youtu.be/4v0-zveSn2I">video introduction</A> if you prefer.-->
+	<UL>
+	  <LI>Choose the first charge configuration by pressing the button marked "1" (below).
+	  <LI> As you move the mouse around the grid, the potential at that location is shown in the meter at the bottom.  Explore the space and get a feel for the range of potentials that are present: what is the largest potential? the smallest potential?
 	      <LI>Below the configuration buttons is a list of potentials.  Find a spot on the grid which has the first potential.  Click this spot to place a point there; the top of the screen will now say "Drawing" and then the potential you chose.
 		<LI>Move your mouse to find another nearby point (about one or two major squares away) with the same potential, and click again.  A line will connect the two points, and a label will appear on that line.
 		<LI>To delete a point and the lines connected to it, hover your mouse over the point and press 'X'.
