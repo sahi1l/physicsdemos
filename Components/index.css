@@ -1,11 +1,13 @@
 #component {
-           width:500px;
+    max-width:500px;
+    max-height:100vh;
+    width:100%;
            position:relative;
            background-color:beige;
            }
 #component>#canvas {
-           width:500px; 
-           height:500px; 
+    width:100%;
+    aspect-ratio: 1;
            background-color: beige;
 }
 #input {font-size:36px;margin-top:5px;}
@@ -77,7 +79,8 @@
 }
 #win>.click {display:inline-block; width:auto;}
 #help {
-    position:fixed;left:550px;
+    position:fixed;right:0%;
+    background-color: var(--bg-color);
     top:10px;
     overflow-y:scroll;
     height: 0px;
