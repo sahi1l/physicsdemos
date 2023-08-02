@@ -1,4 +1,5 @@
 import {Score} from "../lib/quiz.js";
+import {Help} from "../lib/default.js";
 //FIX: Add +x and +y axes
 var guess={x:1,y:1,trig:false};
 var correct={x:1,y:1,trig:false};
@@ -81,24 +82,16 @@ function Win(){
     $("#win>.click").click(start);
     $("#win>#percentage").html(score.error+' errors<br>'+score.max
                                +' questions');
-        /*<br><div id="playagain">Try Again?</div>');*/
-/*    $('#playagain').click(init);*/
-    /*$("#win>#percentage").html(parseInt(100.0*score.correct/(0.0+score.total)+0.5)+"%");*/
     $("#win").attr({opacity:0}).show().animate({opacity:1},2000);
 }
 function updateScore(){
     var suffix=" errors"; if(score.error==1){suffix=" error";}
     $("#score").html(score.error+suffix);
-//    $(".score").html(score.correct+"/"+score.total);
 }
 function updateNumber(){
-    $(".number").html(score.number+" of "+score.max);
-}
-function ClearCorrect(){
-//    correctQ.attr("text","");
+    $("#number").html(score.number+" of "+score.max);
 }
 function RandomVector(){
-    ClearCorrect();
     updateNumber();
     DrawArrow(
         Math.floor(Math.random()*2)*2-1,
@@ -111,7 +104,7 @@ function RandomVector(){
 var score={correct:0,total:0,number:1,max:10,error:0};
 function init() {
     if(paper!=undefined){paper.remove();}
-    paper=Raphael("canvas",500,500);
+    paper=Raphael("canvas","100%","100%");
     paper.setViewBox(-50,-50,100,100);
     base=paper.path("M0,0L30,0").attr({"stroke-dasharray":"-"});
     arc=paper.path("").attr({"stroke-dasharray":".",stroke:"grey","stroke-width":1});
@@ -123,6 +116,7 @@ function init() {
     $("#x").click(function(){ToggleSign("x")});
     $("#y").click(function(){ToggleSign("y")});
     $("#check").click(CheckAnswer);
+    new Help($("#help"));
     RandomVector();
     updateScore();
 }
