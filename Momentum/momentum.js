@@ -9,7 +9,7 @@ function linmap(x,in_min,in_max,out_min,out_max){
 let paper;
 let source,target,shooter,score;
 const H=300;
-const W=900; //height and width
+const W=600; //height and width
 const radius=30;
 const dt=0.1;
 const timeout=10;
@@ -26,7 +26,11 @@ let animate=new function(){
             collideflag=true;
             collide();
         }
-        this.moving.forEach(function(a){a.step(); if(a.x<100){animate.stop();}});
+        this.moving.forEach(
+            (a)=>{
+                a.step();
+                if(a.x<xmin){animate.stop();}}
+        );
     };
     this.start=function(){
         this.stop();
@@ -157,6 +161,7 @@ let Shooter=function(){
     this.x=0;
     this.groove=paper.rect(smin,mainY-grooveH/2,smax-smin,grooveH)
         .attr({fill:"grey"});
+    console.debug(this.groove.node.getBoundingClientRect());
     this.thumb=paper.rect(0,y-thumbH/2, thumbW, thumbH)
         .attr({fill:"red"});
     paper.setStart();
@@ -189,9 +194,12 @@ let Shooter=function(){
         function(x,y){shooter.x2v(x-thumbW/2); shooter.updatethumb();},
         undefined);
         
-    this.dragstart=function(x,y){shooter.help.animate({opacity:0},200);};
+    this.dragstart=function(x,y){
+        shooter.help.animate({opacity:0},200);
+        shooter.x2v(getMouseX(x));
+    };
     this.dragmove=function(dx,dy,nx,ny){
-        shooter.x2v(nx);
+        shooter.x2v(getMouseX(nx));
         this.updatethumb();
     };
     this.dragend=function(){};
@@ -203,12 +211,16 @@ let Shooter=function(){
     };
     this.v2x=function(v){
         this.v=Math.round(constrain(v,1,vmax));
-        this.x=linmap(this.v, 1,vmax, smax,this.x0);
+//        let bRect = this.groove.node.getBoundingClientRect();
+//        let smin = bRect.left;
+//        let smax = bRect.right;
+        this.x=linmap(this.v, 1,vmax, smax,smin);
+        console.debug(v,this.v,this.x);
         this.updatethumb();
     };
     this.x2v=function(x){
         this.x=constrain(x,smin,smax);
-        this.v=Math.round(linmap(this.x, smax,smin, 1,vmax));
+        this.v=Math.round(linmap(this.x, smax, smin, 1, vmax));
         this.updatethumb();
     };
 
@@ -243,6 +255,11 @@ function chooseProblem(src,tgt){
     vscale = Math.max(1,5/Math.min(n,N/n));
 }
 
+function getMouseX(val){
+    let bRect = $("#canvas")[0].getBoundingClientRect();
+    let px2pt = bRect.width/W;
+    return val/px2pt;
+}
 function init(){
     paper=Raphael("canvas","100%","100%");
     paper.setViewBox(0,0,W,H);
