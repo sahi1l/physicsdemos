@@ -94,7 +94,7 @@
 .panel h1 {
     background-color: inherit;
     color: var(--main-color);
-    background-image: linear-gradient(to right,var(--accent-color) 0%,transparent 50%);
+    background-image: linear-gradient(to right,var(--accent-color) 0%,transparent 400px);
 }
 
 body {background-color: var(--main-color);
