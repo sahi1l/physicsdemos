@@ -10,47 +10,9 @@
   <script src="../lib/default.js" type="module"></script>
   <script src="elastic.js"></script>
   <link rel="stylesheet" href="../lib/default.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <style>
-.done {font-weight:bold;color:red;}
-.task {font-family:Helvetica;padding:4px 0px;}
-.task>I {font-family:Times;}
-.buttons,#canvas {display:inline-block;vertical-align:top;}
-#canvas {
-    background-color: #eef;
-    display:block;
-    width: 90%;
-    aspect-ratio: 3;
-}
-.buttons>button {width:100%;}
-.keleft {background-color: red;color:white;text-align:center;}
-.keright {background-color: blue;color:white;text-align:center;}
-.kerow {display:flex;wrap:nowrap;height:20}
-.kecontainer {border:1px solid;display:flex;flex-wrap:nowrap;width:calc(100vw - 80px);}
-.kelabel {width:52px;}
-#challenge {
-    max-width:600px;
-    display:flex;
-    list-style-type:none;
-    flex-wrap:wrap;
-    padding:5px;
-    margin:0px;
-    justify-content:center; }
-#challenge>li {border: 1px solid; padding:5px;margin:5px;}
-#challenge ul {list-style-type: none; margin: 0px;padding:0px;text-align:center;}
-#challenge img {height:25px;margin-left:5px;}
-/*#challenge ul>li {display:flex;align-content:center;}*/
-
-#challenge span[data-blocks] {font-size:24px; padding: 5px;margin-top:-2px;cursor: help;}
-#challengecontainer {display:inline-block;border:1px solid;
-                     user-select: none;
-                    }
-#challengecontainer h3 {margin:0px;margin-top:-20px;padding-left:15px;}
-#challengecontainer summary::marker {
-    background-color: var(--main-color);
-    color: var(--accent-color);
-}
-
 </style>
 
 <body>
@@ -60,6 +22,8 @@
   <li>Press <button id="start">Start</button> to launch the blocks.
   <li>Press <button id="stop">Stop</button> to pause their motion.
   <li>Press <button id="reset">Reset</button> to reset the blocks to their initial positions.
+</ul>
+<div id="canvas"></div>
 </ul>
 <details id="challengecontainer">
 <summary><h3>Challenge: Create the following scenarios</h3></summary>
@@ -86,5 +50,3 @@
       </ul>
   </ul>
 </details>
-<div id="canvas"></div>
-</ul>
