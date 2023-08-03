@@ -93,3 +93,15 @@
     height: calc(100vh - 120px);
     z-index:0;
 }
+@media (max-width:550px) {
+    #input {display: flex;
+            flex-wrap: wrap;
+           }
+    #xcoord,#ycoord {display: block;}
+    #ycoord {margin-left: auto;}
+    
+}
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
