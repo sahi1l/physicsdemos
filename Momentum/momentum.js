@@ -152,7 +152,7 @@ class Button {
         let left = smin;
         let width = smax-smin;
         let fontsize = 24;
-        let height = fontsize + 4;
+        let height = 2*fontsize + 4;
         paper.setStart();
         paper.rect(left,
                    y,
