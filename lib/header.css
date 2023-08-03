@@ -31,7 +31,9 @@ header img {
     height: 45px;
     aspect-ratio: 1;
     display: inline;
+    opacity: 0.8;
 }
+/*
 @media (max-width:500px) {
     #headerbuttons {
         top: 45px !important;;
@@ -40,3 +42,4 @@ header img {
         height: 30px;
     }
 }
+*/
