@@ -173,7 +173,7 @@ class Button {
 let Shooter=function(){
     let thumbH=50;
     let thumbW=20;
-    let smin=10;
+    let smin=20;
     let smax=xmin - radius - thumbW/2;
     let grooveH=4;
     let vmax=20;
@@ -199,6 +199,7 @@ let Shooter=function(){
         animate.moving=[target,source];
         shooter.launch.hide();
         shooter.thumb.hide();
+        shooter.help.hide();
     });
     this.again = new Button(paper, "blue", "Again", smin, smax, mainY + 60);
     this.again.button.hide();
