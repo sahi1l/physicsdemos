@@ -122,8 +122,9 @@ class Ripple {
 class Text {
     constructor($root,canvas) {
         this.$w = $("<div>").appendTo($root).addClass("text")
-        this.canvas = canvas
-        let N = [this.addAnimation(), this.addWavefronts(), this.addPathLength()]
+        this.canvas = canvas;
+        let N = [this.addAnimation(), this.addWavefronts(), this.addPathLength()];
+        console.debug(this.$w, N);
         for (let n of N) {
             this.$w.append(n.addClass("card"))
         }
