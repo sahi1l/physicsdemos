@@ -1,3 +1,5 @@
+import {Help} from "../lib/default.js";
+/*global $,Raphael*/
 let paper;
 //var W=800; var H=800;
 let rmin=10;
@@ -10,15 +12,15 @@ let acceleration = 0;
 let collected = 0;
 var captured;
 var flame;
-var firing=0;
-var maxcollected=3;
-dangle=0.1;
-var count=0;
+let firing=0;
+let maxcollected=3;
+let dangle=0.1;
+let count=0;
 let fuel=0;
 let winW;
-var winQ=false;
-var clickhandle,stephandle;
-var start,elapsed;
+let winQ=false;
+let clickhandle,stephandle;
+let start,elapsed;
 function init(){
     start=new Date();
     paper=Raphael("game","100%","100%");
@@ -41,6 +43,7 @@ function init(){
     $("#downbutton").on("touchstart",downButton).on("touchend",keyReleased);
     winW=paper.text(0,0,"Win!").attr({fill:"white","font-size":6,"text-anchor":"middle"}).hide();
     step();
+//    new Help($("#instructions"),"");
 }
 document.addEventListener('keydown',keyPressed);
 document.addEventListener('keyup',keyReleased);
@@ -158,8 +161,6 @@ function changevel(dv){
     UpdateFuel();
     ship.r=nr; return 1;
 }
-function UpdateFuel(){
-    $("#fuel").html(fuel);
-}
+function UpdateFuel(){$("#fuel").html(fuel);}
 $(init);
 
