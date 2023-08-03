@@ -10,7 +10,7 @@ function setupCanvas() {
     //This is to avoid the rush condition when canvases are deleted and recreated.
     //I might even be able to stick this into the canvas class?
     CANVAS.$w = $("<div id=canvas>");
-    CANVAS.paper = Raphael(CANVAS.$w[0],"100%",300);
+    CANVAS.paper = Raphael(CANVAS.$w[0],"100%",250);
 }
 
 function hArrow(paper,y,base,length,color,text) {
@@ -109,8 +109,10 @@ function Horizontal(prams={}){
         width: boxSz,
         center: center,
     } ).attr("fill","#aaa");
-    let masstxt = paper.text(center, box.data("V").center
-                             , `${mass}kg`)
+    let masstxt = paper.text(center,
+                             box.data("V").center,
+                             `${mass}kg`
+                            )
         .attr("font-size",fontSize);
     let givenArrow = hArrow(paper, base - boxSz/2, center + boxSz/2, arrowL, "blue", `${force}N`);
     let guessArrow = hArrow(paper, base - boxSz/2, center - boxSz/2, -arrowL, "blue", "F");
