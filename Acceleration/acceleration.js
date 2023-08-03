@@ -1,3 +1,4 @@
+/*global $,Raphael*/
 import {Score} from "../lib/quiz.js";
 import {randint,choose} from "../lib/default.js";
 let W=300; let H=300;
@@ -8,8 +9,8 @@ let CANVAS = {};
 function setupCanvas() {
     //This is to avoid the rush condition when canvases are deleted and recreated.
     //I might even be able to stick this into the canvas class?
-    CANVAS.$w = $("<div>");
-    CANVAS.paper = Raphael(CANVAS.$w[0],300,300);
+    CANVAS.$w = $("<div id=canvas>");
+    CANVAS.paper = Raphael(CANVAS.$w[0],"100%",300);
 }
 
 function hArrow(paper,y,base,length,color,text) {
