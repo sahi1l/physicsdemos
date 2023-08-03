@@ -188,8 +188,9 @@ function Clear(){
     charges=[];
 }
 function mouseConversion(mx,my) {
-    let px = (mx - $("#canvas").position().left)/$("#canvas").width();
-    let py = (my - $("#canvas").position().top)/$("#canvas").height();
+    let canvas= document.getElementById("canvas");
+    let px = (mx - canvas.offsetLeft)/canvas.getBoundingClientRect().width;
+    let py = (my - canvas.offsetTop)/canvas.getBoundingClientRect().height;
     return [px*W, py*H];
 }
 function init(){
@@ -278,12 +279,16 @@ function init(){
 	    }
 	}
 	if(printQ){
-	    let val=parseFloat(V.toPrecision(2));
+	    let val=parseFloat(V.toFixed(0));
 	    if(Math.abs(V)<0.1){val=0;}
-            voltmeter.attr({x:cx+20,y:cy+20,text:val}).show();
+            let [vmX,vmY] = mouseConversion(e.pageX+20, e.pageY+20);
+            voltmeter.attr({x:vmX,y:vmY,text:val}).show();
 	    
 	    $("#potential").html(val);
+            let tomatch = $("#label").val();
+            $("#potential").toggleClass("match",val==tomatch);
 	} else {
+            $("#potential").removeClass("match");
             voltmeter.hide();
 	    $("#potential").html("--");
 	}
