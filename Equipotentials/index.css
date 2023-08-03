@@ -1,3 +1,6 @@
+main {
+    display: inline-block;
+}
 #controlpanel {
     display: flex;
     justify-content: space-around;
@@ -45,10 +48,6 @@
     max-width: 100vh;
     height: calc(100vh - 180px);
     margin: auto;
-    /*maybe these will work someday, but mouse events are not working :( */
-/*    height:100%;*/
-    /*    aspect-ratio: 1;*/
-    
     background-color:#ddd;
     border: 1px solid;
 }
@@ -74,6 +73,10 @@
     margin: auto;
 }
 #potential:after {content:"V"}
+#potential.match {
+    background-color: var(--right-color);
+    transition: background-color 50ms;
+}
 #label {
     font-size:24px;
     width:100px;
