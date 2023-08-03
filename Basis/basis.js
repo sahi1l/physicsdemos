@@ -75,7 +75,6 @@ return {text: CANVAS.$w,
 function init() {
     setupCanvas();
     $("#units input").on("change",(e) => {
-        console.debug("e=",e);
         let value = $("#units input[name=unit]:checked").prop("value");
         uvmode = 0+(value == "ij");
         

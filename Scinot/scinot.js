@@ -1,4 +1,4 @@
-import {Score} from "../lib/quiz.js";
+cimport {Score} from "../lib/quiz.js";
 import {randint,choose,Slideshow,Help} from "../lib/default.js";
 function round(number) {
     if (number>=10) {return number.toFixed(0);}
@@ -28,7 +28,6 @@ class Number {
     metric() {
         let engineering = Math.floor(this.t/3.0 + Math.random())*3;
         let multiplier = Math.pow(10,engineering);
-//        console.debug("engineering:", this.t,engineering,premultiplier,this.value*multiplier);
         return round(this.value * multiplier) + " " + prefixes[engineering] + this.unit;
     }
     decimal() {
@@ -66,7 +65,6 @@ function generator() {
         if (!answers.includes(another)) {
             answers.push(another);
             let nnumber = new Number(number.a, number.b, another, number.unit);
-            console.debug(nnumber);
             others.push(nnumber.val[A]);
         }
     }

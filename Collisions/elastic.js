@@ -78,7 +78,6 @@ function collide(){
 }
 var DragValue=function(min,max,y,val,color,done){
     var fontsize=coords.block.font;
-    console.debug(fontsize);
     this.obj=paper.text(0,y,"x").attr({"font-size":fontsize,fill:color});
     this.overlay=paper.rect(-fontsize*2,y-fontsize/2,fontsize*4,fontsize).attr({
         stroke:"",fill:leftcolor,opacity:0.});
@@ -139,7 +138,6 @@ let Block = function(x0,y0,side,color) {
         this.massW.update(this.m);
     };
     this.setvel=function(val,external){
-        console.debug(val);
         this.v=val;
         if(external){this.velW.update(this.v,true);}
         this.setarrow(val);
@@ -159,7 +157,6 @@ let Block = function(x0,y0,side,color) {
 
 class KEBar {
     constructor(label,y) {
-        console.debug(coords,label,y);
         this.label = label;
         this.x0 = coords.ke.left;
         this.y = y;
@@ -259,7 +256,6 @@ function littlepics() {
     let rarr = "&rarr;";
     $("span[data-blocks]").each((i,w) => {
         let $w = $(w);
-        console.debug($w);
         let vals = $w.attr("data-blocks");
         let alt="";
         if (vals=="++" || vals=="--") {alt="same direction";}

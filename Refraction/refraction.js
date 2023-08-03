@@ -166,7 +166,6 @@ class IncidentRay extends Ray {
             this.offset = $("#canvas").offset();
         }
         this.ox = x-this.offset.left; this.oy = y-this.offset.top;
-        console.debug(x,y,this.ox,this.oy);
     }
     set(nval) {
         super.set(nval);
@@ -275,7 +274,6 @@ class Help {
     }
     addText(x,y,text,color="black") {
         let txt = this.paper.text(x,y,text).attr({...this.font,"text-anchor":"start",fill:color});
-        console.debug(txt,txt.node);
         txt.node.style.fontStyle = 'italic';
         this.collection.push(txt);
         return txt;

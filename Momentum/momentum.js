@@ -48,7 +48,6 @@ function collisionQ(){
 function collide(){
     console.log("collide");
     let ptot = source.mom() + target.mom();
-    console.debug(source.m,source.v,source.mom(),ptot);
     let v=(ptot)/parseFloat(source.m+target.m);
     source.setvel(v);
     target.setvel(v);
@@ -161,7 +160,6 @@ let Shooter=function(){
     this.x=0;
     this.groove=paper.rect(smin,mainY-grooveH/2,smax-smin,grooveH)
         .attr({fill:"grey"});
-    console.debug(this.groove.node.getBoundingClientRect());
     this.thumb=paper.rect(0,y-thumbH/2, thumbW, thumbH)
         .attr({fill:"red"});
     paper.setStart();
@@ -215,7 +213,6 @@ let Shooter=function(){
 //        let smin = bRect.left;
 //        let smax = bRect.right;
         this.x=linmap(this.v, 1,vmax, smax,smin);
-        console.debug(v,this.v,this.x);
         this.updatethumb();
     };
     this.x2v=function(x){

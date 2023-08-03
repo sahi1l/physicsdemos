@@ -24,7 +24,6 @@ function init() {
     $("#help").show();
     let paper = Raphael("triangle","100%","100%");
     paper.setViewBox(-10,-10,120,120);
-    console.debug(paper);
     let LEFT = 0;
     let RIGHT = 57.7;
     let TOP = 0;

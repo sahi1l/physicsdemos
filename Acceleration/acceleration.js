@@ -184,7 +184,6 @@ function Elevator(prams={}){
 };
 function generator() {
     let solution = randint(2)?Horizontal():Elevator();
-    console.debug("RMC?",$("#raphael-marker-classic"));
     if (extras) {
         let values = [parseFloat(solution.correct),parseFloat(solution.others[0]),parseFloat(solution.others[1])];
         let min = Math.min(...values);
@@ -198,7 +197,6 @@ function generator() {
         let duh = 0;
         for (let i = 0; i<extras && duh<100;duh++) {
             let val = randint(min,max+1);
-            console.debug(val,values);
             if (!values.includes(val) && !values.includes(val+1) && !values.includes(val-1)) {
                 values.push(val);
                 solution.others.push(`${val}N`);
@@ -214,23 +212,19 @@ function generator() {
 
 function unit_test() {
     //test Elevator correct answers
-    console.debug("Elevator");
     for(let dir of [-1,1]) {
         for (let accdir of [-1,1]) {
             let soln = Elevator({direction:dir,accdir:accdir});
             let correct = parseFloat(soln.correct);
             let wrong = parseFloat(soln.others[0]);
-            if (Math.sign(correct-wrong) != accdir){console.debug("Error when dir,accdir =",dir,accdir);}
+            if (Math.sign(correct-wrong) != accdir){console.log("Error when dir,accdir =",dir,accdir);}
         }
     }
-    console.debug("Horizontal");
     for(let dir of [-1,1]) {
         for (let accdir of [-1,1]) {
             let soln = Horizontal({direction:dir,accdir:accdir});
             let correct = parseFloat(soln.correct);
             let wrong = parseFloat(soln.others[0]);
-            console.debug(dir,accdir,Math.sign(correct-wrong),correct,wrong);
-//            if (Math.sign(correct-wrong) != accdir){console.debug("Error when dir,accdir =",dir,accdir);}
         }
     }
 

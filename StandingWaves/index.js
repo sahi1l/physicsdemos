@@ -6,7 +6,6 @@ class Wave {
         this.L = L;
         this.wave = paper.path("");
         let wallheight = 10;
-        console.debug(`M${x0},${y0-wallheight/2}l0,${wallheight}`);
         let wallattr = {"stroke-width":3};
         this.Lwall = this.paper.path(`M${x0},${y0-wallheight/2}l0,${wallheight}`).attr(wallattr);
         this.Rwall = this.paper.path(`M${x0+L},${y0-wallheight/2}l0,${wallheight}`).attr(wallattr);

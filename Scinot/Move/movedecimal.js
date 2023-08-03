@@ -21,9 +21,6 @@ class Number {
         this.digits = digits.replace(/^0+/,"").replace(/0+$/,"").replace(".","")
         this.exponent = ten;
     }
-    raw() {
-        console.debug(this.digits, this.exponent);
-    }
     pointed(n) { //return digits with the decimal point in the right place. number of places to shift to the right it from the beginning
         let L = this.digits.length;
         if (n>L) { //e.g. digits = 123, n=4, want 1230
