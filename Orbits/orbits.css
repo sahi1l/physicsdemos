@@ -12,6 +12,7 @@ body {
       aspect-ratio: 1;
       margin-top:-20px;
       left: 0px;
+      max-height:calc(99vh - 100px);
   }
   #instructions {
       z-index:3;
