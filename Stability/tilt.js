@@ -56,7 +56,7 @@ function init(){
     Garrow=paper.path("M"+(pivotX-width*COMX)+","+(pivotY-height*COMY)+"l0,50").attr({"stroke-width":5,stroke:colorG,fill:colorG});
     Gtxt=paper.text((pivotX-width*COMX)+30,(pivotY-height*COMY),"mg").attr({"font-size":24,fill:colorG});
     block.toFront();
-    Sizer=paper.rect(pivotX-width,pivotY-height,Math.min(width,height)*0.1,Math.min(width,height)*0.1).attr({fill:"gray"});
+    Sizer=paper.rect(pivotX-width,pivotY-height,Math.min(width,height)*0.2,Math.min(width,height)*0.2).attr({fill:"gray"});
     Sizer.drag(szMove,szStart,szUp);
     com=paper.circle(pivotX-width*COMX,pivotY-height*COMY,5,5);
     com.attr("fill",colorG);
@@ -159,11 +159,17 @@ function szMove(dx,dy){
     let a=angle*Math.PI/180;
     let Dx=dx*Math.cos(a)+dy*Math.sin(a);
     let Dy=dy*Math.cos(a)-dx*Math.sin(a);
-    this.attr({x:this.ox+Dx,y:this.oy+Dy});
-    width=pivotX-this.attr("x");
-    height=pivotY-this.attr("y");
-    Resize();
-    DrawRectangle();
+    let nx = this.ox + Dx;
+    let ny = this.oy + Dy;
+    let nw = pivotX - nx;
+    let nh = pivotY - ny;
+    if (nw>=5 && nh>=5) {
+	this.attr({x:nx, y:ny});
+	width = nw;
+	height = nh;
+	Resize();
+	DrawRectangle();
+    }
 };
 function szUp(){
     this.attr({fill:this.oc});

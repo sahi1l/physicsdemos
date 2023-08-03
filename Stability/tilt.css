@@ -15,3 +15,8 @@
 #help.shown {
     height: 280px !important;
 }
+body {
+    width:95%;
+    height:95%;
+    overflow: hidden;
+}
