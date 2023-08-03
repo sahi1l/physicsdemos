@@ -19,3 +19,24 @@ header img {
     padding: 0px 5px;
     cursor: pointer;
 }
+#headerbuttons {
+    height: 40px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: stretch;
+}
+#headerbuttons img {
+    height: 45px;
+    aspect-ratio: 1;
+    display: inline;
+}
+@media (max-width:500px) {
+    #headerbuttons {
+        top: 45px !important;;
+    }
+    #headerbuttons img {
+        height: 30px;
+    }
+}
