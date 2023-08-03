@@ -1,4 +1,4 @@
-import Button from "/lib/buttons.js";
+import Button from "../lib/buttons.js";
 //parseFloat is string/number to number
 //.toFixed is number to string
 function fixed(val) {
