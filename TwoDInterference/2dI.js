@@ -97,15 +97,15 @@ class Ripple {
         this.raise()
     }
     toggleVisibility() {
-        this.visible = !this.visible
+        this.visible = !this.visible;
         if (this.visible){
-            this.circles.show()
+            this.circles.show();
         } else {
-            this.circles.hide()
+            this.circles.hide();
         }
     }
     raise() {
-        this.circles.forEach((circle, index)=> {if (index%2==0) {circle.toFront();}}) //it just looks better if the reds are above the blues
+        this.circles.forEach((circle, index)=> {if (index%2==0) {circle.toFront();}}); //it just looks better if the reds are above the blues
 
         this.source.toFront();
     }
@@ -113,19 +113,19 @@ class Ripple {
         this.circles.forEach(
             (circle, index) => {
                 let radius = 0;
-                if (index + p >= 0) {radius = (index + p) * this.spacing};
+                if (index + p >= 0) {radius = (index + p) * this.spacing;}
                 circle.attr("r",radius);
-            })
+            });
     }
 }
 //================================================================================
 class Text {
     constructor($root,canvas) {
-        this.$w = $("<div>").appendTo($root).addClass("text")
-        this.canvas = canvas
-        let N = [this.addAnimation(), this.addWavefronts(), this.addPathLength()]
+        this.$w = $("<div>").appendTo($root).addClass("text");
+        this.canvas = canvas;
+        let N = [this.addAnimation(), this.addWavefronts(), this.addPathLength()];
         for (let n of N) {
-            this.$w.append(n.addClass("card"))
+            this.$w.append(n.addClass("card"));
         }
     }
     vocab(text,tooltip) {
@@ -134,8 +134,8 @@ class Text {
     addSources(){
     }
     addWavefronts(){
-        let div = $("<div>")
-        let color = (text,color)=> {color=color??text; return }
+        let div = $("<div>");
+        let color = (text,color)=> {color=color??text; return; };
         let conText = this.vocab(constructive.html(),"when two crests or two troughs line up");
         let desText = this.vocab(destructive.html(), "when a crest lines up with a trough");
         let text = ["The wavefronts created by each source form circles which move away from the source.",
@@ -145,8 +145,8 @@ class Text {
                     `- ${trough.html()} + ${trough.html()} = ${trough.html()}:  <B>${conText}</B> interference`,
                     `- ${crest.html()} + ${trough.html()} = ${mixed.html()}: <B>${desText}</B> interference`
                    ];
-        div.html(combine(text))
-        return div
+        div.html(combine(text));
+        return div;
         
     }
     addAnimation() {
