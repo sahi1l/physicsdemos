@@ -36,3 +36,12 @@ main {
 //#uber {display:flex;}
 
 .mybutton {width:150px;}
+
+@media (max-width: 600px) {
+    #help {
+        width: 95vw;
+    }
+    #help.slideshow img {
+        width: 90%;
+    }
+}

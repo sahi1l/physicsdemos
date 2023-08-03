@@ -1,4 +1,5 @@
-cimport {Score} from "../lib/quiz.js";
+/*global $*/
+import {Score} from "../lib/quiz.js";
 import {randint,choose,Slideshow,Help} from "../lib/default.js";
 function round(number) {
     if (number>=10) {return number.toFixed(0);}
@@ -76,7 +77,7 @@ function generator() {
 
 function init(){
     new Score($("main"), 10, generator, {multiple:2, noauto: true});
-    new Help($("#help"), "");
+    new Help($("#help"), "permanent");
 }
 
 $(init)
