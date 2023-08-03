@@ -74,3 +74,7 @@
 }
 dfn {font-style: italic;}
 #help .pivot  {width:250px;}
+.dragarrow {
+    z-index: 3;
+    cursor: pointer;
+}
