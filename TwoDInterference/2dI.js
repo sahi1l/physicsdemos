@@ -19,7 +19,6 @@ class Color {
     constructor(args) {
         this.color = "";
         let code = (args.fg!=undefined)*2 + (args.bg!=undefined);
-        console.log(code,args,args.fg);
         if (code==0) {this.fg = "black"; this.bg = "white"; this.color = "black";}
         else if (code==1) {this.fg = "white", this.bg = args.bg; this.color = args.bg;}
         else if (code==2) {this.fg = args.fg, this.bg = "white"; this.color = args.fg;}
@@ -123,8 +122,9 @@ class Text {
     constructor($root,canvas) {
         this.$w = $("<div>").appendTo($root).addClass("text")
         this.canvas = canvas;
+        console.debug(this.$w);
         let N = [this.addAnimation(), this.addWavefronts(), this.addPathLength()];
-        console.debug(this.$w, N);
+        console.debug(N);
         for (let n of N) {
             this.$w.append(n.addClass("card"))
         }
@@ -160,7 +160,6 @@ class Text {
         let buttontext = $("<div>").html(combine(text));
         this.animateStatus = false;
         let p = $("<P>").appendTo(buttontext);
-        console.log(p,this.animateButton.$w);
         this.animateButton.$w.appendTo(p);
         p.append(" the animation by pressing this button.");
         this.toggleAnimate();
