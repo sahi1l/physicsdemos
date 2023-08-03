@@ -1,8 +1,11 @@
+/*global $,Raphael*/
 import {Help} from "../lib/default.js";
 let paper,block,bblock,com;
-let pivotX=300;
-let pivotY=350;
-let height=200;
+let W;
+let H=600;
+let pivotX;
+let pivotY=H/2;
+let height=H/3;
 let width=100;
 let arrowL=40;
 let sAngle=0;
@@ -35,10 +38,12 @@ function DrawGravity() {
 
 }
 function init(){
-    paper = Raphael("canvas",800,600);
+    paper = Raphael("canvas","100%",H);
+    W=$("#canvas")[0].getBoundingClientRect().width;
+    pivotX = W/3;
     offset=$("#canvas").offset();
     //Baseline
-    paper.path("M0,"+pivotY+"l"+(pivotX*2)+",0");
+    paper.path("M0,"+pivotY+"l"+(W)+",0");
     //Normal Force: should actually move over when block is prone
     paper.path("M"+pivotX+","+pivotY+"l0,50l0,-50l10,20l-20,0Z").attr({"stroke-width":5,stroke:"red",fill:"red"});
     let duh=paper.text(pivotX+20,pivotY+40,"N").attr({fill:"red","font-size":36});
