@@ -157,7 +157,10 @@ header {
     opacity: 0.5;
 }
 #title .icon img {height: 50px;display:block;}
+    body {overflow-x: hidden; width: 99vw;}
 @media only screen and (max-width:600px) {
     #title .icon {display: none;}
+    .backdrop {display: none;}
+    body {overflow-x: hidden; width: 90vw;}
 }
     
