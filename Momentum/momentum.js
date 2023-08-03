@@ -147,15 +147,40 @@ let Score=function(){
     };
 };
 //============================================================
+class Button {
+    constructor(paper, color, label,smin,smax,y) {
+        let left = smin;
+        let width = smax-smin;
+        let fontsize = 24;
+        let height = fontsize + 4;
+        paper.setStart();
+        paper.rect(left,
+                   y,
+                   smax-smin,
+                   height
+                  ).attr({fill:color,cursor:"pointer"});
+        paper.text(left + width/2,
+                   y + height/2,
+                   label
+                  ).attr({fill:"white","font-size":fontsize,cursor:"pointer"});
+        this.button = paper.setFinish();
+        
+    }
+    hide() {this.button.hide();}
+    show() {this.button.show();}
+}
+//============================================================
 let Shooter=function(){
-    var thumbH=30;
-    let thumbW=10;
-    var smin=10;
+    let thumbH=50;
+    let thumbW=20;
+    let smin=10;
     let smax=xmin - radius - thumbW/2;
-    var grooveH=4;
-    var vmax=20;
-    var fontsize=24; var pad=4;
-    var y=mainY;
+    let grooveH=4;
+    let vmax=20;
+    let fontsize=24;
+    let pad=4;
+    let y=mainY;
+
     this.v=1;
     this.x=0;
     this.groove=paper.rect(smin,mainY-grooveH/2,smax-smin,grooveH)
@@ -168,25 +193,16 @@ let Shooter=function(){
     paper.path(Raphael.format("M{0},{1}L{2},{3}",smax-20,mainY-thumbH,smax-8,mainY-thumbH+15))
         .attr({"arrow-end":"classic","stroke-width":3});
     this.help=paper.setFinish();
-    paper.setStart();
-    paper.rect(smin,y+thumbH-pad/2,smax-smin,fontsize+pad)
-        .attr({fill:"red"});
-    paper.text(smin+(smax-smin)*0.5,y+thumbH+fontsize*0.5,"Launch")
-        .attr({fill:"white","font-size":fontsize});
-    this.launch=paper.setFinish();
-    this.launch.click(function(){
+
+    this.launch = new Button(paper, "red", "Launch", smin, smax, mainY + 60);
+    this.launch.button.click(function(){
         animate.moving=[target,source];
         shooter.launch.hide();
         shooter.thumb.hide();
     });
-    paper.setStart();
-    paper.rect(smin,y+thumbH-pad/2,smax-smin,fontsize+pad)
-        .attr({fill:"blue"});
-    paper.text(smin+(smax-smin)*0.5,y+thumbH+fontsize*0.5,"Again")
-        .attr({fill:"white","font-size":fontsize});
-    this.again=paper.setFinish();
-    this.again.hide();
-    this.again.click(again);
+    this.again = new Button(paper, "blue", "Again", smin, smax, mainY + 60);
+    this.again.button.hide();
+    this.again.button.click(again);
     this.groove.drag(
         function(dx,dy,x,y){shooter.x2v(x-thumbW/2); shooter.updatethumb();},
         function(x,y){shooter.x2v(x-thumbW/2); shooter.updatethumb();},
