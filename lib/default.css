@@ -2,6 +2,7 @@
 @import url("./header.css");
 @import url("./buttons.css");
 @import url("./score.css");
+@import url("./quiz.css");
 @import url("./help.css");
 :root {
     --bg-color: #e5e5d1;/* #DBDBDB;*/
