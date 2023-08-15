@@ -1,12 +1,3 @@
-/*.mybutton {
-    background-color: var(--main-color);
-    width:100px;
-}*/
-.numbers>span:first-child {color: var(--right-color);}
-.question {font-size: 150%;}
-.reaction {font-size: 200%;}
-.reaction.right {color: var(--right-color);}
-.reaction.wrong {color: var(--wrong-color);}
 #help {margin: auto; width: 550px;height:400px;
        position:relative;margin-left:5px;}
 #help img {width:500px;margin:auto;margin-top:40px;}
@@ -32,4 +23,3 @@
     text-align:center;
 }
 
-.mybutton {width:150px;}
