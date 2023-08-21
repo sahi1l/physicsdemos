@@ -1,8 +1,7 @@
 /*global $*/
 import {Score} from "../lib/quiz.js";
-let CANVAS = {};
 
-function generator() {
+function generator(canvas) {
     return {text: "This is a test of the quiz layout.",
             correct: "A",
             others: ["B","C","D"]

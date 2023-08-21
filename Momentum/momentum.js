@@ -280,7 +280,6 @@ function init(){
     source=new Ball(xmin,"red");
     target=new Ball(xmax,"lightblue");
     shooter=new Shooter();
-    score=new Score();
     chooseProblem(source,target);
     animate.moving=[];
     animate.start();

@@ -62,7 +62,7 @@ function generator() {
 }
 
 function init() {
-    new Score($("#main"), 0, generator, {multiple: 2, noauto: true});
+    new Score($("demo-quiz"), 0, generator, {multiple: 2, noauto: true});
 }
 
 $(init);

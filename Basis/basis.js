@@ -82,7 +82,7 @@ function init() {
     CANVAS.arrow = CANVAS.paper.path("M0,0L2,2").attr({stroke:"black", "stroke-width":8});
     CANVAS.magnitude = CANVAS.paper.text(0,0,"")
         .attr({"font-size":18});
-    new Score($("main"), 10, generator, {multiple: 2, noauto: true});
+    new Score($("demo-quiz"), 10, generator, {multiple: 2, noauto: true});
 }
 
-$(init)
+$(init);

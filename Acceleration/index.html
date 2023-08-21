@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang="en">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <link rel="icon" href="../lib/img/favicon.png">
 <title>Newton's Second Law</title>
   <script src="/lib/jquery.js"></script>
   <script src="../lib/raphael.js"></script>
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<!--  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>-->
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script type=module src="../lib/default.js"></script>
+  <link rel=stylesheet href="../lib/default.css">
   <script type="module" src="acceleration.js"></script>
   <link rel="stylesheet" href="acceleration.css">
 <style>
@@ -15,14 +17,20 @@
   .velocity {color: red;}
   .acceleration {color: purple;}
   .sbs {width:200px; display:inline-block;vertical-align:top;}
+  #N2L {grid-column: 1; grid-row: 1}
+  #key {grid-column: 2; grid-row: 1}
+  demo-quiz {grid-row: 2;
+             grid-column: 1 / span 2;}
+  main {display:grid;}
   ul {margin-top: 0px;}
-  #main {display:block;}
+  demo-quiz button.mybutton {min-width:100px;width:100px;}
+  
 </style>
 
 <header>[QUIZ]Newton's 2nd Law</header>
-<div style="display:flex;">
-<div class="sbs">Use Newton's Second Law $$a=F_{net}/m$$ to find the magnitude of the unknown force <i class="forces">F</i>.</div>
-<div class="sbs key">
+<main>
+<div id="N2L" class="sbs">Use Newton's Second Law $$a=F_{net}/m$$ to find the magnitude of the unknown force <i class="forces">F</i>.</div>
+<div id="key" class="sbs key">
   <u>Key</u>
   <ul>
   <li class="forces"><B>Forces</B></li>
@@ -31,5 +39,6 @@
 </ul>
 </div>
 </div>
-<main id="main"></main>
+<demo-quiz></demo-quiz>
+</main>
 

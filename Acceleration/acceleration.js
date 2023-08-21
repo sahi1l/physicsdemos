@@ -233,7 +233,7 @@ function unit_test() {
 
 }
 function init() {
-    let $root = $("#main");
+    let $root = $("demo-quiz");
     setupCanvas();
     let DEBUG = false;
     if (DEBUG) {unit_test();

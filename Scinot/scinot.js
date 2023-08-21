@@ -76,7 +76,7 @@ function generator() {
 }
 
 function init(){
-    new Score($("main"), 10, generator, {multiple:2, noauto: true});
+    new Score($("demo-quiz"), 10, generator, {multiple:2, noauto: true});
     new Help($("#help"), "permanent");
 }
 
