@@ -4,7 +4,6 @@ function arrow(paper,x,y,L,dir,text,boxQ=false) {
     //just a horizontal arrow...for now (dunh dunh dunh)
     //dir will be an angle in degrees, eventually
     let fsize = 24;
-    console.debug(paper,x,y,L);
     let lineobj = paper.path(`M${x},${y}m${-L/2},0l${L},0`)
         .attr({"arrow-end":"classic","stroke-width":4});
     let textobj = paper.text(x,y-fsize,text)
@@ -23,13 +22,13 @@ function arrow(paper,x,y,L,dir,text,boxQ=false) {
 function generator(canvas) {
     let vdir = Math.random()*360;
     let adir;
+    let angleBuffer = 20; //maximum angle from 90° where two arrows might look "perpendicular"
     do {
         adir = Math.random()*360;
-    } while (Math.abs(Math.abs(adir-vdir)%180 -90) < 10);
+    } while (Math.abs(Math.abs(adir-vdir)%180 -90) < angleBuffer);
     let diff = Math.abs(adir-vdir);
     let sgn = 1;
     if (diff>90 && diff<270) {sgn=-1;}
-//    canvas.$w.appendTo($main);
     canvas.$w.css({"border":"1px solid","display":"inline-block"});
     arrow(canvas.paper,150,100,70, vdir,"v",true).attr({"stroke":"red","fill":"red"});
     arrow(canvas.paper,150,200,70,adir,"a");
