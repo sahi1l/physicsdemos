@@ -340,9 +340,6 @@ function grid(){
     let max=S2C(0,0);
     let min=S2C(W,H);
     let i;
-    console.debug(min,max,min.y,max.y);
-    console.debug(C2S(0,Math.floor(min.y)).y,
-                  C2S(0,Math.floor(max.y)).y);
     paper.setStart();
     for(i=Math.floor(max.x);i>=min.x;i--){
         paper.path(linepath(

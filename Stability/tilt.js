@@ -1,8 +1,11 @@
+/*global $,Raphael*/
 import {Help} from "../lib/default.js";
 let paper,block,bblock,com;
-let pivotX=300;
-let pivotY=350;
-let height=200;
+let W;
+let H=600;
+let pivotX;
+let pivotY=H/2;
+let height=H/3;
 let width=100;
 let arrowL=40;
 let sAngle=0;
@@ -35,10 +38,12 @@ function DrawGravity() {
 
 }
 function init(){
-    paper = Raphael("canvas",800,600);
+    paper = Raphael("canvas","100%",H);
+    W=$("#canvas")[0].getBoundingClientRect().width;
+    pivotX = W/3;
     offset=$("#canvas").offset();
     //Baseline
-    paper.path("M0,"+pivotY+"l"+(pivotX*2)+",0");
+    paper.path("M0,"+pivotY+"l"+(W)+",0");
     //Normal Force: should actually move over when block is prone
     paper.path("M"+pivotX+","+pivotY+"l0,50l0,-50l10,20l-20,0Z").attr({"stroke-width":5,stroke:"red",fill:"red"});
     let duh=paper.text(pivotX+20,pivotY+40,"N").attr({fill:"red","font-size":36});
@@ -51,7 +56,7 @@ function init(){
     Garrow=paper.path("M"+(pivotX-width*COMX)+","+(pivotY-height*COMY)+"l0,50").attr({"stroke-width":5,stroke:colorG,fill:colorG});
     Gtxt=paper.text((pivotX-width*COMX)+30,(pivotY-height*COMY),"mg").attr({"font-size":24,fill:colorG});
     block.toFront();
-    Sizer=paper.rect(pivotX-width,pivotY-height,Math.min(width,height)*0.1,Math.min(width,height)*0.1).attr({fill:"gray"});
+    Sizer=paper.rect(pivotX-width,pivotY-height,Math.min(width,height)*0.2,Math.min(width,height)*0.2).attr({fill:"gray"});
     Sizer.drag(szMove,szStart,szUp);
     com=paper.circle(pivotX-width*COMX,pivotY-height*COMY,5,5);
     com.attr("fill",colorG);
@@ -154,11 +159,17 @@ function szMove(dx,dy){
     let a=angle*Math.PI/180;
     let Dx=dx*Math.cos(a)+dy*Math.sin(a);
     let Dy=dy*Math.cos(a)-dx*Math.sin(a);
-    this.attr({x:this.ox+Dx,y:this.oy+Dy});
-    width=pivotX-this.attr("x");
-    height=pivotY-this.attr("y");
-    Resize();
-    DrawRectangle();
+    let nx = this.ox + Dx;
+    let ny = this.oy + Dy;
+    let nw = pivotX - nx;
+    let nh = pivotY - ny;
+    if (nw>=5 && nh>=5) {
+	this.attr({x:nx, y:ny});
+	width = nw;
+	height = nh;
+	Resize();
+	DrawRectangle();
+    }
 };
 function szUp(){
     this.attr({fill:this.oc});

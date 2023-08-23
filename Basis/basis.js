@@ -75,7 +75,6 @@ return {text: CANVAS.$w,
 function init() {
     setupCanvas();
     $("#units input").on("change",(e) => {
-        console.debug("e=",e);
         let value = $("#units input[name=unit]:checked").prop("value");
         uvmode = 0+(value == "ij");
         
@@ -83,7 +82,7 @@ function init() {
     CANVAS.arrow = CANVAS.paper.path("M0,0L2,2").attr({stroke:"black", "stroke-width":8});
     CANVAS.magnitude = CANVAS.paper.text(0,0,"")
         .attr({"font-size":18});
-    new Score($("main"), 10, generator, {multiple: 2, noauto: true});
+    new Score($("demo-quiz"), 10, generator, {multiple: 2, noauto: true});
 }
 
-$(init)
+$(init);

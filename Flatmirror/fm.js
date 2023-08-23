@@ -92,7 +92,6 @@ class Ray {
         this.ray.attr({path:`M${x0},${y0},${x1},${y1}`});
     }
     highlight(onQ,secondary=false) {
-        console.debug(this.ray,onQ);
         let finalattr = {'stroke-width':((onQ && !secondary)? this.sw*2: this.sw), stroke: (onQ? (secondary? 'orange': 'red'): this.color)};
         if (onQ) {
             if (secondary) {
@@ -122,7 +121,6 @@ function getNamedColor(csstag) {
     $duh.remove();
     return color;
 }
-console.debug(getNamedColor("bg"));
 let normcolor = getNamedColor("text");
 let objcolor = getNamedColor("main");
 let reflcolor = getNamedColor("right");
@@ -170,7 +168,6 @@ function showText(which,e){
 }
 let setHover = (element,which, el2)=> {
     element.mouseover((e,x,y,w=which,el=el2)=>{
-        console.debug(element,which,el);
         showText(w,e);
         unhighlight();
         if(el) {el.highlight(true);}
@@ -251,7 +248,6 @@ class Principal {
 }
 function highlightObj(obj,stroke,width,cousinz){
     return (onQ,O=obj,C=stroke,W=width,cousins=cousinz) => {
-        console.debug(cousins);
         if(onQ) {unhighlight();}
         obj.attr({stroke: onQ?"red":C,
                   "stroke-width": onQ?W*2:W});

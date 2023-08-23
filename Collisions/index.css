@@ -1,12 +1,15 @@
-.done {font-weight:bold;background-color:var(--right-color);color:white;}
+.done {font-weight:bold;
+       background-color:var(--right-color);
+       color:white;
+      }
 .task {font-family:Helvetica;padding:4px 0px;}
 .task>I {font-family:Times;}
 .buttons,#canvas {display:inline-block;vertical-align:top;}
 #canvas {
     background-color: #eef;
     display:block;
-    width: 90%;
-    aspect-ratio: 3;
+    width: 600px;
+    aspect-ratio: 2;
 }
 .buttons>button {width:100%;}
 .keleft {background-color: red;color:white;text-align:center;}

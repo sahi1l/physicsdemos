@@ -13,7 +13,6 @@ function arc(cx,cy,r,sa,ea){
     let ey = cy + r*Math.sin(ear);
 //    S.attr({cx:sx,cy:sy});
 //    E.attr({cx:ex,cy:ey});
-//    console.debug(sx,sy,ex,ey);
     let laf = 0+(Math.abs(ea-sa)>180);
     let sf = 0+(ea>sa);
     return `M${sx},${sy}A${r},${r},0,${laf},${sf},${ex},${ey}`;

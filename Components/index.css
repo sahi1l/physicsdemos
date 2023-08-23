@@ -1,7 +1,7 @@
 #component {
     max-width:500px;
     max-height:100vh;
-    width:100%;
+    width:95%;
            position:relative;
            background-color:beige;
            }
@@ -84,12 +84,43 @@
     top:10px;
     overflow-y:scroll;
     height: 0px;
-    transition: height 1s linear, top 1s linear,z-index 1s linear;
+    transition: height 0.5s linear,
+                top 0.5s linear,
+                z-index 0.5s linear,
+                opacity 0.5s linear
+    ;
     z-index:-1;
+    opacity: 0;
 }
 #help h2 {margin:0px;text-align:center;margin-bottom:5px;}
 #help.shown {
     top: 80px;
     height: calc(100vh - 120px);
     z-index:0;
+    opacity: 1;
 }
+@media (max-width:550px) {
+    #input {display: flex;
+            flex-wrap: wrap;
+           }
+    #xcoord,#ycoord {display: block;}
+    #ycoord {margin-left: auto;}
+    
+}
+body {
+    width: 99%;
+    margin:auto;
+    overflow-x: hidden;
+}
+#xcoord,#ycoord {
+    position:relative;
+}
+#xcoord:before,#ycoord:before {
+    position:absolute;
+    top: -0.9em;
+    left: 3em;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+#xcoord:before {content: "x coordinate";}
+#ycoord:before {content: "y coordinate";}

@@ -55,3 +55,10 @@ tbody>tr>td:first-child {text-align:right;}
 
 body {margin-top: 285px; /*So the bottom can scroll*/
       margin-left: 10px;}
+.mobile {display: none;}
+@media (max-width:500px) {
+    .mobile {display: table-row;}
+    .desktop {display:none;}
+    body {margin-top: 320px;}
+    
+}

@@ -151,7 +151,6 @@ function Point(cx,cy,V){
     }
     set.push(this);
     if(lastpoint!=undefined){
-        console.debug("drawline");
 	this.pline=paper.path(`M${this.cx},${this.cy}L${lastpoint.cx},${lastpoint.cy}`);
 	this.pline.attr(epline);
 	lastpoint.nline=this.pline;

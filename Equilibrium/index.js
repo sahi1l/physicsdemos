@@ -1,3 +1,4 @@
+/*global $,Raphael*/
 import {Help} from "../lib/default.js";
 let score={correct:0, total:0, count:0, error:0, max:5};
 let showinstructions=true;
@@ -9,7 +10,7 @@ let Ntics=50;
 let hscale=2;
 let major=5;
 let a1,a2;
-let a0;
+let a0; //The adjustable arrow
 let solution;
 function arrowS(x0,L){
     if(L>0){
@@ -62,8 +63,10 @@ function init(){
             tooltip.hide();});
     }
     a0={x:25,y:10};
-    a0.obj=arrow(a0.x,a0.y);
-    a0.obj.drag(dragmove,dragstart,dragend,a0.obj,a0.obj,a0.obj);
+    a0.obj=arrow(a0.x, a0.y);
+    a0.obj[0].node.classList.add("dragarrow");
+    a0.obj[1].node.classList.add("dragarrow");
+    a0.obj.drag(dragmove, dragstart, dragend, a0.obj, a0.obj, a0.obj);
     a0.obj.attr({"fill":"red","stroke":"red"});
     paper.setStart();
     paper.rect(Ntics-35,43,70,14,5).attr("fill","#ddd");

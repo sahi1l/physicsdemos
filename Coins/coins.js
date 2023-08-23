@@ -30,8 +30,8 @@ let run=function(){
     }
     let avg = S/N;
     let std = Math.sqrt((SS/N)-(S/N)**2);
-    let txt  = [`Number of trials: ${N}`];
-    txt.push([`Average number of heads: ${avg.toFixed(1)}`]);
+    let txt  = [`Total # trials: ${N}`];
+    txt.push([`Average # heads: ${avg.toFixed(1)}`]);
     txt.push([`Standard deviation: ${std.toFixed(1)}`]);
     txt = txt.map((x)=>{return `<span>${x}</span>`}).join('\n');
     $("#stats").html(txt);

@@ -1,8 +1,8 @@
 #canvas {
     height:350px;
     text-align: left;
-    width:600px;
-    background: #eee;
+    width:100%;
+    background: #eef;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -14,4 +14,9 @@
 }
 #help.shown {
     height: 280px !important;
+}
+body {
+    width:95%;
+    height:95%;
+    overflow: hidden;
 }

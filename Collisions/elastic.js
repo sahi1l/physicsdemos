@@ -1,3 +1,5 @@
+/*global $,Raphael*/
+import Button from "../lib/buttons.js";
 let paper, left,right,kegraph,Bstart,Bstop,Breset;
 let KEbefore, KEafter;
 let mmax = 10;
@@ -5,14 +7,14 @@ let vmax = 10;
 let leftcolor = "red";
 let rightcolor = "blue";
 let collideflag=false;
-let W=800, H=300;
+let W=400, H=300;
 let coords = new function() {
     //BLOCKS
     this.block = {};
     this.block.font = 30;
     this.block.y = H/8;
     this.block.left = W/2 - W/4; //initial position of left block
-    this.block.right = W/2; //initial position of right block
+    this.block.right = W/2 + W/4; //initial position of right block
     this.block.width = 80;
     this.block.height = this.block.width/2;
     this.block.arrowmul = 10; //how much larger should the arrow be compared to its value?
@@ -41,7 +43,11 @@ class Animate {
             collideflag=true;
             collide();
         }
-        this.moving.forEach(function(a){a.step(); if(a.x<0){this.stop();}});
+        let stopQ = false;
+        this.moving.forEach(function(a){
+            if (a.step()) {stopQ = true;}
+        });
+        if (stopQ) {this.stop();}
     };
     start() {
         this.stop();
@@ -78,7 +84,6 @@ function collide(){
 }
 var DragValue=function(min,max,y,val,color,done){
     var fontsize=coords.block.font;
-    console.debug(fontsize);
     this.obj=paper.text(0,y,"x").attr({"font-size":fontsize,fill:color});
     this.overlay=paper.rect(-fontsize*2,y-fontsize/2,fontsize*4,fontsize).attr({
         stroke:"",fill:leftcolor,opacity:0.});
@@ -132,14 +137,16 @@ let Block = function(x0,y0,side,color) {
         this.obj.translate(this.x,y0);
     };
     this.step=function(){
-        this.move(this.x+this.v*animate.dt*animate.vscale);
+        let newpos = this.x+this.v*animate.dt*animate.vscale;
+        this.move(newpos);
+        return (newpos >= 0 && newpos <= W);
+            
     };
     this.setmass=function(val){
         this.m=parseInt(val);
         this.massW.update(this.m);
     };
     this.setvel=function(val,external){
-        console.debug(val);
         this.v=val;
         if(external){this.velW.update(this.v,true);}
         this.setarrow(val);
@@ -159,7 +166,6 @@ let Block = function(x0,y0,side,color) {
 
 class KEBar {
     constructor(label,y) {
-        console.debug(coords,label,y);
         this.label = label;
         this.x0 = coords.ke.left;
         this.y = y;
@@ -206,42 +212,6 @@ function KEUpdate() {
         KEbefore.update(left.ke(),right.ke());
     }
 }
-/*
-let KEGraph=function(){
-    let xleft = coords.ke.left; 
-    let xright = this.ke.right; 
-    let colwidth = this.ke.thickness;
-    var middle = this.ke.midY; 
-    var beforeY = middle - colwidth; //the row for the "before" bar
-    var afterY = middle + colwidth; //the row for the "after" bar
-    var maxwidth=xright-xleft;
-    var maxKE=1000.0; //
-    this.beforeL=paper.rect(xleft,beforeY-colwidth/2,maxwidth,colwidth)
-        .attr({fill:"red"});
-    this.beforeR=paper.rect(xleft,beforeY-colwidth/2,maxwidth,colwidth)
-        .attr({fill:"blue"});
-    this.afterL=paper.rect(xleft,afterY-colwidth/2,maxwidth,colwidth)
-        .attr({fill:"red"}).hide();
-    this.afterR=paper.rect(xleft,afterY-colwidth/2,maxwidth,colwidth)
-        .attr({fill:"blue"}).hide();
-    this.beforeT=paper.text(xleft,beforeY-30,"KE Before").attr({"text-anchor":"start","font-size":18});
-    this.afterT=paper.text(xleft,afterY-30,"KE After").attr({"text-anchor":"start","font-size":18});
-    this.update=function(){
-        var L=(0.5*left.m*left.v*left.v);
-        var R=0.5*right.m*right.v*right.v;
-        var LH=L*maxwidth/maxKE;
-        var RH=R*maxwidth/maxKE;
-        if(collideflag){
-            this.afterL.attr({width:LH}).show();
-            this.afterR.attr({x:xleft+LH,width:RH}).show();
-        } else {
-            this.beforeL.attr({width:LH});
-            this.beforeR.attr({x:xleft+LH,width:RH});
-        }
-    };
-    this.update();
-    }
-*/
 function reset(){
     collideflag=false;
     animate.stop();
@@ -259,7 +229,6 @@ function littlepics() {
     let rarr = "&rarr;";
     $("span[data-blocks]").each((i,w) => {
         let $w = $(w);
-        console.debug($w);
         let vals = $w.attr("data-blocks");
         let alt="";
         if (vals=="++" || vals=="--") {alt="same direction";}
@@ -302,7 +271,14 @@ function init() {
     right.setmass(5);
     right.setvel(0,true);
     KEUpdate();
-    animate.moving=[left,right];
+    animate.moving = [left,right];
+    let Bstart = new Button("Start", animate.start);
+    let Bstop = new Button("Stop", animate.stop);
+    let Breset = new Button("Reset", reset);
+    let $buttons = $("#buttons");
+    Bstart.$w.appendTo($buttons);
+    Bstop.$w.appendTo($buttons);
+    Breset.$w.appendTo($buttons);
     $("#start").click($.proxy(animate.start,animate));
     $("#stop").click($.proxy(animate.stop,animate));
     $("#reset").click(reset);

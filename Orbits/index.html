@@ -9,13 +9,25 @@
 <link rel="stylesheet" href="../lib/default.css">
 <script src="../lib/jquery.js"></script>
 <script src="../lib/raphael.js"></script>
+<script type=module src="orbits.js"></script>
 <script type="module" src="../lib/default.js"></script>
 <link rel="stylesheet" href="orbits.css">
   </head>
 <body>
   <header>[GAME]Orbiter</header>
   <div id="game"></div>
-  <div id="instructions">
+  <div class="content" id="controls">
+    <h2>Controls</h2>
+        <span>
+          <img id="upbutton" src="UpButton.png" width="50px">
+          Speed up and move to a lower orbit
+        </span>
+        <span>
+          <img id="downbutton" src="DownButton.png" width="50px">
+          Slow down and move to a higher orbit
+        </span>
+      </div>
+  <div id="instructions" class="toggle">
     <h2>Goal</h2>
     <div class="content">Collect 3 treasures by running into them.</div>
     <h2>Cast</h2>
@@ -36,17 +48,6 @@
           Moves in a constant orbit.
         </span>
     </div>
-    <h2>Controls</h2>
-      <div class="content" id="controls">
-        <span>
-          <img id="upbutton" src="UpButton.png" width="50px">
-          Speed up and move to a lower orbit
-        </span>
-        <span>
-          <img id="downbutton" src="DownButton.png" width="50px">
-          Slow down and move to a higher orbit
-        </span>
-      </div>
   </div>
   <div id="score">
           <div>Time elapsed:
@@ -64,7 +65,6 @@
     <tr><td>Faster<td>Slower
   </table>
   -->
-<script src="orbits.js"></script>
 
   
   </body>

@@ -1,3 +1,4 @@
+/*global $,Raphael*/
 import {Score} from "../lib/quiz.js";
 import {randint,choose} from "../lib/default.js";
 let W=300; let H=300;
@@ -8,8 +9,8 @@ let CANVAS = {};
 function setupCanvas() {
     //This is to avoid the rush condition when canvases are deleted and recreated.
     //I might even be able to stick this into the canvas class?
-    CANVAS.$w = $("<div>");
-    CANVAS.paper = Raphael(CANVAS.$w[0],300,300);
+    CANVAS.$w = $("<div id=canvas>");
+    CANVAS.paper = Raphael(CANVAS.$w[0],"100%",250);
 }
 
 function hArrow(paper,y,base,length,color,text) {
@@ -108,8 +109,10 @@ function Horizontal(prams={}){
         width: boxSz,
         center: center,
     } ).attr("fill","#aaa");
-    let masstxt = paper.text(center, box.data("V").center
-                             , `${mass}kg`)
+    let masstxt = paper.text(center,
+                             box.data("V").center,
+                             `${mass}kg`
+                            )
         .attr("font-size",fontSize);
     let givenArrow = hArrow(paper, base - boxSz/2, center + boxSz/2, arrowL, "blue", `${force}N`);
     let guessArrow = hArrow(paper, base - boxSz/2, center - boxSz/2, -arrowL, "blue", "F");
@@ -184,7 +187,6 @@ function Elevator(prams={}){
 };
 function generator() {
     let solution = randint(2)?Horizontal():Elevator();
-    console.debug("RMC?",$("#raphael-marker-classic"));
     if (extras) {
         let values = [parseFloat(solution.correct),parseFloat(solution.others[0]),parseFloat(solution.others[1])];
         let min = Math.min(...values);
@@ -198,7 +200,6 @@ function generator() {
         let duh = 0;
         for (let i = 0; i<extras && duh<100;duh++) {
             let val = randint(min,max+1);
-            console.debug(val,values);
             if (!values.includes(val) && !values.includes(val+1) && !values.includes(val-1)) {
                 values.push(val);
                 solution.others.push(`${val}N`);
@@ -214,29 +215,25 @@ function generator() {
 
 function unit_test() {
     //test Elevator correct answers
-    console.debug("Elevator");
     for(let dir of [-1,1]) {
         for (let accdir of [-1,1]) {
             let soln = Elevator({direction:dir,accdir:accdir});
             let correct = parseFloat(soln.correct);
             let wrong = parseFloat(soln.others[0]);
-            if (Math.sign(correct-wrong) != accdir){console.debug("Error when dir,accdir =",dir,accdir);}
+            if (Math.sign(correct-wrong) != accdir){console.log("Error when dir,accdir =",dir,accdir);}
         }
     }
-    console.debug("Horizontal");
     for(let dir of [-1,1]) {
         for (let accdir of [-1,1]) {
             let soln = Horizontal({direction:dir,accdir:accdir});
             let correct = parseFloat(soln.correct);
             let wrong = parseFloat(soln.others[0]);
-            console.debug(dir,accdir,Math.sign(correct-wrong),correct,wrong);
-//            if (Math.sign(correct-wrong) != accdir){console.debug("Error when dir,accdir =",dir,accdir);}
         }
     }
 
 }
 function init() {
-    let $root = $("#main");
+    let $root = $("demo-quiz");
     setupCanvas();
     let DEBUG = false;
     if (DEBUG) {unit_test();

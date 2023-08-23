@@ -6,7 +6,6 @@ function Arrow(dx,dy,cls="") {
         dy = dx[1];
         dx = dx[0];
     }
-    console.debug(dx,dy);
     let W = 50;  let H = 50; //size of the arrow
     let $result = $("<svg>").attr({width:W, height:H, viewBox:"-1.2 -1.2 2.4 2.4"});
     let sx = -5; let sy=0;

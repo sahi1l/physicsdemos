@@ -73,7 +73,6 @@ class Highlighted {
     }
     setup() {
         //make the dots red and add the lines, or remove
-        console.debug("running setup");
         this.lines.remove();
         if (this.active()) {
             opacity(dots,0.2);;
@@ -97,7 +96,6 @@ class Highlighted {
             this.dots.toFront();
         } else {
             opacity(dots,1);
-//            this.dots.attr("fill",choose(colors));
         }
     }
     active(val) {
@@ -111,44 +109,6 @@ class Highlighted {
     }
 }
 
-/*
-  function addLines(e){
-    console.debug("Running addLines");
-    let hiQ = e;
-    if (hiQ == undefined) {
-        hiQ = prams.highlight;
-    } else if (hiQ !== true && hiQ !== false){
-        hiQ= e.currentTarget.checked;
-    }
-    prams.highlight = hiQ;
-    for (let h of highlights) {h.attr("fill","black");}
-    hilines.remove();
-
-    console.debug("addlines",prams.highlight);
-    if(!prams.highlight==true){return;}
-
-    console.debug("adding lines");
-    for (let h of highlights) {h.attr("fill","red");}
-    let lattr = {"stroke-dasharray":"-",stroke:"red"};
-    paper.setStart();
-    for (let O of highlights) {
-        console.debug(O);
-        let x = O.attr("cx");
-        let y = O.attr("cy");
-        let path;
-        if (prams.transverse) {
-            path =  `M${x},${H/2+prams.amplitude}L${x},${H/2-prams.amplitude}`;
-        }
-        else {
-            path = `M${x+prams.amplitude},${y}L${x-prams.amplitude},${y}`;
-        }
-        console.debug(path);
-        paper.path(path).attr(lattr);
-    }
-    hilines = paper.setFinish();
-    console.debug(hilines);
-    }
-*/
 function rs(onQ,e) {
     if(onQ) {stoppedQ=0; run();}
     else {stoppedQ=1;}

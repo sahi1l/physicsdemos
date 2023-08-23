@@ -287,7 +287,6 @@ class Graph {
     add(left) {
         let val = left;
         if (!this.matchT && left<=this.Nmax/2) {this.matchT = this.t; $("#tmatch").html(this.t);}
-//                                                console.debug("equal at t=",this.t);}
         if(this.matchT) {
             this.stdev.N += 1;
             this.stdev.S += val;

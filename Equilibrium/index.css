@@ -16,10 +16,15 @@
 .red {color:red;}
 .quiz {
       border:1px solid;
-      width:500px;
+      width:95vw;
+      max-width: 350px;
       position:relative;
 }
-#canvas {margin-left:50px; width:400px; height:400px;}
+#canvas {
+    margin-left:0px;
+    width:350px;
+    height:350px;
+}
 .quiz h1 {
          font-size:150%; 
          text-align:center;
@@ -73,4 +78,15 @@
 
 }
 dfn {font-style: italic;}
+#help {width:300px;
+       overflow-y: scroll;
+      }
 #help .pivot  {width:250px;}
+.dragarrow {
+    z-index: 3;
+    cursor: pointer;
+}
+body {
+    width: 90vw;
+    overflow-x: hide;
+}
