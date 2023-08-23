@@ -47,17 +47,16 @@ function DrawArrow(xs,ys,trig,angle){
     } else {
         base.attr("path","M-50,0L50,0");
     }
-    vector.attr("path",(Raphael.format("M0,0L{0},{1}",50*full.x,50*full.y)));
+    vector.attr("path",`M0,0L${50*full.x},${50*full.y}`);
     var llength=-0.43*angle+48.6;
     Lang.attr({x:llength*half.x,
-                y:llength*half.y,
-                text:angle+"°"});
+               y:llength*half.y,
+               text:angle+"°"});
     llength*=0.8;
-    arc.attr({path:Raphael.format("M{0},{1}S{2},{3},{4},{5}",
-                                  llength*zero.x, llength*zero.y,
-                                  llength*half.x, llength*half.y,
-                                  llength*full.x, llength*full.y
-                )});
+    arc.attr({path:`M${llength*zero.x},${llength*zero.y},\
+                    S${llength*half.x},${llength*half.y},\
+                    ${llength*full.x},${llength*full.y}`}
+            );
 }
 function CheckAnswer(){
     //Is the answer correct?
