@@ -10,7 +10,8 @@
   <script type="text/javascript" id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
-  <script src="../lib/raphael.js"></script>
+  <script src="../lib/raphael.min.js"></script>
+  <script src="../lib/snap.svg-min.js"></script>
   <script type="module" src="../lib/default.js"></script>
   <script type="module" src="index.js"></script>
   <script type="module" src="help.js"></script>
@@ -29,7 +30,7 @@ Final score:
 <div id="number">1 of 20</div>
 <div id="score">0 errors</div>
 </div>
-<div id="canvas"></div>
+<svg id="canvas"></svg>
 <div id="input">
 
   <span id="xcoord">
@@ -50,7 +51,7 @@ Final score:
     </span>
 </div>
 <div id="labels" style="width:100%;height=100px;">
-  <div class="signinfo">Click on a sign to toggle it.</div>
+  <div class="signinfo">Click on a sign to toggle it. The vector is written (x,y).</div>
   <div class="triginfo">Click on a trig function to swap it with the other one.</div>
   <div>Click on "OK" when you think your expression matches the vector.</div>
 </div>

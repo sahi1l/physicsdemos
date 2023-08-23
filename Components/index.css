@@ -112,3 +112,15 @@ body {
     margin:auto;
     overflow-x: hidden;
 }
+#xcoord,#ycoord {
+    position:relative;
+}
+#xcoord:before,#ycoord:before {
+    position:absolute;
+    top: -0.9em;
+    left: 3em;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+#xcoord:before {content: "x coordinate";}
+#ycoord:before {content: "y coordinate";}
