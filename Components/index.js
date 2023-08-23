@@ -1,6 +1,7 @@
 /*global Snap,$ */
 import {Score} from "../lib/quiz.js";
 import {Help} from "../lib/default.js";
+import {Arrow} from "../lib/arrows.js";
 //FIX: Add +x and +y axes
 var guess={x:1,y:1,vertical:false};
 var correct={x:1,y:1,vertical:false};
@@ -26,43 +27,19 @@ function ToggleTrig(){
     }
     $("#xtrig").html(x); $("#ytrig").html(y);
 }
-var paper=undefined,base,vector,AngleText,arc,correctQ,circle,mask,arrow;
-class Arrow {
-    constructor(paper,x1,y1,x2,y2,attrs={}) {
-        let sc = 2; //scale of arrowhead
-        this.color = attrs.color??"grey";
-        this.width = attrs.width??3;
-        this.class = attrs.class??"";
-        this.obj = paper.group();
-        this.headid = "head" + parseInt(1e6*Math.random());
-        this.arrowhead=paper.polyline(0,-sc,2*sc,0,0,sc).attr({fill:this.color,class:this.class});
-        this.arrowhead.marker(0,-sc,2*sc,2*sc,sc,0).attr({id:this.headid});
-        this.line = paper.line(x1,y1,x2,y2)
-            .attr({"stroke-width":this.width,
-                   "stroke-linecap":"round",
-                   "stroke": this.color,
-                   "class": this.class
-                  });
-        this.obj.append(this.line);
-        this.line.node.style['marker-end'] = Snap.url(this.headid);
-        console.debug(this.line);
-    }
-    attr(args) {
-        this.line.attr(args);
-    }
-    setColor(color) {
-        this.line.node.style["stroke"]=color;
-        this.arrowhead.node.style["fill"] = color;
-    }
-}
-class LabelledArrow {
+var paper=undefined,vector,AngleText,arc,correctQ,circle,mask,arrow;
+class AngledArrow {
     /*An arrow with a label and a dotted arc between angle (0-360) and horizontal or vertical*/
     constructor(paper,length,angle,vertical) {
         this.color = "grey";
         this.paper = paper;
         this.length = length;
 
-        
+        this.base=paper.line(0,0,30,0).attr(
+            {stroke:"black",
+             "stroke-dasharray": "1,1"
+            }
+        );
         this.mask = paper.group();
         this.mask.rect = paper.polyline(0,0,0,0).attr({fill:"black"});
         this.mask.wedge = paper.polyline(0,0,0,0).attr({fill:"white"});
@@ -76,11 +53,6 @@ class LabelledArrow {
                    "mask": this.mask
                   });
         this.vector = new Arrow(paper,0,0,0,0);
-/*        this.vector = paper.line(0,0,0,0)
-            .attr({"stroke-width":3,
-                   "stroke-linecap":"round",
-                   "stroke":this.color});
-*/
         this.label = paper.text(0,0,"?°")
             .attr({"font-size":parseInt(length/6), "text-anchor": "middle", "dominant-baseline":"middle"});
 
@@ -100,7 +72,7 @@ class LabelledArrow {
         }
     }
     
-    SetAngle(xs,ys,vertical,angle) {//FIX: Maybe figure out xs/ys separately...later. Bigger nightmare than I thought.
+    SetAngle(xs,ys,vertical,angle) {
 
         let XS = xs*this.length;
         let YS = -ys*this.length;
@@ -108,9 +80,9 @@ class LabelledArrow {
         let half = this.Components(XS, YS, 0.5*angle, vertical);
         let zero = this.Components(XS, YS, 0, vertical);
         if(vertical) {
-            base.attr({x1:0, y1: -this.length, x2: 0, y2: this.length});
+            this.base.attr({x1:0, y1: -this.length, x2: 0, y2: this.length});
         } else {
-            base.attr({x1: -this.length, y1:0, x2: this.length, y2: 0});
+            this.base.attr({x1: -this.length, y1:0, x2: this.length, y2: 0});
         }
         this.vector.attr({x2: full.x, y2: full.y});
         this.label.attr({x: 0.6*half.x,
@@ -128,7 +100,6 @@ class LabelledArrow {
     }
 }
 function CheckAnswer(){
-    //Is the answer correct?
     if(guess.x==correct.x && guess.y==correct.y && guess.vertical==correct.vertical){
         correctQ.attr({text:"Correct!",fill:"var(--right-color)",opacity:1});
         score.correct++;
@@ -168,7 +139,6 @@ function RandomVector(){
         vertical = Math.floor(Math.random()*2);
     } while (xs==correct.x && ys==correct.y && vertical==correct.vertical);
     let angle = Math.floor(Math.random()*13)*5+20;
-//    [xs,ys,vertical] = [1,1,0];
 
     correct = {x:xs, y:ys, vertical: vertical};
     console.debug("correct: ",correct);
@@ -176,27 +146,25 @@ function RandomVector(){
     $(".angle").each(function(i,e){e.innerHTML=angle;});
 }
 var score={correct:0,total:0,number:1,max:10,error:0};
+function DrawBasis(size) {
+    //size is half-size of the screen
+    let Bsize=10;
+    let cx = size-Bsize-10;
+    let cy = 2*Bsize-size+5;
+    new Arrow(paper, cx, cy, cx+Bsize, cy,{width:1,color:fadedColor});
+    new Arrow(paper, cx, cy, cx, cy-Bsize, {width:1,color:fadedColor});
+    let font = {"font-size":size/10, "text-anchor":"middle", "dominant-baseline":"middle", fill:fadedColor};
+    paper.text(cx+Bsize+5, cy, "+x").attr(font);
+    paper.text(cx, cy-Bsize-5, "+y").attr(font);
+}
 function init() {
     if(paper!=undefined){paper.remove();}
     paper = Snap("#canvas");
     let size = vlength+10;
     paper.attr({viewBox:[-size,-size,2*size,2*size].join(",")});
-    //basis
-    let basis = {size: 10};
-    basis.cx = size-basis.size-10;
-    basis.cy = 2*basis.size-size+5;
-    basis.x = new Arrow(paper,basis.cx,basis.cy,basis.cx+basis.size,basis.cy,{width:1,color:fadedColor});
-    basis.y = new Arrow(paper,basis.cx,basis.cy,basis.cx,basis.cy-basis.size,{width:1,color:fadedColor});
-    let font = {"font-size":size/10,"text-anchor":"middle","dominant-baseline":"middle",fill:fadedColor};
-    basis.tx = paper.text(basis.cx+basis.size+5,basis.cy,"+x").attr(font);
-    basis.ty = paper.text(basis.cx,basis.cy-basis.size-5,"+y").attr(font);
-    
-    base=paper.line(0,0,30,0).attr(
-        {stroke:"black",
-         "stroke-dasharray": "1,1"
-        });
-    let vectorcolor = "grey";
-    arrow = new LabelledArrow(paper,vlength);
+    //define basis vectors
+    DrawBasis(size);
+    arrow = new AngledArrow(paper,vlength);
     correctQ=paper.text(-50,43,"")
         .attr({"font-size":10,"text-anchor":"start",opacity:0});
     $(".trig").click(ToggleTrig);
