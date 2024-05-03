@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>QUIZ: Vector Components</title>
+
+  <script src="/lib/jquery.js"></script>
+  
+  <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <script src="../lib/raphael.min.js"></script>
+  <script src="../lib/snap.svg-min.js"></script>
+  <script type="module" src="../lib/default.js"></script>
+  <script type="module" src="index.js"></script>
+  <script type="module" src="help.js"></script>
+  <link rel="stylesheet" href="../lib/default.css">
+  <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../lib/embed.css">
+</head>
+
+  <div id="component" style="display:inline-block">
+<div id="win">
+Final score:
+<div id="percentage">x</div>
+<div class="click fill">Try again?</div>
+</div>
+<div id="scoreheader">
+<div id="number">1 of 20</div>
+<div id="score">0 errors</div>
+</div>
+<svg id="canvas"></svg>
+<div id="input">
+
+  <span id="xcoord">
+    (
+    <span id="x" class="click sign">+</span>
+    <span class="magnitude">v</span>
+    <span id="xtrig" class="click trig">cos</span>
+    <span class="angle">20</span>&deg;
+    ,</span>
+  
+  <span id="ycoord">
+    <span id="y" class="click sign">+</span>
+    <span class="magnitude">v</span>
+    <span id="ytrig" class="click trig">sin</span>
+    <span class="angle">20</span>&deg;
+    )
+<span id="check" class="click fill">OK?</span>
+    </span>
+</div>
+<div id="labels" style="width:100%;height=100px;">
+  <div class="signinfo">Click on a sign to toggle it. The vector is written (x,y).</div>
+  <div class="triginfo">Click on a trig function to swap it with the other one.</div>
+  <div>Click on "OK" when you think your expression matches the vector.</div>
+</div>
+  </div>
+
+
+
+  <div id="help" style="border: 1px solid; padding:10px;display:inline-block;width:300px;">
+    <h2>Help</h2>
+  \(\def\rect{\sqsubset\!\sqsupset}\)
+All vectors can be written in the form $$\vec v = \pm|v|\rect\theta \pm |v|\rect\theta,$$ where one \(\rect\) is replaced with "sin" and one with "cos".  The axis (x or y) that the angle is measured from gets the cosine.
+  
+  <div id="triangle" style="position:relative"></div>
+<p>  For example, this vector \(\vec v\) can be written
+  $$\vec v = ({\color{red} -}|v|{\color{blue}\cos}\ 60^\circ, {\color{red}-}|v|{\color{blue}\sin}\ 60^\circ)$$
+  because</p>
+  <ul>
+    <li>The 60&deg; angle is measured from the <i>x</i> axis, so the cosine goes in the x component, while the y component gets the sign.</li>
+    <li>The arrow points in a leftward direction, so the <i>x</i> component is negative (in this basis).</li>
+    <li>The arrow points in a downward direction, so the <i>y</i> component is also negative.</li>
+    </ul>
+</div>
+  
