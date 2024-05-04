@@ -11,7 +11,7 @@
     padding:5px;
     margin:5px;
     width:220px;
-    height:400px;
+    height:450px;
     display:inline-block;
     background-color: var(--bg-color);
     vertical-align:top;
@@ -22,13 +22,33 @@
     background: none;
     width:90%;
 }
-.card img {
-    max-width:200px;
-    max-height:150px;
-    padding:5px;
+.card .img {
+    --pad: 5px;
+    width: 200px;
+    --width: calc(200px);
+    height: fit-content;
+    padding:var(--pad);
     display:block;
     border:3px inset var(--text-color);
     margin:auto;
+    position: relative;
+    object-fit:contain;
+    img {
+        object-fit: contain;
+        z-index: 1;
+    }
+    .staticoverlay {
+        display: block;
+    }
+    &:not(:hover) {
+        .animated {
+            display: none;
+        }
+    }
+    &:hover {
+        .staticoverlay {display: none;}
+    }
+
 }
 
 .card p {

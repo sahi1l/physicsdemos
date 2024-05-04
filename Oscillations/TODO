@@ -1,0 +1,11 @@
+* Fix it so canvas is added to the right place automatically.
+* Add a command to clear the canvas.
+
+
+
+* Check the ones that are already set up:
+** Acceleration [OK]
+** Basis [OK]
+** Development/Velacc
+** Scinot: [OK]
+** Vectormath [OK]
