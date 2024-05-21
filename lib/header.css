@@ -1,5 +1,5 @@
 h1,h2,h3 {
-    font-family: var(--display-font);
+    font-family: var(--subheader-font);
     color: var(--accent-color);
     background-color: var(--main-color);
     padding:4px;

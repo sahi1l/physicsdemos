@@ -20,6 +20,7 @@ let COMY=0.5; //fraction of the way up (when to the left)
 let COM=0.5; //fraction of the way up
 let Garrow;
 let Gtxt;
+let normal;
 let Sizer;
 function pD(event){event.preventDefault();};
 function nil(event){;};
@@ -35,7 +36,24 @@ function DrawGravity() {
     let path="M"+(pivotX-dx)+","+(pivotY-dy)+"L"+(pivotX-dx)+","+pivotY+"l10,-20l-20,0l10,20";
     Garrow.attr({path:path});
     Gtxt.attr({x:pivotX-dx+30,y:pivotY-dy+30});
-
+    if(angle<=0 || angle>=90) {
+        normal.move(pivotX-dx);
+    } else {
+        normal.move(pivotX);
+    }
+}
+class Normal {
+    constructor(x,y) {
+        this.x=x;
+        this.y=y;
+        this.arrow = paper.path("M"+this.x+","+this.y+"l0,50l0,-50l10,20l-20,0Z").attr({"stroke-width":5,stroke:"red",fill:"red"});
+        this.txt = paper.text(this.x+20,this.y+40,"N").attr({fill:"red","font-size":36});
+    }
+    move(x) {
+        this.x=x;
+        this.arrow.attr("path","M"+this.x+","+this.y+"l0,50l0,-50l10,20l-20,0Z");
+        this.txt.attr("x",this.x+20);
+    }
 }
 function init(){
     paper = Raphael("canvas","100%",H);
@@ -45,9 +63,7 @@ function init(){
     //Baseline
     paper.path("M0,"+pivotY+"l"+(W)+",0");
     //Normal Force: should actually move over when block is prone
-    paper.path("M"+pivotX+","+pivotY+"l0,50l0,-50l10,20l-20,0Z").attr({"stroke-width":5,stroke:"red",fill:"red"});
-    let duh=paper.text(pivotX+20,pivotY+40,"N").attr({fill:"red","font-size":36});
-    //    duh.drag(nil,nil,nil);
+    normal = new Normal(pivotX,pivotY);
     block=paper.rect(pivotX-width,pivotY-height,width,height);
     block.attr({fill:"#222",stroke:"black",opacity:0.1});
     bblock=paper.rect(pivotX-width,pivotY-height,width,height).attr({fill:"#222",stroke:"black"});

@@ -1,18 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url("/physics/style.css");
 @import url("./header.css");
 @import url("./buttons.css");
 @import url("./score.css");
 @import url("./quiz.css");
 @import url("./help.css");
 :root {
-    --bg-color: #e5e5d1;/* #DBDBDB;*/
+    --bg-color: var(--light-color);
+    --text-color: var(--dark-color);
+/*    --bg-color: #e5e5d1;// #DBDBDB;
     --text-color: #0F1735;
     --main-color: #663D5F;
     --right-color: #326FC0;
     --wrong-color: #6B0504;
     --accent-color: #F4CF15;
+    
     --text-font: Lato;
-    --display-font: "Lato","Libre Baskerville",sans;
+*/
+    --display-font: var(--text-font);
+/*    --display-font: "Lato","Libre Baskerville",sans;*/
 }
 body {
     background-color: var(--bg-color);

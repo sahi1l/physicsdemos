@@ -1,19 +1,21 @@
 @import url("../default.css");
-@import url("https://fonts.googleapis.com/css2?family=Righteous");
+:root {
+    --text-color: var(--dark-color);
+}
 .cards {
     display:flex;
     overflow-x:scroll;
 }
-.card h2 {font-family: Righteous;}
+.card h2 {font-family: var(--header-font);}
 .card {
     text-align:center;
-    border:1px solid var(--text-color);
+    border:1px solid var(--dark-color);
     padding:5px;
     margin:5px;
     width:220px;
     height:450px;
     display:inline-block;
-    background-color: var(--bg-color);
+    background-color: var(--light-color);
     vertical-align:top;
     cursor: pointer;
 }
@@ -22,6 +24,16 @@
     background: none;
     width:90%;
 }
+.card:not(:hover) {
+    .img .animated {
+        display: none;
+    }
+}
+.card:hover {
+    .img .staticoverlay {
+        display:none;
+    }
+}
 .card .img {
     --pad: 5px;
     width: 200px;
@@ -29,7 +41,7 @@
     height: fit-content;
     padding:var(--pad);
     display:block;
-    border:3px inset var(--text-color);
+    border:3px inset var(--dark-color);
     margin:auto;
     position: relative;
     object-fit:contain;
@@ -40,14 +52,14 @@
     .staticoverlay {
         display: block;
     }
-    &:not(:hover) {
+/*    &:not(:hover) {
         .animated {
             display: none;
         }
     }
     &:hover {
         .staticoverlay {display: none;}
-    }
+    }*/
 
 }
 
@@ -59,7 +71,7 @@
         max-height:600px;
         padding:10px;
         margin:5px; /*Must change in script too...*/
-        border:1px solid var(--text-color);
+        border:1px solid var(--dark-color);
         display:inline-block;
 /*        background: rgb(215,174,238);
         background: linear-gradient(45deg, rgba(215,174,238,1) 0%, rgba(251,251,251,1) 68%, rgba(215,174,238,1) 100%);*/
@@ -108,8 +120,12 @@
 }
 .cards>a {color:var(--text-color);}
 .cards>a:visited {color:var(--text-color);}
-.card:hover {background-color:var(--bg-color);}
-.card:hover h2 {color:var(--right-color);}
+.card:hover {background-color:var(--main-color);
+             --text-color: var(--light-color);
+             color: var(--light-color);
+            }
+.card:hover h2 {color:var(--light-color);
+               }
 
 .panel h1 {
     background-color: inherit;
@@ -151,7 +167,7 @@ header {
 
 #title h1 {font-size: 200%;}
 #title h1,header {
-    font-family: "Righteous";
+    font-family: var(--header-font);
     position:relative;
     z-index:2;
     margin:0px;
@@ -168,14 +184,15 @@ header {
 
 #title .icon {
     display:inline-block;
-    color: var(--bg-color);;
-    font-family: Righteous;
+    color: var(--light-color);;
+    font-family: var(--header-font);
     z-index:2;
     cursor: pointer;
 }
 #title .icon.disabled {
     opacity: 0.5;
 }
+.backdrop {display: none;}
 #title .icon img {height: 50px;display:block;}
     body {overflow-x: hidden; width: 99vw;}
 @media only screen and (max-width:600px) {
