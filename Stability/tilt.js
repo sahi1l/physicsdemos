@@ -48,8 +48,8 @@ class _block {
         
     }
     resetSize() {
-        this.width=100;
         this.height=H/3;
+        this.width=this.height/2;
         Resize();
         DrawRectangle();
     }
@@ -112,14 +112,46 @@ class _pivot {
     constructor() {
         this.base = paper.path();
         this.widget = paper.circle(0,0,5).attr("fill","yellow");
+        this.font = 24;
+        let color = "#08F";
+        this.Larc = paper.path().attr({fill: color,opacity:0.2});
+        this.Ltext = paper.text(0,0,"0°").attr({fill: color,"font-size": this.font});
+        color = "magenta";
+        this.Rarc = paper.path().attr({fill: color, opacity:0.2});
+        this.Rtext = paper.text(0,0,"90°").attr({fill: color, "font-size":this.font});
         this.reset();
     }
     reset() {
         this.x = W/3;
-        this.y = H/2;
+        this.y = 0.7*H;
         this.widget.attr({cx: this.x, cy: this.y});
         this.base.attr({path:`M0,${this.y}l${W},0`});
     }
+    resetArc() {
+        let compos = com.pos(ROT.angle);
+        let radius = Math.hypot(this.x-compos.x,this.y-compos.y);
+        let M = ROT.M();
+        radius = block.width;
+        let Lend = {x:M.x(this.x-radius,this.y), y:M.y(this.x-radius,this.y)};
+        this.Larc.attr("path",`M${this.x},${this.y}L${this.x-radius},${this.y} A${radius},${radius} 0 0,1 ${Lend.x} ${Lend.y} z`);
+        this.Ltext.attr({x:this.x-1.2*block.width,
+                         y:this.y-this.font,
+                         text:Math.round(ROT.angle)+"°"
+                        });
+        radius = block.height;
+        let Rend = {x:M.x(this.x,this.y-radius), y:M.y(this.x,this.y-radius)};
+        this.Rarc.attr("path",`M${this.x},${this.y}L${this.x+radius},${this.y} A${radius},${radius} 0 0,0 ${Rend.x} ${Rend.y} z`);
+        this.Rtext.attr({x:this.x+1.2*block.height,
+                         y:this.y-this.font,
+                         text:Math.round(90-ROT.angle)+"°"
+                        });
+        
+        this.Larc.toFront();
+        this.Rarc.toFront();
+        com.dot.toFront();
+//        this.arcline.toFront();
+    }
+    
 }
 class _com {
     constructor(x,y) {
@@ -176,6 +208,7 @@ class _com {
         this.Garrow.attr({path:`M${x},${y}l0,50`+arrowhead})
         this.Gtxt.attr({x: x+30, y:y+30});
         this.dot.toFront();
+        pivot.resetArc();
         return [x,y];
     }
     rotate(angle) {
@@ -239,13 +272,15 @@ class _normal {
     constructor(x,y) {
         this.x=x;
         this.y=y;
-        this.arrow = paper.path("M"+this.x+","+this.y+"l0,50l0,-50l10,20l-20,0Z").attr({"stroke-width":5,stroke:"red",fill:"red"});
+        this.arrowhead = "l0,50l0,-50l10,20l-20,0Z";
+        this.arrow = paper.path(`M${this.x},${this.y}`+this.arrowhead).attr({"stroke-width":5,stroke:"red",fill:"red"});
         this.txt = paper.text(this.x+20,this.y+40,"N").attr({fill:"red","font-size":36});
     }
     move(x) {
         this.x=x;
-        this.arrow.attr("path","M"+this.x+","+this.y+"l0,50l0,-50l10,20l-20,0Z");
-        this.txt.attr("x",this.x+20);
+        this.y=pivot.y;
+        this.arrow.attr("path",`M${this.x},${this.y}`+this.arrowhead);
+        this.txt.attr({x:this.x+30,y:this.y+30});
     }
     position(angle) {
         if (angle<=0 || angle>=90) {
@@ -256,7 +291,9 @@ class _normal {
     }
 }
 function init(){
-    paper = Raphael("canvas","100%",H);
+    $("#canvas").on("resize",WindowResize);
+    new ResizeObserver(WindowResize).observe($("#canvas")[0])
+    paper = Raphael("canvas","100%","100%");
     buttons = new _buttons();
     W=$("#canvas")[0].getBoundingClientRect().width;
     pivot = new _pivot();
@@ -353,6 +390,15 @@ function Bounce(off,side){
 function Resize() {
     block.resize();
     com.resize();
+}
+function WindowResize() {
+    console.debug("WR");
+    W=$("#canvas")[0].getBoundingClientRect().width;
+    H=$("#canvas")[0].getBoundingClientRect().height;
+    pivot.reset();
+    block.resetSize();
+    Resize();
+    DrawRectangle();
 }
 
 $(init);
