@@ -20,3 +20,8 @@ body {
     height:95%;
     overflow: hidden;
 }
+#buttons {
+    position: relative;
+    z-index: 1;
+    top: -20px;
+}

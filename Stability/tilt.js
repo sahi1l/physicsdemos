@@ -1,23 +1,35 @@
 /*global $,Raphael*/
 import {Help} from "../lib/default.js";
-let paper,bblock;
+//CLASSES
+let block;
+let pivot;
+let com;
+let normal;
+let ROT;
+let Sizer;
+let buttons;
+let thump = new Audio('thump.mp3');
+//----------------------------------------
+let paper;
 let W;
 let H=600;
-let height=H/3;
-let width=100;
-let colorG="#8af";
-//let clickx=0;
 let offset;
 let active=0;
-//let COMX=0.5;//fraction of the way over (when to the left)
-//let COMY=0.5; //fraction of the way up (when to the left)
+class _buttons {
+    constructor() {
+        let $root=$("#buttons");
+        this.left = $("<button>").appendTo($root).html("<-").on("click",()=>{Jump(0)});
+        this.right = $("<button>").appendTo($root).html("->").on("click",()=>{Jump(90)});;
+        this.reset = $("<button>").appendTo($root).html("Reset").on("click",()=>{block.resetSize()});
+    }
+}
 
-let block; class _block {
+class _block {
     constructor() {
         this.width = 100;
         this.height = H/3;
-        let x0 = pivot.x - width;
-        let y0 = pivot.y - height;
+        let x0 = pivot.x - this.width;
+        let y0 = pivot.y - this.height;
         let color = "#222";
         let bcolor = "black";
         this.back = paper.rect(x0,y0,this.width,this.height)
@@ -25,8 +37,9 @@ let block; class _block {
         this.front = paper.rect(x0,y0,this.width,this.height)
             .attr({fill:color, stroke: bcolor, opacity:0.1}); //was block
         this.front.mousedown((event)=>{
-	    ROT.clickA=ROT.Ang(event.pageX,event.pageY);
-	    ROT.start=ROT.angle;
+            ROT.click(event.pageX,event.pageY);
+            //ROT.clickA=ROT.Ang(event.pageX,event.pageY);
+	    //ROT.start=ROT.angle;
 	    this.front.mousemove((event)=>{Turn(event.pageX,event.pageY);});
         });
         this.stopTurn = this.stopTurn.bind(this);
@@ -34,40 +47,68 @@ let block; class _block {
         this.front.mouseup(this.stopTurn);
         
     }
+    resetSize() {
+        this.width=100;
+        this.height=H/3;
+        Resize();
+        DrawRectangle();
+    }
+    getBox() {
+        return this.front.getBBox(false);
+    }
     toFront() {
         this.front.toFront();
     }
     stopTurn() {
-        ROT.clickA=720;
+        ROT.clickA=null;
         this.front.unmousemove();
         Fall(0,2);
     }
     rotate(angle) {
-        this.front.transform("R"+angle+","+pivot.x+","+pivot.y);
-        this.back.transform("R"+angle+","+pivot.x+","+pivot.y);
-
+        ROT.transform(this.front);
+        ROT.transform(this.back);
     }
     resize() {
-        let x0 = pivot.x - width;
-        let y0 = pivot.y - height;
-        let attr = {x: x0, y:y0, width: width, height: height};
+        let x0 = pivot.x - this.width;
+        let y0 = pivot.y - this.height;
+        let attr = {x: x0, y:y0, width: this.width, height: this.height};
         this.front.attr(attr);
         this.back.attr(attr);
     }
     
 }
-let ROT = new class {
+ROT = new class {
     constructor(){
         this.start=0; //was sAngle
-        this.clickA=720;
+        this.clickA=null;
         this.angle=0;
+    }
+    dragging() {
+        return (this.clickA!==null);
+    }
+    set(angle) {
+        if(angle<0) {angle=0;}
+        if(angle>90) {angle=90;}
+        this.angle = angle;
+    }
+    M() {
+        let M = Raphael.matrix(1,0,0,1,0,0);
+        M.rotate(this.angle,pivot.x,pivot.y);
+        return M;
+    }
+    transform(widget) {
+        widget.transform(this.M().toTransformString());
     }
     Ang(x,y){
         //problem: screen coordinates
-        return Math.atan2(y-offset.top-pivot.y,x-offset.left-pivot.x)/Math.PI*180;
+        return Raphael.deg(Math.atan2(y-offset.top-pivot.y,x-offset.left-pivot.x));
+    }
+    click(x,y) {
+        this.clickA = this.Ang(x,y);
+        this.start = this.angle;
     }
 }
-let pivot; class _pivot {
+class _pivot {
     constructor() {
         this.base = paper.path();
         this.widget = paper.circle(0,0,5).attr("fill","yellow");
@@ -80,30 +121,56 @@ let pivot; class _pivot {
         this.base.attr({path:`M0,${this.y}l${W},0`});
     }
 }
-let com; class _com {
+class _com {
     constructor(x,y) {
         //x and y are percentages of the total block
         this.x = x;
         this.y = y;
-        this.dot = paper.circle(pivot.x-width*x, pivot.y-height*y,5,5);
-        this.dot.attr("fill",colorG);
-        this.dot.drag(comMove, comStart, comUp);
-        this.Garrow = paper.path().attr({"stroke-width":5,stroke:colorG,fill:colorG});
-        this.Gtxt = paper.text(0,0,"mg").attr({"font-size":24,fill:colorG});
+        this.color = "#8af";
+        this.dot = paper.circle(pivot.x-block.width*x, pivot.y-block.height*y,5,5);
+        this.dot.attr("fill",this.color);
+        this.Garrow = paper.path().attr({"stroke-width":5,stroke:this.color,fill:this.color});
+        this.Gtxt = paper.text(0,0,"mg").attr({"font-size":24,fill:this.color});
+        this.move = this.move.bind(this);
+        this.start = this.start.bind(this);
+        this.up = this.up.bind(this);
+        this.dot.drag(this.move, this.start, this.up);
         
     }
+    start(){
+        this.ox=this.dot.attr("cx");
+        this.oy=this.dot.attr("cy");
+        this.dot.attr({fill:"white"});
+    };
+    move(dx,dy) {
+        let a=Raphael.rad(ROT.angle);
+        let nx = this.ox+dx;
+        let ny = this.oy+dy;
+        let IM = ROT.M().invert();
+        let Nx = IM.x(nx,ny);
+        let Ny = IM.y(nx,ny);
+        this.x=-(Nx-pivot.x)/block.width;
+        this.y=-(Ny-pivot.y)/block.height;
+        DrawGravity();
+    };
+    up(){
+        this.dot.attr({fill: this.color});
+    };
+
+
+
     pos(angle) {
-        let a=angle*Math.PI/180;
-        let dx=(width*this.x)*Math.cos(a)-(height*this.y)*Math.sin(a);
-        let dy=+(width*this.x)*Math.sin(a)+(height*this.y)*Math.cos(a);
+        let a=Raphael.rad(angle);
+        let dx=(block.width*this.x)*Math.cos(a)-(block.height*this.y)*Math.sin(a);
+        let dy=+(block.width*this.x)*Math.sin(a)+(block.height*this.y)*Math.cos(a);
         let x = pivot.x - dx;
         let y = pivot.y - dy;
         return {x:x, y:y};
     }
-    resize(angle) {
+    resize(angle=0) {
         let x = this.pos(angle).x;
         let y = this.pos(angle).y;
-        let a = angle * Math.PI/180;
+        let a = Raphael.rad(angle);
         this.dot.attr({cx:x, cy: y});
         let arrowhead = "l10,-20l-20,0l10,20";
         this.Garrow.attr({path:`M${x},${y}l0,50`+arrowhead})
@@ -116,31 +183,59 @@ let com; class _com {
         //this.dot.transform(`R${angle},${pivot.x},${pivot.y}`);
     }
 }
-
-let Garrow;
-let Gtxt;
-let Sizer;
-//function pD(event){event.preventDefault();};
-//function nil(event){;};
-
 function DrawGravity() {
-//    let a=angle*Math.PI/180;
-//    let dx=(width*com.x)*Math.cos(a)-(height*com.y)*Math.sin(a);
-//    let dy=+(width*com.x)*Math.sin(a)+(height*com.y)*Math.cos(a);
-//    let path="M"+(pivot.x-dx)+","+(pivot.y-dy)+"L"+(pivot.x-dx)+","+pivot.y+"l10,-20l-20,0l10,20";
-//    Garrow.attr({path:path});
-    //    Gtxt.attr({x:pivot.x-dx+30,y:pivot.y-dy+30});
-    let [x,y] = com.resize(ROT.angle);
-    //    com.dot.toFront();
+    com.resize(ROT.angle);
     normal.position(ROT.angle);
-//    if(angle<=0 || angle>=90) {
-//        normal.move(x);
-//    } else {
-//        normal.move(pivot.x);
-//    }
 }
 
-let normal; class _normal {
+class _sizer {
+    constructor() {
+        this.passiveColor = "gray";
+        this.activeColor = "white";
+        this.widget = paper.rect(0,0,0,0).attr({fill:this.passiveColor});
+        this.reset();
+        this.move = this.move.bind(this);
+        this.start = this.start.bind(this);
+        this.up = this.up.bind(this);
+        this.widget.drag(this.move,this.start,this.up);
+    }
+    reset(angle=0) {
+        let size = Math.min(block.width,block.height)*0.2;
+        this.widget.attr({x:pivot.x-block.width,
+                          y:pivot.y-block.height,
+                          width: size,
+                          height: size});
+        ROT.transform(this.widget);
+    }
+    move(dx,dy){
+        let a=Raphael.rad(ROT.angle);
+        let Dx=dx*Math.cos(a)+dy*Math.sin(a);
+        let Dy=dy*Math.cos(a)-dx*Math.sin(a);
+        let nx = this.ox + Dx;
+        let ny = this.oy + Dy;
+        let nw = pivot.x - nx;
+        let nh = pivot.y - ny;
+        if (nw>=5 && nh>=5) {
+	    this.widget.attr({x:nx, y:ny});
+	    block.width = nw;
+	    block.height = nh;
+	    Resize();
+	    DrawRectangle();
+        }
+    }
+    start(){
+        this.ox=this.widget.attr("x");
+        this.oy=this.widget.attr("y");
+        this.widget.attr({fill:this.activeColor});
+    };
+    up() {
+        this.widget.attr({fill:this.passiveColor});
+        Resize();
+        DrawRectangle();
+    }
+}
+
+class _normal {
     constructor(x,y) {
         this.x=x;
         this.y=y;
@@ -162,34 +257,24 @@ let normal; class _normal {
 }
 function init(){
     paper = Raphael("canvas","100%",H);
+    buttons = new _buttons();
     W=$("#canvas")[0].getBoundingClientRect().width;
     pivot = new _pivot();
     offset=$("#canvas").offset();
-    //Baseline
-    //Normal Force: should actually move over when block is prone
     normal = new _normal(pivot.x,pivot.y);
     block = new _block();
-/*    block=paper.rect(pivot.x-width,pivot.y-height,width,height);
-    block.attr({fill:"#222",stroke:"green",opacity:0.1});
-    bblock=paper.rect(pivot.x-width,pivot.y-height,width,height).attr({fill:"#222",stroke:"red"});
-    bblock.toBack();
-    */
-    //Gravity:
     com = new _com(0.5,0.5);
     block.toFront();
-    Sizer=paper.rect(pivot.x-width,pivot.y-height,Math.min(width,height)*0.2,Math.min(width,height)*0.2).attr({fill:"gray"});
-    Sizer.drag(szMove,szStart,szUp);
-//    com=paper.circle(pivot.x-width*COMX,pivot.y-height*COMY,5,5);
-//    com.attr("fill",colorG);
-//    com.drag(comMove,comStart,comUp);
+    Sizer = new _sizer();
     DrawGravity();
     new Help($("#help"),"toggle");
 
 }
 function DrawRectangle(){
+    
     block.rotate(ROT.angle);
     com.resize(ROT.angle);
-    Sizer.transform("R"+ROT.angle+","+pivot.x+","+pivot.y);
+    Sizer.reset(ROT.angle);
     DrawGravity();
 }
 function Turn(x,y){
@@ -197,94 +282,74 @@ function Turn(x,y){
     //Solution: an underlying object on top of the paper, the size of the paper
     //consider drag instead!
     //also, instead of X, how about calculate the d-theta with respect to the pivot
-    if(ROT.clickA<=360){
-	let newangle=ROT.start+ROT.Ang(x,y)-ROT.clickA;
-	if(newangle<0){newangle=0;}
-	if(newangle>90){newangle=90;}
-	ROT.angle=newangle;
+    if(ROT.clickA!=null){
+	let newangle=ROT.start + ROT.Ang(x,y) - ROT.clickA;
+        ROT.set(newangle);
 	DrawRectangle();
+    }
+}
+function Jump(newangle){
+    console.debug("Jump");
+    ROT.set(newangle);
+    DrawRectangle();
+    if(newangle==0) {
+        Done(0,10);
+    } else {
+        Done(1,10);
     }
 }
 function Fall(omega,alpha) {
     let dt=0.05;
-    alpha=5*Math.sin(ROT.angle/180*Math.PI);
-    let x=-width*com.x*Math.cos(ROT.angle/180*Math.PI)+height*com.y*Math.sin(ROT.angle/180*Math.PI);
+    alpha=5*Math.sin(Raphael.rad(ROT.angle));
+    let x = -block.width*com.x*Math.cos(Raphael.rad(ROT.angle))
+        +block.height*com.y*Math.sin(Raphael.rad(ROT.angle));
+    if(Math.abs(x)<0.5) {
+        //balancing on one end
+        omega=0;
+        DrawRectangle();
+        return;
+    }
     if(x<0){
 	if(ROT.angle<=0){
-	    Bounce(2,0);
-	    return;} //possible jolt first
-	ROT.angle=ROT.angle+omega*dt;
+            Done(0,omega);
+            thump.play();
+	    Bounce(1,0);
+	    return;
+        } //possible jolt first
+	ROT.set(ROT.angle+omega*dt);
 	omega=omega-alpha*dt;
 	DrawRectangle();
     }
     if(x>0){
-	if(ROT.angle>=90){Bounce(2,1);return;}
-	ROT.angle=ROT.angle+omega*dt;
+	if(ROT.angle>=90){
+            Done(1,omega);
+            return;
+        }
+	ROT.set(ROT.angle+omega*dt);
 	omega=omega+alpha*dt;
 	DrawRectangle();
     }
-    if(ROT.clickA==720){setTimeout((o=omega,a=alpha)=>Fall(o,a),10);}
+    
+    if(!ROT.dragging()){setTimeout((o=omega,a=alpha)=>Fall(o,a),10);}
+}
+
+function Done(side=0,omega){
+    thump.volume = Math.pow(Math.min(1,Math.abs(omega)/20),2);
+    thump.play();
+    Bounce(1,side);
 }
 function Bounce(off,side){
-    if(ROT.clickA==720){return;}
+    if(!ROT.dragging()){return;}
     if(side==1){
-	ROT.angle=90-(off%2)*1;
+	ROT.set(90-(off%2)*2);
     } else {
-	ROT.angle=(off%2)*1;
+	ROT.set((off%2)*2);
     }
     DrawRectangle(ROT.angle);
     if(off>0){
-	setTimeout((o=off,s=side)=>{Bounce(o-1,s);},20);
+	setTimeout((o=off,s=side)=>{Bounce(o-1,s);},50);
     }
 }
-//THE CENTER OF MASS
-function comStart(){
-    this.ox=this.attr("cx");
-    this.oy=this.attr("cy");
-    this.oc=this.attr("fill");
-    this.attr({fill:"white"});
-};
-function comMove(dx,dy) {
-    let a=ROT.angle*Math.PI/180;
-    let Dx=dx*Math.cos(a)+dy*Math.sin(a);
-    let Dy=dy*Math.cos(a)-dx*Math.sin(a);
-    this.attr({cx:this.ox+Dx,cy:this.oy+Dy});
-    com.x=-(this.attr("cx")-pivot.x)/width;
-    com.y=-(this.attr("cy")-pivot.y)/height;
-    DrawGravity();
-};
-function comUp(){
-    this.attr({fill: this.oc});
-};
-
-function szStart(){
-    this.ox=this.attr("x");
-    this.oy=this.attr("y");
-    this.oc=this.attr("fill");
-    this.attr({fill:"white"});
-};
-function szMove(dx,dy){
-    let a=ROT.angle*Math.PI/180;
-    let Dx=dx*Math.cos(a)+dy*Math.sin(a);
-    let Dy=dy*Math.cos(a)-dx*Math.sin(a);
-    let nx = this.ox + Dx;
-    let ny = this.oy + Dy;
-    let nw = pivot.x - nx;
-    let nh = pivot.y - ny;
-    if (nw>=5 && nh>=5) {
-	this.attr({x:nx, y:ny});
-	width = nw;
-	height = nh;
-	Resize();
-	DrawRectangle();
-    }
-};
-function szUp(){
-    this.attr({fill:this.oc});
-    Resize();
-    DrawRectangle();
-};
-
 function Resize() {
     block.resize();
     com.resize();
