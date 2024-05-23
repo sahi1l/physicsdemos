@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Righteous");
+
+:root {
+    --light-color: #e5e5d1; /*white*/
+    --dark-color: #0F1735; /*black*/
+    --main-color: #663D5F;
+    --right-color: #326FC0;
+    --wrong-color: #6B0504;
+    --accent-color: #F4CF15;
+    --text-font: Lato;
+    --header-font: "Luckiest Guy";
+    --subheader-font: "Righteous", "Fredoka One";
+    --serif-font: "serif";
+}
