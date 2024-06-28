@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Static Friction</title>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <script src="/lib/jquery.js"></script>
+  <script src="../lib/raphael.js"></script>
+  <script type="module" src="../lib/default.js"></script>
+  <script type="module" src="index.js"></script>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../lib/default.css">
+  <header>[DEMO]Static Friction</header>
+  <main>
+  <div id="instructions">
+    </div>
+  <my-canvas id="canvas">
+    <div id="static" class="explanation">
+      Static friction always balances the opposing force, so long as it doesn't exceed the maximum <I>S<sub>max</sub></I>, which is <I>&mu;<sub>S</sub></I> times the normal force.
+    </div>
+    <div id="kinetic" class="explanation">
+      Kinetic friction is always equal to <i>&mu;<sub>K</sub></i> times the normal force, no matter what the other forces are.</div>
+    <button id="brakebutton">Stop</button>
+    <div class="moving" id="background"></div>
+    <div class="moving" id="table"></div>
+
+  </my-canvas>
+  </main>
+</html>
+

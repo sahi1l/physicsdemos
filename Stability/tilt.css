@@ -1,5 +1,5 @@
 #canvas {
-    height:350px;
+    height:calc(100dvh - 60px);
     text-align: left;
     width:100%;
     background: #eef;
@@ -24,4 +24,6 @@ body {
     position: relative;
     z-index: 1;
     top: -20px;
+    display: flex;
+    justify-content: center;
 }

@@ -19,8 +19,8 @@ class _buttons {
     constructor() {
         let $root=$("#buttons");
         this.left = $("<button>").appendTo($root).html("<-").on("click",()=>{Jump(0)});
+        this.reset = $("<button>").appendTo($root).html("Reset Size").on("click",()=>{block.resetSize()});
         this.right = $("<button>").appendTo($root).html("->").on("click",()=>{Jump(90)});;
-        this.reset = $("<button>").appendTo($root).html("Reset").on("click",()=>{block.resetSize()});
     }
 }
 
@@ -204,9 +204,11 @@ class _com {
         let y = this.pos(angle).y;
         let a = Raphael.rad(angle);
         this.dot.attr({cx:x, cy: y});
-        let arrowhead = "l10,-20l-20,0l10,20";
-        this.Garrow.attr({path:`M${x},${y}l0,50`+arrowhead})
-        this.Gtxt.attr({x: x+30, y:y+30});
+        let S=Math.min(block.height,block.width)/11; //arrowscale
+        let arrowhead = arrowpath(S);
+        //let arrowhead = `l${S},-${2*S}l-${2*S},0l10,${2*S}`;
+        this.Garrow.attr({path:`M${x},${y}`+arrowhead,linejoin:"round","stroke-width":S/2})
+        this.Gtxt.attr({x: x+S, y:y+S,"font-size":S*3,"text-anchor":"start"});
         this.dot.toFront();
         pivot.resetArc();
         return [x,y];
@@ -215,6 +217,9 @@ class _com {
         this.resize(angle);
         //this.dot.transform(`R${angle},${pivot.x},${pivot.y}`);
     }
+}
+function arrowpath(S) {
+    return `l0,${3*S} l${S},0 l${-S},${2*S} l${-S},${-2*S} l${S},0`;
 }
 function DrawGravity() {
     com.resize(ROT.angle);
@@ -271,16 +276,22 @@ class _sizer {
 class _normal {
     constructor(x,y) {
         this.x=x;
-        this.y=y;
-        this.arrowhead = "l0,50l0,-50l10,20l-20,0Z";
+        this.y=y+80;
+        this.arrowhead = arrowpath(-10); //"l0,50l0,-50l10,20l-20,0Z";
+        console.debug(this.arrowhead);
         this.arrow = paper.path(`M${this.x},${this.y}`+this.arrowhead).attr({"stroke-width":5,stroke:"red",fill:"red"});
         this.txt = paper.text(this.x+20,this.y+40,"N").attr({fill:"red","font-size":36});
     }
     move(x) {
+        let S=Math.min(block.height,block.width)/11;
         this.x=x;
-        this.y=pivot.y;
-        this.arrow.attr("path",`M${this.x},${this.y}`+this.arrowhead);
-        this.txt.attr({x:this.x+30,y:this.y+30});
+        this.y=pivot.y+5.5*S;
+        this.arrow.attr("path",`M${this.x},${this.y}`+arrowpath(-S));
+        this.txt.attr({x:this.x+S,y:this.y-S,"font-size":S*3,"text-anchor":"start"});
+    }
+    resize() {
+        
+        this.arrow 
     }
     position(angle) {
         if (angle<=0 || angle>=90) {
@@ -399,6 +410,7 @@ function WindowResize() {
     block.resetSize();
     Resize();
     DrawRectangle();
+    
 }
 
 $(init);
