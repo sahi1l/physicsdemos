@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang=en>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <link rel="icon" href="../lib/img/favicon.png">
+  <title>Equilibrium</title>
+
+    <script src="/lib/jquery.js"></script>
+    <script src="../lib/raphael.js"></script>
+    <script type=module src="../lib/default.js"></script>
+    <script type=module src="index.js"></script>
+    <link rel="stylesheet" href="../lib/default.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel=stylesheet href="../lib/embed.css">
+  <body>
+      <div class="quiz">
+        <h1>Equilibrium</h1>
+<div id="score"></div>
+<div id="count"></div>
+
+<div id="canvas"></div>
+<!--<div id="bothbox" style="position:relative">-->
+  <div id="correct"></div>
+<!--</div>-->
+  <div id="instructions" style="padding-left:5px;">
+    <B>Goal: </B>Adjust the <span style="color:red">third force</span> so that the ruler is in <I>equilibrium</I>.
+    <BR>Drag the <span class="red">red</span> arrow or number...
+    <ul>
+      <li>...<B>left and right</B> to position the force.
+      <li>...<B>up and down</B> to change the magnitude of the force.
+      <li>...<B>to the other side</B> of the ruler to change the direction of the force.
+    </ul>
+    When you think the ruler is in equilibrium,<BR> press the "Check answer" button.
+  </div>
+      </div>
+<!--<img id="help" class="toggle" class="instructions" src="Instructions.png" width=400px>-->
