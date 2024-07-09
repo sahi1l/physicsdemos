@@ -1,0 +1,8 @@
+#main {
+    display: inline-block;
+    border: 1px solid;
+}
+main {display: flex;
+      flex-direction:column;
+      justify-content: middle;
+     }
