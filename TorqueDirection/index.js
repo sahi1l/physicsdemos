@@ -19,6 +19,9 @@ function arrow(paper,x,y,L,dir,text,boxQ=false) {
     textobj.rotate(-dir,x,y-fsize);
     return st;
 }
+function rn(min,max) {
+    return (max-min)*Math.random()+min;
+}
 function generator(canvas) {
     let boxW = 100;
     let boxH = 100;
@@ -27,7 +30,7 @@ function generator(canvas) {
     let box = canvas.paper.rect(boxX,boxY,boxW,boxH);
     let actionX = 100; //x position of force's action, currently on left side of box
     let actionY = Math.random()*boxH + boxY;
-    let forceAngle = (Math.random()*120 - 60)/180*Math.PI;
+    let forceAngle = rn(-60,60)/180*Math.PI;
     let forceMag = 50;
     let forcedX = -forceMag*Math.cos(forceAngle);
     let forcedY = forceMag*Math.sin(forceAngle);
@@ -37,8 +40,8 @@ function generator(canvas) {
     let pivotX; let pivotY; let rX; let rY; let angle=0;
     let minAngle = 20; //maximum angle from 90° where two arrows might look "perpendicular"
     do {
-        pivotX = 0.5*(1+Math.random())*boxW + boxX;
-        pivotY = 0.5*(Math.random())*boxH + boxY;
+        pivotX = rn(0.25,1)*boxW + boxX;
+        pivotY = rn(0,1)*boxH + boxY;
         if(Math.hypot(pivotX-actionX,pivotY-actionY)>0) {
             angle = (pivotX-actionX)*forcedY - (pivotY-actionY)*forcedX;
             angle /= Math.hypot(pivotX-actionX,pivotY-actionY) * forceMag;
